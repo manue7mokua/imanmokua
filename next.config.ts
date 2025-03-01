@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  compiler: {
+    styledComponents: true,
+  },
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  basePath: '/imanmokua',
 };
 
 export default nextConfig;
