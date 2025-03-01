@@ -69,7 +69,7 @@ export default function Home() {
     
     const [appState, setAppState] = useState<AppState>({
         currentBranch: 'main',
-        branches: ['main', 'projects', 'blog'],
+        branches: ['main', 'projects', 'blog', 'awards'],
     });
     
     const handleCommand = useCallback((command: string) => {
@@ -121,6 +121,8 @@ export default function Home() {
                 <div>git branch</div>
                 <div>ls</div>
                 <div>cat [file.md]</div>
+                <div>social [platform]</div>
+                <div>open [project]</div>
                 <div>help</div>
                 <div>clear</div>
             </CommandReference>
