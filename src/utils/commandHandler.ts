@@ -70,6 +70,17 @@ const commandHandler = (
                 }
             }
             return "Entering the Matrix...";
+        case 'sound':
+            if (!args.length || args[0].toLowerCase() === 'toggle') {
+                return { toggleSound: true };
+            }
+            if (args[0].toLowerCase() === 'on') {
+                return { soundEnabled: true };
+            }
+            if (args[0].toLowerCase() === 'off') {
+                return { soundEnabled: false };
+            }
+            return "Usage: sound [on|off|toggle]"
         default: 
             return `Command not found: ${command}. Type 'help' to see available commands.`;
     }

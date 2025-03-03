@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { TerminalProps } from "../types";
+import useSound from "use-sound";
 
 const TerminalContainer = styled.div`
   width: 100%;
@@ -16,7 +17,8 @@ const Terminal: React.FC<TerminalProps> = ({
   history = [],
   historyIndex = -1,
   setHistoryIndex = () => {},
-  commandOutput = [], // Add new prop for command output
+  commandOutput = [],
+  soundEnabled = true
 }) => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const xtermRef = useRef<any>(null);
@@ -25,6 +27,9 @@ const Terminal: React.FC<TerminalProps> = ({
   const [isClient, setIsClient] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const lastOutputLengthRef = useRef(0);
+  const [playKeyPress] = useSound('/imanmokua/sounds/keypress.mp3', { volume: 0.5 });
+  const [playEnter] = useSound('/imanmokua/sounds/enter.mp3', { volume: 0.5 });
+  const [playError] = useSound('/imanmokua/sounds/error.mp3', { volume: 0.5 });
 
   // Set isClient to true when component mounts (client-side only)
   useEffect(() => {
@@ -85,15 +90,14 @@ const Terminal: React.FC<TerminalProps> = ({
         
         // Handle Enter key
         if (charCode === 13) {
+          if (soundEnabled) playEnter();
           const command = commandRef.current.trim();
           term.writeln("");
           if (command) {
-            // Don't write command output here, let the dedicated effect handle it
             onCommand(command);
             commandRef.current = "";
             lineRef.current = "";
           }
-          // Don't write prompt here, let the command output handler do it
         }
         // Handle Up Arrow (history navigation)
         else if (charCode === 38) {
@@ -172,6 +176,7 @@ const Terminal: React.FC<TerminalProps> = ({
         }
         // Handle normal input
         else {
+          if (soundEnabled) playKeyPress();
           commandRef.current += key;
           lineRef.current += key;
           term.write(key);

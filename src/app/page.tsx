@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, use } from 'react';
 import styled from 'styled-components';
 import Terminal from '../components/Terminal';
 import GitTree from '../components/GitTree';
@@ -68,6 +68,7 @@ interface TerminalOutput {
 
 export default function Home() {
     const { theme, setTheme } = useTheme();
+    const [soundEnabled, setSoundEnabled] = useState(false);
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
     const [commandOutput, setCommandOutput] = useState<string[]>([
@@ -118,6 +119,19 @@ export default function Home() {
             ]);
             return;
         }
+
+        // Handle sound command
+        if (typeof result === 'object') {
+            if (result.toggleSound) {
+                setSoundEnabled(prev => !prev);
+                setCommandOutput(prev => [
+                    ...prev,
+                    `$ ${command}`,
+                    `Sound ${result.soundEnabled ? 'enabled': 'disabled'}`
+                ]);
+                return;
+            }
+        }
         
         // Handle output
         if (typeof result === 'object' && result.clear) {
@@ -134,7 +148,7 @@ export default function Home() {
             `$ ${command}`,
             typeof result === 'string' ? result : result.output || ''
         ]);
-    }, [appState, setTheme]);
+    }, [appState, setTheme, soundEnabled]);
     
     return (
       <AppContainer theme={theme}>
