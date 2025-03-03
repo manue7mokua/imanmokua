@@ -72,7 +72,7 @@ const Terminal: React.FC<TerminalProps> = ({
       xtermRef.current = term;
 
       // Welcome message
-      term.writeln("Welcome to my interactive portfolio!");
+      term.writeln("Welcome to Iman's interactive portfolio!");
       term.writeln('Type "help" to see available commands.');
       term.writeln("");
 
@@ -171,6 +171,16 @@ const Terminal: React.FC<TerminalProps> = ({
   useEffect(() => {
     const term = xtermRef.current;
     if (!term || !isInitialized) return;
+
+    // If commmandOutput was reset, clear the terminal too
+    if (commandOutput.length <= 2 && lastOutputLengthRef.current > 2) {
+      term.clear();
+      term.writeln(commandOutput[0] || '');
+      term.writeln(commandOutput[1] || '');
+      writePrompt(term);
+      lastOutputLengthRef.current = commandOutput.length;
+      return;
+    }
 
     // Only process new outputs
     if (commandOutput.length > lastOutputLengthRef.current) {

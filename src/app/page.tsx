@@ -66,7 +66,7 @@ export default function Home() {
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
     const [commandOutput, setCommandOutput] = useState<string[]>([
-        "Welcome to my interactive portfolio!",
+        "Welcome to Iman's interactive portfolio!",
         'Type "help" to see available commands.'
     ]);
     
@@ -88,14 +88,19 @@ export default function Home() {
         
         // Handle output
         if (typeof result === 'object' && result.clear) {
-            setCommandOutput([]);
-        } else {
-            // Then add the result
-            setCommandOutput(prev => [
-                ...prev, 
-                typeof result === 'string' ? result : result.output || ''
+            // Reset to initial welcome messages
+            setCommandOutput([
+                "Welcome to Iman's interactive portfolio!",
+                'Type "help" to see available commands'
             ]);
+            return
         }
+        // Then add the result
+        setCommandOutput(prev => [
+            ...prev, 
+            `$ ${command}`,
+            typeof result === 'string' ? result : result.output || ''
+        ]);
     }, [appState]);
     
     return (
