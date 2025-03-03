@@ -23,6 +23,18 @@ const commandHandler = (
             return handleSocialCommand(args);
         case 'open':
             return handleOpenCommand(args);
+        case 'theme':
+            if (!args.length) return "Usage: theme [dark|light|hacker|retro]";
+
+            switch (args[0].toLowerCase()) {
+                case 'dark':
+                case 'light':
+                case 'hacker':
+                case 'retro':
+                    return { theme: args[0].toLowerCase() };
+                default:
+                    return `Theme '${args[0]}' not found. Available themes: dark, light, hacker, retro`;
+            }
         default: 
             return `Command not found: ${command}. Type 'help' to see available commands.`;
     }

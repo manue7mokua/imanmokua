@@ -7,14 +7,18 @@ import Terminal from '../components/Terminal';
 import GitTree from '../components/GitTree';
 import commandHandler from '../utils/commandHandler';
 import { AppState, CommandResult } from '../types';
+import { ThemeType, useTheme } from '../context/ThemeContext';
+import { themes } from '../styles/themes';
 
 const AppContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #1E1E1E;
-    color: white;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     font-family: monospace;
+
+    ${({ theme }) => themes[theme]}
 `;
 
 const Header = styled.header`
@@ -63,6 +67,7 @@ interface TerminalOutput {
 }
 
 export default function Home() {
+    const { theme, setTheme } = useTheme();
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
     const [commandOutput, setCommandOutput] = useState<string[]>([
@@ -101,6 +106,18 @@ export default function Home() {
         
         // Process command
         const result = commandHandler(command, appState, setAppState);
+
+        // Handle theme command
+        if (typeof result === 'object' && result.theme) {
+            setTheme(result.theme as ThemeType);
+
+            setCommandOutput(prev => [
+                ...prev,
+                `$ ${command}`,
+                `Theme switched to ${result.theme}`
+            ]);
+            return;
+        }
         
         // Handle output
         if (typeof result === 'object' && result.clear) {
@@ -117,12 +134,12 @@ export default function Home() {
             `$ ${command}`,
             typeof result === 'string' ? result : result.output || ''
         ]);
-    }, [appState]);
+    }, [appState, setTheme]);
     
     return (
-      <AppContainer>
+      <AppContainer theme={theme}>
         <Header>
-          <span>Portfolio Terminal - emmanuel@portfolio:~/{appState.currentBranch}</span>
+          <span>Portfolio Terminal - imanmokua@portfolio:~/{appState.currentBranch}</span>
           <div>
               <span style={{ margin: '0 5px', color: '#FF5F56' }}>●</span>
               <span style={{ margin: '0 5px', color: '#FFBD2E' }}>●</span>
