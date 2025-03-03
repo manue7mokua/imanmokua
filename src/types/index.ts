@@ -13,4 +13,5 @@ export interface TerminalProps {
     history?: string[];
     historyIndex?: number;
     setHistoryIndex?: (index: number) => void;
+    commandOutput?: string[];
 }

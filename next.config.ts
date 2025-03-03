@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/imanmokua',
+  // basePath: '/imanmokua',
 };
 
 export default nextConfig;

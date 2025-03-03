@@ -63,9 +63,12 @@ interface TerminalOutput {
 }
 
 export default function Home() {
-    const [terminalOutput, setTerminalOutput] = useState<TerminalOutput[]>([]);
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
+    const [commandOutput, setCommandOutput] = useState<string[]>([
+        "Welcome to my interactive portfolio!",
+        'Type "help" to see available commands.'
+    ]);
     
     const [appState, setAppState] = useState<AppState>({
         currentBranch: 'main',
@@ -77,21 +80,28 @@ export default function Home() {
         setCommandHistory(prev => [...prev, command]);
         setHistoryIndex(-1);
         
+        // First, add the command to the output
+        setCommandOutput(prev => [...prev, `$ ${command}`]);
+        
         // Process command
         const result = commandHandler(command, appState, setAppState);
         
         // Handle output
         if (typeof result === 'object' && result.clear) {
-            setTerminalOutput([]);
+            setCommandOutput([]);
         } else {
-            setTerminalOutput(prev => [...prev, { input: command, output: result }]);
+            // Then add the result
+            setCommandOutput(prev => [
+                ...prev, 
+                typeof result === 'string' ? result : result.output || ''
+            ]);
         }
     }, [appState]);
     
     return (
       <AppContainer>
         <Header>
-          <span>Portfolio Terminal - user@portfolio:~/{appState.currentBranch}</span>
+          <span>Portfolio Terminal - emmanuel@portfolio:~/{appState.currentBranch}</span>
           <div>
               <span style={{ margin: '0 5px', color: '#FF5F56' }}>●</span>
               <span style={{ margin: '0 5px', color: '#FFBD2E' }}>●</span>
@@ -105,6 +115,7 @@ export default function Home() {
                 history={commandHistory}
                 historyIndex={historyIndex}
                 setHistoryIndex={setHistoryIndex}
+                commandOutput={commandOutput}
             />
           </TerminalWrapper>
           <VisualizationPanel>

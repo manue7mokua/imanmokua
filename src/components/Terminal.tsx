@@ -1,7 +1,6 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
-import { Terminal as Xterm } from "@xterm/xterm";
-import { FitAddon } from "@xterm/addon-fit";
-import "@xterm/xterm/css/xterm.css";
 import styled from "styled-components";
 import { TerminalProps } from "../types";
 
@@ -17,124 +16,178 @@ const Terminal: React.FC<TerminalProps> = ({
   history = [],
   historyIndex = -1,
   setHistoryIndex = () => {},
+  commandOutput = [], // Add new prop for command output
 }) => {
   const terminalRef = useRef<HTMLDivElement>(null);
-  const xtermRef = useRef<Xterm | null>(null);
-  const [currentCommand, setCurrentCommand] = useState<string>("");
-  const [currentLine, setCurrentLine] = useState<string>("");
+  const xtermRef = useRef<any>(null);
+  const commandRef = useRef<string>("");
+  const lineRef = useRef<string>("");
+  const [isClient, setIsClient] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const lastOutputLengthRef = useRef(0);
 
+  // Set isClient to true when component mounts (client-side only)
   useEffect(() => {
-    if (!terminalRef.current) return;
+    setIsClient(true);
+  }, []);
 
-    // Initialize xterm.js
-    const term = new Xterm({
-      cursorBlink: true,
-      theme: {
-        background: "#252526",
-        foreground: "#FFFFFF",
-      },
-    });
+  // Initial terminal setup
+  useEffect(() => {
+    if (!isClient || !terminalRef.current) return;
+    if (isInitialized) return;
 
-    const fitAddon = new FitAddon();
-    term.loadAddon(fitAddon);
+    // Dynamic import of xterm
+    const loadXterm = async () => {
+      const xtermModule = await import("@xterm/xterm");
+      const fitAddonModule = await import("@xterm/addon-fit");
+      
+      await import("@xterm/xterm/css/xterm.css");
 
-    // Mount terminal
-    term.open(terminalRef.current);
-    fitAddon.fit();
+      const XTerm = xtermModule.Terminal;
+      const FitAddon = fitAddonModule.FitAddon;
 
-    // Store reference
-    xtermRef.current = term;
+      // Initialize xterm.js
+      const term = new XTerm({
+        cursorBlink: true,
+        theme: {
+          background: "#252526",
+          foreground: "#FFFFFF",
+        },
+        scrollback: 1000,
+        // Improve performance with these options
+        disableStdin: false,
+        allowProposedApi: true,
+        fastScrollModifier: "alt",
+        allowTransparency: false,
+      });
 
-    // Welcome message
-    term.writeln("Karibu from Iman!");
-    term.writeln('Type "help" to see available commands.');
-    term.writeln("");
+      const fitAddon = new FitAddon();
+      term.loadAddon(fitAddon);
 
-    // Set up prompt
-    writePrompt(term);
+      // Mount terminal
+      term.open(terminalRef.current!);
+      fitAddon.fit();
 
-    // Handle user input
-    term.onKey(({ key, domEvent }) => {
-      const code = domEvent.code;
+      // Store reference
+      xtermRef.current = term;
 
-      // Handle Enter key
-      if (code === "Enter") {
-        term.writeln("");
-        if (currentCommand.trim()) {
-          onCommand(currentCommand.trim());
-          setCurrentCommand("");
-          setCurrentLine("");
+      // Welcome message
+      term.writeln("Welcome to my interactive portfolio!");
+      term.writeln('Type "help" to see available commands.');
+      term.writeln("");
+
+      // Set up prompt
+      writePrompt(term);
+
+      // Handle user input - use refs instead of state for better performance
+      term.onKey(({ key, domEvent }) => {
+        const charCode = domEvent.keyCode;
+        
+        // Handle Enter key
+        if (charCode === 13) {
+          const command = commandRef.current.trim();
+          term.writeln("");
+          if (command) {
+            // Don't write command output here, let the dedicated effect handle it
+            onCommand(command);
+            commandRef.current = "";
+            lineRef.current = "";
+          }
+          // Don't write prompt here, let the command output handler do it
         }
-        writePrompt(term);
-      }
-      // Handle UP Arrow (history navigation)
-      else if (code === "ArrowUp") {
-        if (history.length > 0 && historyIndex < history.length - 1) {
+        // Handle Up Arrow (history navigation)
+        else if (charCode === 38) {
+          if (history.length > 0 && historyIndex < history.length - 1) {
+            // Clear current line
+            for (let i = 0; i < lineRef.current.length; i++) {
+              term.write("\b \b");
+            }
+
+            const newIndex = historyIndex + 1;
+            const historicalCommand = history[history.length - 1 - newIndex];
+
+            setHistoryIndex(newIndex);
+            commandRef.current = historicalCommand;
+            lineRef.current = historicalCommand;
+            term.write(historicalCommand);
+          }
+        }
+        // Handle Down Arrow (history navigation)
+        else if (charCode === 40) {
           // Clear current line
-          for (let i = 0; i < currentLine.length; i++) {
+          for (let i = 0; i < lineRef.current.length; i++) {
             term.write("\b \b");
           }
 
-          const newIndex = historyIndex + 1;
-          const historicalCommand = history[history.length - 1 - newIndex];
+          if (historyIndex > 0) {
+            const newIndex = historyIndex - 1;
+            const historicalCommand = history[history.length - 1 - newIndex];
 
-          setHistoryIndex(newIndex);
-          setCurrentCommand(historicalCommand);
-          setCurrentLine(historicalCommand);
-          term.write(historicalCommand);
+            setHistoryIndex(newIndex);
+            commandRef.current = historicalCommand;
+            lineRef.current = historicalCommand;
+            term.write(historicalCommand);
+          } else {
+            setHistoryIndex(-1);
+            commandRef.current = "";
+            lineRef.current = "";
+          }
         }
-      }
-      // Handle DOWN Arrow (history navigation)
-      else if (code === "ArrowDown") {
-        // Clear current line
-        for (let i = 0; i < currentLine.length; i++) {
-          term.write("\b \b");
+        // Handle Backspace
+        else if (charCode === 8) {
+          if (lineRef.current.length > 0) {
+            commandRef.current = commandRef.current.slice(0, -1);
+            lineRef.current = lineRef.current.slice(0, -1);
+            term.write("\b \b");
+          }
         }
+        // Handle normal input
+        else {
+          commandRef.current += key;
+          lineRef.current += key;
+          term.write(key);
+        }
+      });
 
-        if (historyIndex > 0) {
-          const newIndex = historyIndex - 1;
-          const historicalCommand = history[history.length - 1 - newIndex];
+      // Resize handler
+      const handleResize = () => {
+        fitAddon.fit();
+      };
+      
+      window.addEventListener('resize', handleResize);
+      setIsInitialized(true);
 
-          setHistoryIndex(newIndex);
-          setCurrentCommand(historicalCommand);
-          setCurrentLine(historicalCommand);
-          term.write(historicalCommand);
-        } else {
-          setHistoryIndex(-1);
-          setCurrentCommand("");
-          setCurrentLine("");
-        }
-      }
-      // Handle backspace
-      else if (code === "Backspace") {
-        if (currentLine.length > 0) {
-          setCurrentCommand(currentCommand.slice(0, -1));
-          setCurrentLine(currentLine.slice(0, -1));
-          term.write("\b \b");
-        }
-      }
-      // Handle normal input
-      else {
-        setCurrentCommand(currentCommand + key);
-        setCurrentLine(currentLine + key);
-        term.write(key);
-      }
-    });
-
-    // Cleanup
-    return () => {
-      term.dispose();
+      // Cleanup
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        term.dispose();
+      };
     };
-  }, [
-    onCommand,
-    history,
-    historyIndex,
-    setHistoryIndex,
-    currentCommand,
-    currentLine,
-  ]);
 
-  const writePrompt = (term: Xterm) => {
+    loadXterm();
+  }, [onCommand, history, historyIndex, setHistoryIndex, isClient, isInitialized]);
+
+  // Handle command output updates
+  useEffect(() => {
+    const term = xtermRef.current;
+    if (!term || !isInitialized) return;
+
+    // Only process new outputs
+    if (commandOutput.length > lastOutputLengthRef.current) {
+      const newOutputs = commandOutput.slice(lastOutputLengthRef.current);
+      
+      newOutputs.forEach(output => {
+        term.writeln(output);
+      });
+
+      lastOutputLengthRef.current = commandOutput.length;
+      
+      // Add a new prompt after processing all new outputs
+      writePrompt(term);
+    }
+  }, [commandOutput, isInitialized]);
+
+  const writePrompt = (term: any) => {
     term.write("\r\n$ ");
   };
 

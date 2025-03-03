@@ -133,16 +133,24 @@ const handleSocialCommand = (args: string[]): string => {
 
     switch (args[0].toLowerCase()) {
         case 'linkedin':
-            window.open('https://www.linkedin.com/in/mokua-emmanuel-43b798269/', '_blank');
+            if (typeof window !== 'undefined') {
+                window.open('https://www.linkedin.com/in/mokua-emmanuel-43b798269/', '_blank');
+            }
             return "Opening LinkedIn profile...";
         case 'github':
-            window.open('https://github.com/manue7mokua', '_blank');
+            if (typeof window !== 'undefined') {
+                window.open('https://github.com/manue7mokua', '_blank');
+            }
             return "Opening Github profile";
         case 'instagram':
-            window.open('https://www.instagram.com/imanmokua/', '_blank');
+            if (typeof window !== 'undefined') {
+                window.open('https://www.instagram.com/imanmokua/', '_blank');
+            }
             return "Opening Github profile";
         case 'x':
-            window.open('https://x.com/imanmokua', '_blank');
+            if (typeof window !== 'undefined') {
+                window.open('https://x.com/imanmokua', '_blank');
+            }
             return "Opening Github profile";
         default:
             return `Platform '${args[0]}' not found. Available platforms: linkedin, github, instagram, twitter`;
@@ -162,7 +170,9 @@ const handleOpenCommand = (args: string[]): string => {
     const projectKey = args.join('-').toLowerCase();
 
     if (projects[projectKey]) {
-        window.open(projects[projectKey], '_blank');
+        if (typeof window !== 'undefined') {
+            window.open(projects[projectKey], '_blank');    
+        }
         return `Opening ${args.join(' ')} project on github...`;
     }
 
