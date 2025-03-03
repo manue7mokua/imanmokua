@@ -7,6 +7,7 @@ import styled from 'styled-components';
 interface GitTreeProps {
   currentBranch: string;
   branches: string[];
+  onBranchClick?: (branch: string) => void;
 }
 
 const TreeContainer = styled.div`
@@ -14,16 +15,20 @@ const TreeContainer = styled.div`
   margin-top: 20px;
 `;
 
-// Change isActive to $isActive (transient prop)
 const Branch = styled.div<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
   margin: 5px 0;
   color: ${props => props.$isActive ? '#27C93F' : 'white'};
   font-weight: ${props => props.$isActive ? 'bold' : 'normal'};
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
 `;
 
-// Change isActive to $isActive (transient prop)
 const Circle = styled.span<{ $isActive: boolean }>`
   display: inline-block;
   width: 10px;
@@ -31,9 +36,14 @@ const Circle = styled.span<{ $isActive: boolean }>`
   border-radius: 50%;
   margin-right: 8px;
   background-color: ${props => props.$isActive ? '#27C93F' : '#4169E1'};
+  transition: background-color 0.4s ease;
 `;
 
-const GitTree: React.FC<GitTreeProps> = ({ currentBranch, branches }) => {
+const GitTree: React.FC<GitTreeProps> = ({ 
+  currentBranch, 
+  branches, 
+  onBranchClick = () => {} 
+}) => {
   return (
     <TreeContainer>
       {branches.map((branch, index) => {
@@ -41,9 +51,14 @@ const GitTree: React.FC<GitTreeProps> = ({ currentBranch, branches }) => {
         const isLast = index === branches.length - 1;
         
         return (
-          <Branch key={branch} $isActive={isActive}>  {/* Change isActive to $isActive */}
+          <Branch 
+            key={branch} 
+            $isActive={isActive}
+            onClick={() => onBranchClick(branch)}
+            title={`Switch to ${branch} branch`}
+          > 
             {index > 0 && <span style={{ marginRight: '8px' }}>{isLast ? '└──' : '├──'}</span>}
-            <Circle $isActive={isActive} />  {/* Change isActive to $isActive */}
+            <Circle $isActive={isActive} />
             <span>{branch}</span>
             {isActive && <span> (active)</span>}
           </Branch>

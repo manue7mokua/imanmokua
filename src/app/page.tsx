@@ -74,6 +74,22 @@ export default function Home() {
         currentBranch: 'main',
         branches: ['main', 'projects', 'blog', 'awards'],
     });
+
+    const handleBranchClick = useCallback((branch: string) => {
+        if (branch === appState.currentBranch) return;
+
+        // Add command to history and execute it
+        const command = `git checkout ${branch}`;
+        setCommandHistory(prev => [...prev, command]);
+        setHistoryIndex(-1);
+
+        setCommandOutput(prev => [...prev, `$ ${command}`]);
+        setAppState(prev => ({ ...prev, currentBranch: branch }));
+        setCommandOutput(prev => [
+            ...prev,
+            `Switched to branch '${branch}'`
+        ]);
+    }, [appState.currentBranch]);
     
     const handleCommand = useCallback((command: string) => {
         // Add to history
@@ -129,6 +145,7 @@ export default function Home() {
               <GitTree 
                   currentBranch={appState.currentBranch} 
                   branches={appState.branches} 
+                  onBranchClick={handleBranchClick}
               />
             </TreeVisualization>
             <CommandReference>
