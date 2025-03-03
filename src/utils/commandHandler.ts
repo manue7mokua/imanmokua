@@ -45,6 +45,31 @@ const commandHandler = (
                 default:
                     return `Theme '${args[0]}' not found. Available themes: dark, light, hacker, retro`;
             }
+        case 'sudo':
+            return "Nice try! But you don't need root priviledges here. 😉";
+        case 'coffee':
+            return `
+            Brewing coffee...
+            
+                ( (
+                ) )
+                .______.
+                |      |]
+                \\      /
+                 '----'
+            
+            Coffee ready! Keep coding! ☕`;
+        case 'matrix':
+            if (typeof window !== 'undefined') {
+                const terminalEl = document.querySelector('[class^="Terminal__TerminalContainer"]');
+                if (terminalEl) {
+                terminalEl.classList.add('matrix-effect');
+                setTimeout(() => {
+                    terminalEl.classList.remove('matrix-effect');
+                }, 5000);
+                }
+            }
+            return "Entering the Matrix...";
         default: 
             return `Command not found: ${command}. Type 'help' to see available commands.`;
     }

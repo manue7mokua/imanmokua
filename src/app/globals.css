@@ -24,4 +24,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Add any other global styles below */
+/* In globals.css */
+@keyframes matrix {
+  0% {
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    color: rgba(0, 255, 0, 0.9);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+    color: rgba(0, 255, 0, 1);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    color: rgba(0, 255, 0, 0.9);
+  }
+}
+
+.matrix-effect {
+  animation: matrix 0.5s infinite;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+}
