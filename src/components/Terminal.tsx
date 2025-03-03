@@ -141,6 +141,35 @@ const Terminal: React.FC<TerminalProps> = ({
             term.write("\b \b");
           }
         }
+        // Handle Tab for command completion
+        else if (charCode === 9) {
+          domEvent.preventDefault();
+
+          if (commandRef.current.length > 0) {
+            const { AVAILABLE_COMMANDS } = require('../types');
+            const matches = AVAILABLE_COMMANDS.filter(cmd => 
+              cmd.startsWith(commandRef.current.toLowerCase())
+            );
+
+            if (matches.length === 1){
+              // Clear current command
+              for (let i = 0; i < lineRef.current.length; i++) {
+                term.write('\b \b');
+              }
+
+              // Write the completed command
+              commandRef.current = matches[0];
+              lineRef.current = matches[0];
+              term.write(matches[0]);
+            } else if (matches.length > 1) {
+              // Display possible completions
+              term.writeln('');
+              term.writeln(matches.join(' '));
+              writePrompt(term);
+              term.write(commandRef.current);
+            }
+          }
+        }
         // Handle normal input
         else {
           commandRef.current += key;
