@@ -23,6 +23,16 @@ const commandHandler = (
             return handleSocialCommand(args);
         case 'open':
             return handleOpenCommand(args);
+        case 'download':
+            if (!args.length) return "Usage: download [resume]";
+
+            if (args[0].toLowerCase() === 'resume') {
+                if (typeof window !== 'undefined') {
+                    window.open('/documents/iman_mokua_resume.pdf', '_blank');
+                }
+                return "Opening resume in a new tab.."
+            }
+            return `File '${args[0]}' not available for download.`;
         case 'theme':
             if (!args.length) return "Usage: theme [dark|light|hacker|retro]";
 
