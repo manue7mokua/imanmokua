@@ -72,8 +72,15 @@ export default function Home() {
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
     const [commandOutput, setCommandOutput] = useState<string[]>([
-        "Welcome to Iman's interactive portfolio!",
-        'Type "help" to see available commands.'
+        `
+        ___                         __  __       _              
+        |_ _|_ __ ___   __ _ _ __   |  \\/  | ___ | | ___   __ _ 
+        | || '_ \` _ \\ / _\` | '_ \\  | |\\/| |/ _ \\| |/ / | | | '_|
+        | || | | | | | (_| | | | | | |  | | (_) |   <| |_| | |  
+        |___|_| |_| |_|\\__,_|_| |_| |_|  |_|\\___/|_|\\_\\\\__,_|_|  
+                                                                
+        \n Welcome to my interactive CLI portfolio! Type 'help' to see available commands.
+        `
     ]);
     
     const [appState, setAppState] = useState<AppState>({
