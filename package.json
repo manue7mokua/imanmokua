@@ -9,7 +9,7 @@
     "lint": "next lint --dir src",
     "test": "jest",
     "export": "next build",
-    "deploy": "next build && gh-pages -d out --dotfiles",
+    "deploy": "rm -rf node_modules/.cache && next build && touch out/.nojekyll && gh-pages -d out --dotfiles --remove \"!(out|.git)\"",
     "release": "standard-version"
   },
   "dependencies": {
