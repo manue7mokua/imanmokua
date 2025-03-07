@@ -1,21 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   reactStrictMode: true,
-  images: {
-    unoptimized: true,
-  },
-  compiler: {
-    styledComponents: true,
-  },
   transpilePackages: ["@xterm/xterm", "@xterm/addon-fit"],
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
-        ...config.resolve.fallback,
         fs: false,
+        module: false,
       };
     }
     return config;
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 

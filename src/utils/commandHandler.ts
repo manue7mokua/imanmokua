@@ -204,7 +204,6 @@ const handleCatCommand = (args: string[], state: AppState): CommandResult => {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    const nextLine = (lines[i + 1] || "").trim();
 
     if (line.startsWith("# ")) {
       // H1 headers
@@ -311,7 +310,9 @@ const handleOpenCommand = (args: string[]): CommandResult => {
     if (typeof window !== "undefined") {
       window.open(projects[projectKey], "_blank");
     }
-    return { output: `\x1B[1;32mOpening ${projectKey} project in new tab...\x1B[0m` };
+    return {
+      output: `\x1B[1;32mOpening ${projectKey} project in new tab...\x1B[0m`,
+    };
   }
 
   return { output: `\x1B[1;31mProject '${project}' not found.\x1B[0m` };

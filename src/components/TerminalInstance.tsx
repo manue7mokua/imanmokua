@@ -55,7 +55,7 @@ export default function TerminalInstance({
     }
   };
 
-  const writePrompt = (terminal: XTerm, preserveCursor = false) => {
+  const writePrompt = (terminal: XTerm) => {
     const prompt = `\x1B[1;32mimanmokua@portfolio:~/${currentBranch}$\x1B[0m `;
     terminal.write("\r"); // Move to start of line
     terminal.write(prompt);
@@ -237,6 +237,13 @@ export default function TerminalInstance({
       terminal.dispose();
     };
   }, [currentBranch, onCommand]);
+
+  useEffect(() => {
+    if (xtermRef.current) {
+      xtermRef.current.focus();
+      writePrompt(xtermRef.current);
+    }
+  }, [writePrompt]);
 
   return <div ref={terminalRef} style={{ height: "100%" }} />;
 }
