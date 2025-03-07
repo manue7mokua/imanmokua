@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "test": "jest",
-    "export": "next export",
+    "export": "next build",
+    "deploy": "next build && gh-pages -d out --dotfiles",
     "release": "standard-version"
   },
   "dependencies": {
