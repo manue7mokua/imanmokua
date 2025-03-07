@@ -12,7 +12,7 @@ const CommandHelpContainer = styled.div`
   color: #87ceeb;
   font-family: "Menlo", monospace;
   transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
-  max-height: 45vh;
+  max-height: 65vh;
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;

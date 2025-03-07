@@ -68,7 +68,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
       };
 
     case "cat":
-      return handleCatCommand(args, state);
+            return handleCatCommand(args, state);
 
     case "clear":
       return {
@@ -89,10 +89,10 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
       };
 
     case "social":
-      return handleSocialCommand(args);
+            return handleSocialCommand(args);
 
     case "open":
-      return handleOpenCommand(args);
+            return handleOpenCommand(args);
 
     case "branch":
       const branchList = state.branches.map((branch) =>
@@ -110,7 +110,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
         output: branchList.join("\n"),
       };
 
-    default:
+        default: 
       return {
         output: `\x1B[1;31mCommand not found: ${command}. Type 'help' for available commands.\x1B[0m`,
       };
@@ -120,7 +120,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
 const handleGitCommand = (args: string[], state: AppState): CommandResult => {
   if (!args.length) return { output: "Usage: git [command]" };
 
-  switch (args[0]) {
+    switch (args[0]) {
     case "checkout":
       if (!args[1]) return { output: "Usage: git checkout [branch]" };
       const targetBranch = args[1].toLowerCase();
