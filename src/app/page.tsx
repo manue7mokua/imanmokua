@@ -1,204 +1,270 @@
-// src/app/page.tsx
 "use client";
 
-import React, { useState, useCallback, use } from 'react';
-import styled from 'styled-components';
-import Terminal from '../components/Terminal';
-import GitTree from '../components/GitTree';
-import commandHandler from '../utils/commandHandler';
-import { AppState, CommandResult } from '../types';
-import { ThemeType, useTheme } from '../context/ThemeContext';
-import { themes } from '../styles/themes';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Terminal from "@/components/Terminal";
+import GitTree from "@/components/GitTree";
+import CommandHelp from "@/components/CommandHelp";
+import { AppState } from "@/types";
+import commandHandler from "@/utils/commandHandler";
 
 const AppContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: monospace;
-
-    ${({ theme }) => themes[theme]}
+  display: flex;
+  height: 100vh;
+  background: #000000;
+  overflow: hidden;
 `;
 
-const Header = styled.header`
-    background-color: #333;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+const SidebarContainer = styled.div`
+  width: 25vw;
+  padding: 1rem;
+  background: #000000;
+  border-right: 1px solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
-const MainContent = styled.div`
-    display: flex;
-    flex: 1;
-    overflow: hidden;
+const MainContainer = styled.div`
+  flex: 1;
+  height: 100%;
+  padding: 1rem;
+  background: #000000;
+  overflow: hidden;
 `;
-
-const TerminalWrapper = styled.div`
-    flex: 2;
-    padding: 10px;
-`;
-
-const VisualizationPanel = styled.div`
-    flex: 1;
-    padding: 10px;
-    background-color: #252526;
-    display: flex;
-    flex-direction: column;
-`;
-
-const TreeVisualization = styled.div`
-    flex: 2;
-    border: 1px solid #444;
-    margin-bottom: 10px;
-    padding: 10px;
-`;
-
-const CommandReference = styled.div`
-    flex: 1;
-    border: 1px solid #444;
-    padding: 10px;
-`;
-
-interface TerminalOutput {
-    input: string;
-    output: string | CommandResult;
-}
 
 export default function Home() {
-    const { theme, setTheme } = useTheme();
-    const [soundEnabled, setSoundEnabled] = useState(false);
-    const [commandHistory, setCommandHistory] = useState<string[]>([]);
-    const [historyIndex, setHistoryIndex] = useState<number>(-1);
-    const [commandOutput, setCommandOutput] = useState<string[]>([
-        `
-        ___                         __  __       _              
-        |_ _|_ __ ___   __ _ _ __   |  \\/  | ___ | | ___   __ _ 
-        | || '_ \` _ \\ / _\` | '_ \\  | |\\/| |/ _ \\| |/ / | | | '_|
-        | || | | | | | (_| | | | | | |  | | (_) |   <| |_| | |  
-        |___|_| |_| |_|\\__,_|_| |_| |_|  |_|\\___/|_|\\_\\\\__,_|_|  
-                                                                
-        \n Welcome to my interactive CLI portfolio! Type 'help' to see available commands.
-        `
-    ]);
-    
-    const [appState, setAppState] = useState<AppState>({
-        currentBranch: 'main',
-        branches: ['main', 'projects', 'blog', 'awards'],
-    });
+  const [state, setState] = useState<AppState>({
+    currentBranch: "main",
+    branches: [
+      "main",
+      "projects",
+      "projects/pinned",
+      "projects/all-repos",
+      "blog",
+      "hackathons",
+    ],
+    currentFiles: ["about.md", "experience.md", "education.md"],
+    commandHistory: [],
+    historyIndex: -1,
+    files: {
+      main: {
+        "about.md": `# About Me
+Hi, I'm Iman Mokua!
+I study Computer Engineering at Howard University with a minor in Computer Science.
+I build web apps, small ML models, and low-level system infra.
+I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.`,
+        "experience.md": `# Experience
+## Meta Platforms, Inc. | Menlo Park, CA
 
-    const handleBranchClick = useCallback((branch: string) => {
-        if (branch === appState.currentBranch) return;
+\x1B[36mSoftware Engineering Intern | June 2024 - August 2024\x1B[0m
+- Improved classification accuracy by 47% using logistic regression and gradient descent optimization
+- Achieved 1.5x server speed-up through database denormalization and query caching
+- Implemented model persistence with local storage checkpointing for seamless page reloads
 
-        // Add command to history and execute it
-        const command = `git checkout ${branch}`;
-        setCommandHistory(prev => [...prev, command]);
-        setHistoryIndex(-1);
+## Howard University | Washington, D.C
 
-        setCommandOutput(prev => [...prev, `$ ${command}`]);
-        setAppState(prev => ({ ...prev, currentBranch: branch }));
-        setCommandOutput(prev => [
-            ...prev,
-            `Switched to branch '${branch}'`
-        ]);
-    }, [appState.currentBranch]);
-    
-    const handleCommand = useCallback((command: string) => {
-        // Add to history
-        setCommandHistory(prev => [...prev, command]);
-        setHistoryIndex(-1);
-        
-        // First, add the command to the output
-        setCommandOutput(prev => [...prev, `$ ${command}`]);
-        
-        // Process command
-        const result = commandHandler(command, appState, setAppState);
+\x1B[36mUndergraduate Research Assistant | October 2023 - January 2025\x1B[0m
+- Developed MIMO network simulations supporting 500+ Mbps throughput for high-capacity scenarios
+- Enhanced RF signal processing with 90% improved fidelity using advanced modulation schemes`,
+        "education.md": `# Education
 
-        // Handle theme command
-        if (typeof result === 'object' && result.theme) {
-            setTheme(result.theme as ThemeType);
+## Howard University | Washington, DC
+**Bachelor of Science in Computer Engineering, Minor in Computer Science** | Aug. 2022 - May 2026`,
+      },
+      projects: {},
+      "projects/pinned": {
+        "HDL_Alien_Shooter.md": `# HDL Alien Shooter - VHDL Game
 
-            setCommandOutput(prev => [
-                ...prev,
-                `$ ${command}`,
-                `Theme switched to ${result.theme}`
-            ]);
-            return;
-        }
+## Overview
+- Retro-style shooting game implemented in VHDL
+- Hardware-accelerated graphics and collision detection
+- Built for FPGA development board
+- Real-time sprite rendering and movement
 
-        // Handle sound command
-        if (typeof result === 'object') {
-            if (result.toggleSound) {
-                setSoundEnabled(prev => !prev);
-                setCommandOutput(prev => [
-                    ...prev,
-                    `$ ${command}`,
-                    `Sound ${result.soundEnabled ? 'enabled': 'disabled'}`
-                ]);
-                return;
-            }
-        }
-        
-        // Handle output
-        if (typeof result === 'object' && result.clear) {
-            // Reset to initial welcome messages
-            setCommandOutput([
-                "Welcome to Iman's interactive portfolio!",
-                'Type "help" to see available commands'
-            ]);
-            return
-        }
-        // Then add the result
-        setCommandOutput(prev => [
-            ...prev, 
-            `$ ${command}`,
-            typeof result === 'string' ? result : result.output || ''
-        ]);
-    }, [appState, setTheme, soundEnabled]);
-    
-    return (
-      <AppContainer theme={theme}>
-        <Header>
-          <span>Portfolio Terminal - imanmokua@portfolio:~/{appState.currentBranch}</span>
-          <div>
-              <span style={{ margin: '0 5px', color: '#FF5F56' }}>●</span>
-              <span style={{ margin: '0 5px', color: '#FFBD2E' }}>●</span>
-              <span style={{ margin: '0 5px', color: '#27C93F' }}>●</span>
-          </div>
-        </Header>
-        <MainContent>
-          <TerminalWrapper>
-            <Terminal 
-                onCommand={handleCommand} 
-                history={commandHistory}
-                historyIndex={historyIndex}
-                setHistoryIndex={setHistoryIndex}
-                commandOutput={commandOutput}
-            />
-          </TerminalWrapper>
-          <VisualizationPanel>
-            <TreeVisualization>
-              <h3>Repository Structure</h3>
-              <GitTree 
-                  currentBranch={appState.currentBranch} 
-                  branches={appState.branches} 
-                  onBranchClick={handleBranchClick}
-              />
-            </TreeVisualization>
-            <CommandReference>
-                <h3>Available Commands</h3>
-                <div>git checkout [branch]</div>
-                <div>git branch</div>
-                <div>ls</div>
-                <div>cat [file.md]</div>
-                <div>social [platform]</div>
-                <div>open [project]</div>
-                <div>help</div>
-                <div>clear</div>
-            </CommandReference>
-          </VisualizationPanel>
-        </MainContent>
-      </AppContainer>
-    );
+## Features
+- Custom sprite rendering engine
+- Real-time collision detection
+- Score tracking system
+- Multiple difficulty levels
+- Hardware-optimized game logic
+- VGA display output
+
+## Tech Stack
+- VHDL
+- Xilinx Vivado
+- FPGA Development Board`,
+
+        "roids.md": `# Roids - Asteroid Shooter
+
+## Overview
+- Classic asteroid shooting game built with Python
+- Object-oriented design with inheritance
+- Smooth physics-based movement
+- Dynamic difficulty scaling
+
+## Features
+- Multiple asteroid types and behaviors
+- Power-up system
+- High score tracking
+- Progressive difficulty
+- Particle effects system
+- Sound effects and background music
+
+## Tech Stack
+- Python
+- Pygame
+- Object-Oriented Programming
+- Vector Mathematics`,
+
+        "SSG.md": `# SSG - Static Site Generator
+
+## Overview
+- Custom static site generator written in Python
+- Markdown to HTML conversion
+- Template-based page generation
+- Asset management system
+
+## Features
+- Markdown support with custom extensions
+- Customizable HTML templates
+- Asset pipeline for CSS/JS
+- Blog post management
+- Tag and category system
+- RSS feed generation
+
+## Tech Stack
+- Python
+- Jinja2 Templates
+- Markdown Parser
+- YAML Front Matter
+- CSS/SCSS Processing`,
+
+        "FinMe.md": `# FinMe - Student Finance Tracker
+
+## Overview
+- Financial management tool for students
+- Budget tracking and planning
+- Expense categorization
+- Financial insights and analytics
+
+## Features
+- Expense tracking and categorization
+- Budget planning tools
+- Bill payment reminders
+- Spending analytics
+- Savings goals tracking
+- Export financial reports
+
+## Tech Stack
+- Python
+- Flask
+- SQLAlchemy
+- PostgreSQL
+- Chart.js
+- Bootstrap`,
+      },
+      "projects/all-repos": {
+        "repositories.md": `# All GitHub Repositories
+
+## Active Projects
+* SSG (python-based static site generator with markdown support)
+
+* imanmokua (interactive terminal-based portfolio website)
+
+* Enclave (real-time event attendance tracking using QR codes)
+
+* dabble (p2p randomized college video chat)
+
+## Future Projects
+* iTems (find stuff super fast)
+
+* SigLight (ML Voice-Controlled LED Lighting)`,
+      },
+      blog: {
+        "coming-soon.md": `# Blog Coming Soon!
+
+Stay tuned for articles on:
+- Random thoughts
+- Backend Development
+- ML Engineering
+- Design (cause no one likes shitty UIs like Microsoft Outlook)`,
+      },
+      hackathons: {
+        "bison-hacks.md": `# BisonHacks 2024 - Autonomy
+
+## Project Overview
+- Developed a real-time knowledge graph system for local community awareness
+- Implemented hourly data scraping pipeline with distributed crawlers
+- Built transformer-based NLP models for semantic understanding
+- Deployed a conversational AI interface for intuitive information retrieval
+- Enabled local communities to query and understand real-time events in their area`,
+        "bison-bytes.md": `# Bison Bytes 2024 - Roblox Obstacle Course
+
+## Project Overview
+- Developed a physics-based obstacle course game in Roblox Studio
+- Implemented advanced game mechanics and real-time multiplayer functionality
+- Created procedurally generated obstacles with difficulty scaling
+- Built dynamic leaderboard system for competitive gameplay
+- Designed engaging player progression system`,
+        "black-blockchain.md": `# Black Blockchain Summit - DeFi Community Lending
+
+## Project Overview
+- Developed a decentralized peer-to-peer lending platform for community microfinance
+- Implemented smart contracts for loan management and crowdfunding
+- Created a transparent voting system for loan approval
+- Built a community-driven risk assessment system
+- Enabled secure and transparent loan transactions
+- Won 1st Place for Technical Innovation and Impact`,
+        "google-hbcu.md": `# Google HBCU Hackathon - Beatz
+
+## Project Overview
+- Developed an AI-powered music recommendation platform
+- Built mood-based playlist generation using OpenAI API
+- Implemented cross-cultural music discovery algorithm
+- Created personalized music recommendations using NLP
+- Designed intuitive mood-based user interface
+- Won 1st Place for Innovation in AI/ML`,
+      },
+    },
+  });
+
+  const handleCommand = (command: string) => {
+    const result = commandHandler(command, state);
+
+    if (result.newBranch) {
+      setState((prev) => ({
+        ...prev,
+        currentBranch: result.newBranch as string,
+        currentFiles: Object.keys(prev.files[result.newBranch as string] || {}),
+      }));
+    }
+
+    return result;
+  };
+
+  return (
+    <AppContainer>
+      <SidebarContainer>
+        <GitTree
+          currentBranch={state.currentBranch}
+          branches={state.branches}
+          onBranchClick={(branch) => handleCommand(`git checkout ${branch}`)}
+        />
+        <CommandHelp />
+      </SidebarContainer>
+      <MainContainer>
+        <Terminal
+          onCommand={handleCommand}
+          currentBranch={state.currentBranch}
+        />
+      </MainContainer>
+    </AppContainer>
+  );
 }

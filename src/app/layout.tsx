@@ -1,12 +1,11 @@
 // src/app/layout.tsx
-import type { Metadata } from 'next';
-import './globals.css';
-import StyledComponentsRegistry from './registry';
-import { ThemeProvider } from '../context/ThemeContext';
+import "./globals.css";
+import type { Metadata } from "next";
+import StyledComponentsRegistry from "./registry";
 
 export const metadata: Metadata = {
-  title: 'Iman Mokua Portfolio',
-  description: 'Interactive CLI-style developer portfolio',
+  title: "Iman's Portfolio",
+  description: "Interactive terminal portfolio",
 };
 
 export default function RootLayout({
@@ -16,12 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        <StyledComponentsRegistry>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
-        </StyledComponentsRegistry>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
   );

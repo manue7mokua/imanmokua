@@ -1,15 +1,8 @@
-import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   compiler: {
-    styledComponents: true,
-  },
-  output: 'export',
-  images: {
-    unoptimized: true,
-  },
-  // basePath: '/imanmokua',
+    styledComponents: true
+  }
 };
 
-export default nextConfig;
+module.exports = nextConfig;
