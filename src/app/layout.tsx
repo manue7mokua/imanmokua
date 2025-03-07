@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Iman:_:Mokua",
+  title: "Iman Mokua",
   description: "Interactive terminal-based portfolio",
   icons: {
     icon: "/iman-mokua.png",
@@ -14,16 +14,16 @@ export const metadata: Metadata = {
     apple: "/iman-mokua.png",
   },
   openGraph: {
-    title: "Iman:_:Mokua",
-    description: "Iman:_:Mokua",
+    title: "Iman Mokua",
+    description: "Interactive terminal-based portfolio",
     url: "https://imanmokua.me",
-    siteName: "Iman:_:Mokua",
+    siteName: "Iman Mokua",
     images: [
       {
         url: "/iman-mokua.png",
         width: 500,
         height: 500,
-        alt: "Iman:_:Mokua",
+        alt: "Iman Mokua",
       },
     ],
     locale: "en_US",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iman:_:Mokua",
-    description: "Iman:_:Mokua",
+    title: "Iman Mokua",
+    description: "Interactive terminal-based portfolio",
     images: ["/iman-mokua.png"],
   },
 };
@@ -45,6 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/iman-mokua.png" />
+        <link rel="apple-touch-icon" href="/iman-mokua.png" />
+        <link rel="shortcut icon" href="/iman-mokua.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
           rel="stylesheet"
