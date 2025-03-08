@@ -1,0 +1,14 @@
+{
+  "name": "Iman Mokua",
+  "short_name": "Iman Mokua",
+  "icons": [
+    {
+      "src": "/iman-mokua.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone"
+}

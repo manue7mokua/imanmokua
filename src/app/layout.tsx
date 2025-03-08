@@ -8,10 +8,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   title: "Iman Mokua",
   description: "Interactive terminal-based portfolio",
+  manifest: "/manifest.json",
   icons: {
-    icon: "/iman-mokua.png",
-    shortcut: "/iman-mokua.png",
-    apple: "/iman-mokua.png",
+    icon: [{ url: "/iman-mokua.png", type: "image/png" }],
+    shortcut: [{ url: "/iman-mokua.png", type: "image/png" }],
+    apple: [{ url: "/iman-mokua.png", type: "image/png" }],
   },
   openGraph: {
     title: "Iman Mokua",
@@ -45,9 +46,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/iman-mokua.png" />
-        <link rel="apple-touch-icon" href="/iman-mokua.png" />
-        <link rel="shortcut icon" href="/iman-mokua.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
           rel="stylesheet"
