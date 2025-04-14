@@ -13,6 +13,10 @@ const AppContainer = styled.div`
   height: 100vh;
   background: #000000;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const SidebarContainer = styled.div`
@@ -29,6 +33,18 @@ const SidebarContainer = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 40vh;
+    min-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 const MainContainer = styled.div`
@@ -37,6 +53,14 @@ const MainContainer = styled.div`
   padding: 1rem;
   background: #000000;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 60vh;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 export default function Home() {
