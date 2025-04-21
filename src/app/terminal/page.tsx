@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 import Terminal from "@/components/Terminal";
 import DirectoryTree from "@/components/DirectoryTree";
 import CommandHelp from "@/components/CommandHelp";
+import MobileProjectList from "@/components/MobileProjectList";
 import { AppState } from "@/types";
 import commandHandler from "@/utils/commandHandler";
 
@@ -64,6 +66,8 @@ const MainContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
   const [state, setState] = useState<AppState>({
     currentDirectory: "~",
     directories: [
@@ -246,6 +250,20 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
     },
   });
 
+  // Check if device is mobile on component mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
   const handleCommand = (command: string) => {
     const result = commandHandler(command, state);
 
@@ -262,6 +280,16 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
     return result;
   };
 
+  const handleBackToHome = () => {
+    router.push("/");
+  };
+
+  // For mobile devices, show the simplified project list instead of the terminal
+  if (isMobile) {
+    return <MobileProjectList state={state} onBackClick={handleBackToHome} />;
+  }
+
+  // Regular terminal interface for larger screens
   return (
     <AppContainer>
       <SidebarContainer>
