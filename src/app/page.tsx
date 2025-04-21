@@ -61,9 +61,12 @@ export default function HomePage() {
           >
             about
           </span>
-          {/* Disabled "yaps" link - keeping cursor-not-allowed since it's disabled */}
-          <span className="text-base md:text-lg font-mono text-muted-foreground cursor-not-allowed">
+          {/* Disabled "yaps" link - adding custom tooltip */}
+          <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
             yaps
+            <span className="absolute -right-24 top-1 hidden group-hover:block w-20 px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
+              coming soon...
+            </span>
           </span>
         </div>
 
@@ -91,17 +94,17 @@ export default function HomePage() {
             {/* Reduced space */}
             <p className="font-mono text-sm md:text-base">my calendar:</p>{" "}
             {/* Reduced font size */}
-            <ul className="list-disc list-inside space-y-1 inline-block text-left font-mono text-sm md:text-base leading-relaxed">
+            <ul className="list-disc list-inside space-y-1 inline-block text-center mx-auto font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size & space */}
               <li>
-                building scalable infra projects to learn how to optimize
+                building smaller scale infra projects to learn how to optimize
                 real-time user interactions.
               </li>
               <li>
                 simulating wireless networks as a research assistant @howardu.
               </li>
-              <li>learning golang and gRPC toolchain.</li>
+              <li>learning golang and the gRPC toolchain.</li>
             </ul>
           </div>
           {/* Block 3: "also:" */}
