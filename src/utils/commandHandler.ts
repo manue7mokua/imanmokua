@@ -11,27 +11,26 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
 ╚══════════════════════════════════════════════════════════════╝\x1B[0m
 
 \x1B[1;36mNavigation Commands:\x1B[0m
-  ls                     - List files in current branch
-  cat [filename]         - View the contents of a file
-  git branch            - Show all available branches
-  git checkout [branch] - Switch to a different branch
-  goback                - Return to parent branch (from nested branches)
+  go back home          - Return to the homepage
+  pwd                   - Show current directory
+  ls                    - List files in current directory
+  cd [path]             - Change directory (cd .. to go up one level)
+  cat [filename]        - View the contents of a file
   clear                 - Clear the terminal screen
 
-\x1B[1;36mBranch Structure:\x1B[0m
-  main/                 - About me, education, and experience
-  projects/            - My GitHub projects
-    ├── pinned/       - Featured projects with details
-    └── all-repos/    - Complete list of repositories
-  blog/                - Tech blog posts (coming soon)
-  hackathons/          - Hackathon projects and achievements
+\x1B[1;36mDirectory Structure:\x1B[0m
+  ~/                    - Home directory with welcome and info
+  ~/projects/          - My GitHub projects
+    ├── pinned/        - Featured projects with details
+    └── all-repos/     - Complete list of repositories
+  ~/hackathons/        - Hackathon projects and achievements
 
 \x1B[1;36mSocial & Links:\x1B[0m
   social [platform]     - Open my social media profiles
     Available platforms: github, linkedin, x, instagram
   
-  open [project]       - Open project repository
-    Available projects: portfolio, alien-shooter, voxgen
+  open [project]        - Open project repository
+    Available projects: dogbed_db, HDL_Alien_Shooter, SSG, FinMe
 
 \x1B[1;36mTips:\x1B[0m
   - Use Tab for command autocomplete
@@ -39,13 +38,18 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
   - Type 'clear' to clean the terminal screen`,
       };
 
-    case "git":
-      return handleGitCommand(args, state);
+    case "pwd":
+      return {
+        output: state.currentDirectory,
+      };
+
+    case "cd":
+      return handleCdCommand(args, state);
 
     case "ls":
-      if (state.currentBranch === "projects") {
+      if (state.currentDirectory === "~/projects") {
         return {
-          output: "\x1B[1;36mBranches:\x1B[0m\n  pinned/\n  all-repos/",
+          output: "\x1B[1;36mDirectories:\x1B[0m\n  pinned/\n  all-repos/",
         };
       }
 
@@ -57,7 +61,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
       return {
         output: state.currentFiles
           .map((file) => {
-            const content = state.files[state.currentBranch]?.[file];
+            const content = state.files[state.currentDirectory]?.[file];
             const firstLine = content?.split("\n")[0] || "";
             const title = firstLine.replace("# ", "");
             // Pad the filename to align descriptions
@@ -68,7 +72,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
       };
 
     case "cat":
-            return handleCatCommand(args, state);
+      return handleCatCommand(args, state);
 
     case "clear":
       return {
@@ -76,121 +80,94 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
         clear: true,
       };
 
-    case "goback":
-      if (state.currentBranch.includes("/")) {
-        const parentBranch = state.currentBranch.split("/")[0];
+    case "go":
+      if (args.join(" ") === "back home") {
+        if (typeof window !== "undefined") {
+          window.location.href = "/";
+        }
         return {
-          output: `\x1B[1;32mReturned to ${parentBranch} branch\x1B[0m`,
-          newBranch: parentBranch,
+          output: `\x1B[1;32mNavigating back to homepage...\x1B[0m`,
         };
       }
       return {
-        output: "\x1B[1;33mAlready at root branch\x1B[0m",
+        output: `\x1B[1;31mUnknown command: go ${args.join(
+          " "
+        )}. Did you mean 'go back home'?\x1B[0m`,
       };
 
     case "social":
-            return handleSocialCommand(args);
+      return handleSocialCommand(args);
 
     case "open":
-            return handleOpenCommand(args);
+      return handleOpenCommand(args);
 
-    case "branch":
-      const branchList = state.branches.map((branch) =>
-        branch === state.currentBranch
-          ? `* \x1B[1;32m${branch}\x1B[0m`
-          : `  ${branch}`
-      );
-
-      if (state.currentBranch === "projects") {
-        branchList.push("  pinned/");
-        branchList.push("  all-repos/");
-      }
-
-      return {
-        output: branchList.join("\n"),
-      };
-
-        default: 
+    default:
       return {
         output: `\x1B[1;31mCommand not found: ${command}. Type 'help' for available commands.\x1B[0m`,
       };
   }
 };
 
-const handleGitCommand = (args: string[], state: AppState): CommandResult => {
-  if (!args.length) return { output: "Usage: git [command]" };
-
-    switch (args[0]) {
-    case "checkout":
-      if (!args[1]) return { output: "Usage: git checkout [branch]" };
-      const targetBranch = args[1].toLowerCase();
-
-      // Handle nested branches in projects
-      if (targetBranch.startsWith("projects/")) {
-        const nestedBranch = targetBranch.split("/")[1];
-        if (nestedBranch === "pinned" || nestedBranch === "all-repos") {
-          if (state.currentBranch !== "projects") {
-            return {
-              output: `\x1B[1;31mMust be in 'projects' branch to access ${nestedBranch}\x1B[0m`,
-            };
-          }
-          return {
-            output: `\x1B[1;32mSwitched to branch '${targetBranch}'\x1B[0m`,
-            newBranch: targetBranch,
-          };
-        }
-      } else if (targetBranch === "pinned" || targetBranch === "all-repos") {
-        if (state.currentBranch !== "projects") {
-          return {
-            output: `\x1B[1;31mMust be in 'projects' branch to access ${targetBranch}\x1B[0m`,
-          };
-        }
-        const fullBranch = `projects/${targetBranch}`;
-        return {
-          output: `\x1B[1;32mSwitched to branch '${fullBranch}'\x1B[0m`,
-          newBranch: fullBranch,
-        };
-      }
-
-      if (!state.branches.includes(targetBranch)) {
-        return {
-          output: `\x1B[1;31mBranch '${targetBranch}' not found.\x1B[0m`,
-        };
-      }
-
-      return {
-        output: `\x1B[1;32mSwitched to branch '${targetBranch}'\x1B[0m`,
-        newBranch: targetBranch,
-      };
-
-    case "branch":
-      const branchList = state.branches.map((branch) =>
-        branch === state.currentBranch
-          ? `* \x1B[1;32m${branch}\x1B[0m`
-          : `  ${branch}`
-      );
-
-      if (state.currentBranch === "projects") {
-        branchList.push("  pinned/");
-        branchList.push("  all-repos/");
-      }
-
-      return {
-        output: branchList.join("\n"),
-      };
-
-    default:
-      return {
-        output: `\x1B[1;31mGit command not supported: ${args[0]}\x1B[0m`,
-      };
+const handleCdCommand = (args: string[], state: AppState): CommandResult => {
+  if (!args.length) {
+    // Default to home directory if no argument is provided
+    return {
+      output: `\x1B[1;32mChanged to home directory\x1B[0m`,
+      newDirectory: "~",
+    };
   }
+
+  let targetDir = args[0];
+
+  // Handle "cd .." (go up one directory)
+  if (targetDir === "..") {
+    if (state.currentDirectory === "~") {
+      return {
+        output: `\x1B[1;33mAlready at home directory\x1B[0m`,
+      };
+    }
+
+    const dirs = state.currentDirectory.split("/");
+    dirs.pop();
+    targetDir = dirs.join("/") || "~";
+
+    return {
+      output: `\x1B[1;32mChanged to ${targetDir}\x1B[0m`,
+      newDirectory: targetDir,
+    };
+  }
+
+  // Handle absolute paths (starting with ~)
+  if (!targetDir.startsWith("~")) {
+    // Relative path - prepend current directory
+    if (state.currentDirectory === "~") {
+      targetDir = `~/${targetDir}`;
+    } else {
+      targetDir = `${state.currentDirectory}/${targetDir}`;
+    }
+  }
+
+  // Clean up double slashes
+  targetDir = targetDir.replace(/\/+/g, "/");
+
+  // Check if the directory exists
+  if (!state.directories.includes(targetDir)) {
+    return {
+      output: `\x1B[1;31mDirectory not found: ${targetDir}\x1B[0m`,
+    };
+  }
+
+  return {
+    output: `\x1B[1;32mChanged to ${targetDir}\x1B[0m`,
+    newDirectory: targetDir,
+  };
 };
 
 const handleCatCommand = (args: string[], state: AppState): CommandResult => {
   if (!args.length) return { output: "Usage: cat [filename]" };
 
   const fileName = args[0];
-  const fileContent = state.files[state.currentBranch]?.[fileName];
+  const fileContent = state.files[state.currentDirectory]?.[fileName];
 
   if (!fileContent) {
     return { output: `\x1B[1;31mFile '${fileName}' not found.\x1B[0m` };
@@ -279,10 +256,10 @@ const handleOpenCommand = (args: string[]): CommandResult => {
   if (!args.length) {
     return {
       output: `\x1B[1;35mAvailable projects:\x1B[0m
-  \x1B[1;36mHDL_Alien_Shooter\x1B[0m - VHDL-based retro shooting game
-  \x1B[1;36mroids\x1B[0m           - Python asteroid shooter game
-  \x1B[1;36mSSG\x1B[0m             - Static site generator
-  \x1B[1;36mFinMe\x1B[0m           - Student finance tracker
+  \x1B[1;36mdogbed_db\x1B[0m       - A simple key-value database
+  \x1B[1;36mHDL_Alien_Shooter\x1B[0m - Space Invaders in VHDL
+  \x1B[1;36mSSG\x1B[0m             - Lightweight static site generator
+  \x1B[1;36mFinMe\x1B[0m           - Automate DCA investing for students
   \x1B[1;36mimanmokua\x1B[0m       - CLI Portfolio
   \x1B[1;36mEnclave\x1B[0m         - Event QR code tracking
   \x1B[1;36mdabble\x1B[0m          - P2P college video chat
@@ -292,12 +269,11 @@ const handleOpenCommand = (args: string[]): CommandResult => {
 
   const project = args.join("-");
   const projects: Record<string, string> = {
+    dogbed_db: "https://github.com/manue7mokua/dogbed_db",
     HDL_Alien_Shooter: "https://github.com/manue7mokua/HDL_Alien_Shooter",
-    roids: "https://github.com/manue7mokua/roids",
     SSG: "https://github.com/manue7mokua/SSG",
     FinMe: "https://github.com/manue7mokua/FinMe",
     imanmokua: "https://github.com/manue7mokua/imanmokua",
-    Enclave: "https://github.com/Mikito-Coder/Enclave",
     dabble: "https://github.com/Mikito-Coder/bomegleclone",
   };
 

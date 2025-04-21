@@ -1,12 +1,12 @@
 export interface CommandResult {
   output: string;
-  newBranch?: string;
+  newDirectory?: string;
   clear?: boolean;
 }
 
 export interface AppState {
-  currentBranch: string;
-  branches: string[];
+  currentDirectory: string;
+  directories: string[];
   currentFiles: string[];
   commandHistory: string[];
   historyIndex: number;
@@ -14,22 +14,23 @@ export interface AppState {
 }
 
 export interface TerminalProps {
-  onCommand: (command: string) => void;
-  currentBranch: string;
+  onCommand: (command: string) => CommandResult;
+  currentDirectory: string;
 }
 
 export const AVAILABLE_COMMANDS = [
+  "go back home",
   "help",
+  "pwd",
   "ls",
+  "cd ~",
+  "cd ~/projects",
+  "cd ~/projects/pinned",
+  "cd ~/projects/all-repos",
+  "cd ~/hackathons",
+  "cd ..",
   "clear",
-  "git branch",
-  "git checkout main",
-  "git checkout projects",
-  "git checkout projects/pinned",
-  "git checkout projects/all-repos",
-  "git checkout blog",
-  "git checkout hackathons",
-  "goback",
+  "cat welcome.md",
   "social github",
   "social linkedin",
   "social x",
@@ -41,10 +42,13 @@ export const AVAILABLE_COMMANDS = [
   "open imanmokua",
   "open Enclave",
   "open dabble",
+  "cat bison-hacks.md",
+  "cat black-blockchain.md",
   "cat google-hbcu.md",
+  "cat bison-bytes.md",
   "cat HDL_Alien_Shooter.md",
   "cat roids.md",
   "cat SSG.md",
   "cat FinMe.md",
-  "cat bison-bytes.md",
+  "cat repositories.md",
 ];

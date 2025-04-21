@@ -59,23 +59,28 @@ const CommandHelp: React.FC = () => {
 
       <CommandGroup>
         <CommandItem>
+          <span className="command">go back home</span>
+          <span className="description">Return to the homepage</span>
+        </CommandItem>
+
+        <CommandItem>
           <span className="command">help</span>
           <span className="description">Show this help menu</span>
         </CommandItem>
 
         <CommandItem>
-          <span className="command">git branch</span>
-          <span className="description">List all branches</span>
-        </CommandItem>
-
-        <CommandItem>
-          <span className="command">git checkout [branch]</span>
-          <span className="description">Switch to a branch</span>
+          <span className="command">pwd</span>
+          <span className="description">Show current directory</span>
         </CommandItem>
 
         <CommandItem>
           <span className="command">ls</span>
-          <span className="description">List files in current branch</span>
+          <span className="description">List files in current directory</span>
+        </CommandItem>
+
+        <CommandItem>
+          <span className="command">cd [directory]</span>
+          <span className="description">Change to a directory</span>
         </CommandItem>
 
         <CommandItem>
@@ -99,25 +104,25 @@ const CommandHelp: React.FC = () => {
         </CommandItem>
       </CommandGroup>
 
-      <Title>Available Branches</Title>
+      <Title>Available Directories</Title>
       <CommandGroup>
         <CommandItem>
-          <span className="command">main</span>
-          <span className="description">About me & experience</span>
+          <span className="command">~</span>
+          <span className="description">Home directory</span>
         </CommandItem>
 
         <CommandItem>
-          <span className="command">projects</span>
+          <span className="command">~/projects</span>
           <span className="description">My GitHub projects</span>
         </CommandItem>
 
         <CommandItem>
-          <span className="command">blog</span>
-          <span className="description">(coming soon)</span>
+          <span className="command">~/projects/pinned</span>
+          <span className="description">Featured projects with details</span>
         </CommandItem>
 
         <CommandItem>
-          <span className="command">hackathons</span>
+          <span className="command">~/hackathons</span>
           <span className="description">Hackathon projects</span>
         </CommandItem>
       </CommandGroup>

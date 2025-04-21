@@ -6,13 +6,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Default light mode */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fcfcfc;
+  --foreground: #000000;
 }
 
+/* Dark mode when .dark class is applied */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* For system preference - only used if enableSystem is true */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }

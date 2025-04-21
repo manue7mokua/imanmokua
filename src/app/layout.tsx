@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import StyledComponentsRegistry from "./registry";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Iman Mokua",
@@ -44,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
@@ -53,9 +54,16 @@ export default function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          {children}
-          <Analytics />
-          <SpeedInsights />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            storageKey="iman-mokua-theme"
+          >
+            {children}
+            <Analytics />
+            <SpeedInsights />
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

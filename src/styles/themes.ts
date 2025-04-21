@@ -1,44 +1,44 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 export const themes = {
   dark: css`
-    --bg-primary: #1E1E1E;
+    --bg-primary: #1e1e1e;
     --bg-secondary: #252526;
     --bg-tertiary: #333;
-    --text-primary: #FFFFFF;
-    --text-secondary: #CCCCCC;
-    --accent-color: #27C93F;
-    --accent-secondary: #4169E1;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #27c93f;
+    --accent-secondary: #4169e1;
     --border-color: #444;
   `,
   light: css`
-    --bg-primary: #F5F5F5;
-    --bg-secondary: #ECECEC;
-    --bg-tertiary: #DDDDDD;
-    --text-primary: #333333;
-    --text-secondary: #555555;
-    --accent-color: #2E7D32;
-    --accent-secondary: #1976D2;
-    --border-color: #CCCCCC;
+    --bg-primary: #fcfcfc;
+    --bg-secondary: #f8f8f8;
+    --bg-tertiary: #f0f0f0;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --accent-color: #dd8833;
+    --accent-secondary: #b05c1d;
+    --border-color: #e0e0e0;
   `,
   hacker: css`
-    --bg-primary: #0D0208;
-    --bg-secondary: #003B00;
-    --bg-tertiary: #008F11;
-    --text-primary: #00FF41;
-    --text-secondary: #00BB31;
-    --accent-color: #00FF41;
-    --accent-secondary: #8BC34A;
-    --border-color: #005F00;
+    --bg-primary: #0d0208;
+    --bg-secondary: #003b00;
+    --bg-tertiary: #008f11;
+    --text-primary: #00ff41;
+    --text-secondary: #00bb31;
+    --accent-color: #00ff41;
+    --accent-secondary: #8bc34a;
+    --border-color: #005f00;
   `,
   retro: css`
-    --bg-primary: #2C3E50;
-    --bg-secondary: #34495E;
+    --bg-primary: #2c3e50;
+    --bg-secondary: #34495e;
     --bg-tertiary: #283747;
-    --text-primary: #F39C12;
-    --text-secondary: #F1C40F;
-    --accent-color: #E74C3C;
-    --accent-secondary: #9B59B6;
-    --border-color: #1C2833;
-  `
+    --text-primary: #f39c12;
+    --text-secondary: #f1c40f;
+    --accent-color: #e74c3c;
+    --accent-secondary: #9b59b6;
+    --border-color: #1c2833;
+  `,
 };
