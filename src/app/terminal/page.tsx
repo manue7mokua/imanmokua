@@ -126,7 +126,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 - File I/O Operations
 - Unit Testing`,
 
-        "HDL_Alien_Shooter.md": `# HDL Alien Shooter - VHDL Game
+        "HDL_Alien_Shooter.md": `# HDL Alien Shooter - Space Invaders in VHDL
 
 ## Overview
 - Retro-style shooting game implemented in VHDL
@@ -147,7 +147,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 - Xilinx Vivado
 - FPGA Development Board`,
 
-        "SSG.md": `# SSG - Static Site Generator
+        "SSG.md": `# SSG - Lightweight Static Site Generator
 
 ## Overview
 - Custom static site generator written in Python

@@ -1,100 +1,187 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AppState } from "@/types";
 import { Github } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const MobileContainer = styled.div`
-  padding: 1rem;
-  background: #000000;
-  color: #fff;
+  padding: 1.5rem 1rem;
+  background: var(--background, #0a0a0a);
+  color: var(--foreground, #ededed);
   min-height: 100vh;
   overflow-y: auto;
-  font-family: "Menlo", monospace;
+  font-family: var(--font-sans, "Inter", sans-serif);
 `;
 
 const Header = styled.h1`
-  font-size: 1.5rem;
-  color: #27c93f;
-  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: var(--foreground, #ededed);
+  margin-bottom: 1.8rem;
   text-align: center;
+  font-weight: 500;
+  font-family: var(--font-sans, "Inter", sans-serif);
 `;
 
 const BackButton = styled.button`
   display: block;
-  margin: 0 auto 1.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #1a1a1a;
-  color: #4169e1;
-  border: 1px solid #333;
-  border-radius: 4px;
-  font-family: "Menlo", monospace;
+  margin: 0 auto 1.8rem;
+  padding: 0.5rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #dd8833;
+  border: 1px solid rgba(221, 136, 51, 0.3);
+  border-radius: 6px;
+  font-family: var(--font-mono, "Geist Mono", monospace);
   cursor: pointer;
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #27c93f22;
-    color: #27c93f;
+    background-color: rgba(221, 136, 51, 0.1);
+    border-color: rgba(221, 136, 51, 0.5);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 `;
 
 const SectionTitle = styled.h2`
   font-size: 1.25rem;
-  color: #4169e1;
-  margin: 1.5rem 0 1rem;
-  border-bottom: 1px solid #333;
+  color: #dd8833;
+  margin: 2rem 0 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
-`;
-
-const ProjectCard = styled.div`
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background-color: #1a1a1a;
+  font-weight: 500;
+  font-family: var(--font-mono, "Geist Mono", monospace);
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: 1rem;
-  color: #27c93f;
-  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--foreground, #ededed);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-sans, "Inter", sans-serif);
 `;
 
 const ProjectDescription = styled.p`
-  font-size: 0.875rem;
-  color: #ccc;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1rem;
-  line-height: 1.4;
-`;
-
-const ProjectLink = styled.a`
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  background-color: #333;
-  color: #87ceeb;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-
-  &:hover {
-    background-color: #444;
-  }
+  line-height: 1.5;
+  font-family: var(--font-sans, "Inter", sans-serif);
 `;
 
 const TagList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.75rem;
+  margin-top: 1rem;
 `;
 
-const Tag = styled.span`
+// Style for light mode
+const LightModeTag = styled.span`
   font-size: 0.7rem;
-  padding: 0.15rem 0.4rem;
-  background-color: #2a2a2a;
-  color: #aaa;
-  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(221, 136, 51, 0.1);
+  color: rgba(176, 92, 29, 0.9);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+
+  &:hover {
+    background-color: rgba(221, 136, 51, 0.15);
+  }
+`;
+
+// Style for dark mode
+const DarkModeTag = styled.span`
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+// Light and dark mode styles for ProjectCard
+const LightModeProjectCard = styled.div`
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-sans, "Inter", sans-serif);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(221, 136, 51, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+`;
+
+const DarkModeProjectCard = styled.div`
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  font-family: var(--font-sans, "Inter", sans-serif);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(221, 136, 51, 0.3);
+  }
+`;
+
+// Light and dark mode styles for ProjectLink
+const LightModeProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(176, 92, 29, 0.1);
+  color: rgba(176, 92, 29, 1);
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+
+  &:hover {
+    background-color: rgba(176, 92, 29, 0.15);
+    transform: translateY(-1px);
+  }
+`;
+
+const DarkModeProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(221, 136, 51, 0.15);
+  color: #dd8833;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+
+  &:hover {
+    background-color: rgba(221, 136, 51, 0.25);
+    transform: translateY(-1px);
+  }
 `;
 
 interface MobileProjectListProps {
@@ -106,6 +193,14 @@ const MobileProjectList: React.FC<MobileProjectListProps> = ({
   state,
   onBackClick,
 }) => {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Set mounted to true when component mounts to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Helper to extract first paragraph from content as description
   const getDescription = (content: string): string => {
     const lines = content.split("\n");
@@ -174,39 +269,61 @@ const MobileProjectList: React.FC<MobileProjectListProps> = ({
       <BackButton onClick={onBackClick}>Back to Homepage</BackButton>
 
       <SectionTitle>Featured Projects</SectionTitle>
-      {projects.map((project) => (
-        <ProjectCard key={project.filename}>
-          <ProjectTitle>{project.title}</ProjectTitle>
-          <ProjectDescription>{project.description}</ProjectDescription>
+      {projects.map((project) => {
+        const Card =
+          mounted && theme === "light"
+            ? LightModeProjectCard
+            : DarkModeProjectCard;
+        const Link =
+          mounted && theme === "light"
+            ? LightModeProjectLink
+            : DarkModeProjectLink;
 
-          {project.tags.length > 0 && (
-            <TagList>
-              {project.tags.map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </TagList>
-          )}
+        return (
+          <Card key={project.filename}>
+            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectDescription>{project.description}</ProjectDescription>
 
-          {project.link && (
-            <ProjectLink
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="View on GitHub"
-            >
-              <Github size={16} />
-            </ProjectLink>
-          )}
-        </ProjectCard>
-      ))}
+            {project.tags.length > 0 && (
+              <TagList>
+                {project.tags.map((tag, index) =>
+                  mounted && theme === "light" ? (
+                    <LightModeTag key={index}>{tag}</LightModeTag>
+                  ) : (
+                    <DarkModeTag key={index}>{tag}</DarkModeTag>
+                  )
+                )}
+              </TagList>
+            )}
+
+            {project.link && (
+              <Link
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View on GitHub"
+              >
+                <Github size={16} />
+              </Link>
+            )}
+          </Card>
+        );
+      })}
 
       <SectionTitle>Hackathon Projects</SectionTitle>
-      {hackathons.map((hackathon) => (
-        <ProjectCard key={hackathon.filename}>
-          <ProjectTitle>{hackathon.title}</ProjectTitle>
-          <ProjectDescription>{hackathon.description}</ProjectDescription>
-        </ProjectCard>
-      ))}
+      {hackathons.map((hackathon) => {
+        const Card =
+          mounted && theme === "light"
+            ? LightModeProjectCard
+            : DarkModeProjectCard;
+
+        return (
+          <Card key={hackathon.filename}>
+            <ProjectTitle>{hackathon.title}</ProjectTitle>
+            <ProjectDescription>{hackathon.description}</ProjectDescription>
+          </Card>
+        );
+      })}
     </MobileContainer>
   );
 };

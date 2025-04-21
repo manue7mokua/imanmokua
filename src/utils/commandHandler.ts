@@ -257,8 +257,8 @@ const handleOpenCommand = (args: string[]): CommandResult => {
     return {
       output: `\x1B[1;35mAvailable projects:\x1B[0m
   \x1B[1;36mdogbed_db\x1B[0m       - A simple key-value database
-  \x1B[1;36mHDL_Alien_Shooter\x1B[0m - VHDL-based retro shooting game
-  \x1B[1;36mSSG\x1B[0m             - Static site generator
+  \x1B[1;36mHDL_Alien_Shooter\x1B[0m - Space Invaders in VHDL
+  \x1B[1;36mSSG\x1B[0m             - Lightweight static site generator
   \x1B[1;36mFinMe\x1B[0m           - Automate DCA investing for students
   \x1B[1;36mimanmokua\x1B[0m       - CLI Portfolio
   \x1B[1;36mEnclave\x1B[0m         - Event QR code tracking
