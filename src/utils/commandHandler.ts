@@ -16,6 +16,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
   cd [path]             - Change directory (cd .. to go up one level)
   cat [filename]        - View the contents of a file
   clear                 - Clear the terminal screen
+  go back home          - Return to the homepage
 
 \x1B[1;36mDirectory Structure:\x1B[0m
   ~/                    - Home directory with welcome and info
@@ -77,6 +78,21 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
       return {
         output: "",
         clear: true,
+      };
+
+    case "go":
+      if (args.join(" ") === "back home") {
+        if (typeof window !== "undefined") {
+          window.location.href = "/";
+        }
+        return {
+          output: `\x1B[1;32mNavigating back to homepage...\x1B[0m`,
+        };
+      }
+      return {
+        output: `\x1B[1;31mUnknown command: go ${args.join(
+          " "
+        )}. Did you mean 'go back home'?\x1B[0m`,
       };
 
     case "social":

@@ -29,6 +29,7 @@ export const AVAILABLE_COMMANDS = [
   "cd ~/hackathons",
   "cd ..",
   "clear",
+  "go back home",
   "cat welcome.md",
   "social github",
   "social linkedin",

@@ -60,6 +60,7 @@ const TouchCommandBar: React.FC<TerminalProps> = ({
       { command: "pwd", label: "pwd" },
       { command: "ls", label: "ls" },
       { command: "clear", label: "clear" },
+      { command: "go back home", label: "Exit Terminal" },
     ],
     navigation: [
       {
@@ -78,11 +79,13 @@ const TouchCommandBar: React.FC<TerminalProps> = ({
         isActive: currentDirectory === "~/hackathons",
       },
       { command: "cd ..", label: "cd .." },
+      { command: "go back home", label: "Exit Terminal" },
     ],
     social: [
       { command: "social github", label: "GitHub" },
       { command: "social linkedin", label: "LinkedIn" },
       { command: "social x", label: "X" },
+      { command: "go back home", label: "Exit Terminal" },
     ],
   };
 
