@@ -1,78 +1,48 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import type { TerminalProps } from "@/types/terminal";
-import { AVAILABLE_COMMANDS } from "@/types";
+import React from "react";
+import styled from "styled-components";
+import { TerminalProps } from "@/types/terminal";
 
-const blink = keyframes`
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-`;
-
-const Container = styled.div`
+const CommandBarContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  background-color: #111;
+  right: 0;
+  height: 60px;
+  background-color: #000000;
   border-top: 1px solid #1a1a1a;
-  padding: 8px;
-  z-index: 100;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  z-index: 100;
 `;
 
-const InputWrapper = styled.div`
-  position: relative;
-  display: flex;
-  background-color: #000;
-  border: 1px solid #333;
+const CommandButton = styled.button<{ isActive?: boolean }>`
+  background-color: ${(props) => (props.isActive ? "#27c93f22" : "#1a1a1a")};
+  color: ${(props) => (props.isActive ? "#27c93f" : "#ccc")};
+  border: 1px solid ${(props) => (props.isActive ? "#27c93f" : "#333")};
   border-radius: 4px;
   padding: 8px 12px;
-  font-family: 'Menlo, Monaco, "Courier New", monospace';
-  align-items: center;
-  margin-bottom: 8px;
-`;
+  margin: 0 5px;
+  font-family: "Menlo", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 
-const Prompt = styled.span`
-  color: #27c93f;
-  margin-right: 8px;
-  font-size: 14px;
-  user-select: none;
-`;
-
-const InputField = styled.input`
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Menlo, Monaco, "Courier New", monospace';
-  font-size: 14px;
-  flex: 1;
-  outline: none;
-
-  &:focus + .cursor {
-    display: none;
+  &:hover {
+    background-color: #27c93f22;
+    color: #27c93f;
   }
 `;
 
-const Cursor = styled.span`
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  background-color: #87ceeb;
-  animation: ${blink} 1s infinite;
-  position: absolute;
-  left: 70px;
-`;
-
-const ButtonRow = styled.div`
+const ScrollContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  gap: 8px;
-  padding-bottom: 4px;
-
-  /* Hide scrollbar */
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -80,125 +50,65 @@ const ButtonRow = styled.div`
   scrollbar-width: none;
 `;
 
-const CommandButton = styled.button`
-  background-color: #1a1a1a;
-  color: #4169e1;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-family: 'Menlo, Monaco, "Courier New", monospace';
-  font-size: 12px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-
-  &:active {
-    background-color: #333;
-    transform: scale(0.95);
-  }
-`;
-
 const TouchCommandBar: React.FC<TerminalProps> = ({
   onCommand,
-  currentBranch,
+  currentDirectory,
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [cursorPosition, setCursorPosition] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const cursorRef = useRef<HTMLSpanElement>(null);
-
-  // Common commands for quick access buttons
-  const quickCommands = [
-    "help",
-    "git checkout projects",
-    "git checkout blog",
-    "git checkout hackathons",
-    "ls",
-    "clear",
-  ];
-
-  // Update cursor position when input changes
-  useEffect(() => {
-    if (inputRef.current && cursorRef.current) {
-      const textWidth = getTextWidth(
-        inputValue.substring(0, inputRef.current.selectionStart || 0)
-      );
-      cursorRef.current.style.left = `${70 + textWidth}px`;
-    }
-  }, [inputValue, cursorPosition]);
-
-  // Helper function to calculate text width
-  const getTextWidth = (text: string) => {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    if (context) {
-      context.font = '14px Menlo, Monaco, "Courier New", monospace';
-      return context.measureText(text).width;
-    }
-    return 0;
+  const commandGroups = {
+    home: [
+      { command: "cd ~", label: "Home", isActive: currentDirectory === "~" },
+      { command: "pwd", label: "pwd" },
+      { command: "ls", label: "ls" },
+      { command: "clear", label: "clear" },
+    ],
+    navigation: [
+      {
+        command: "cd ~/projects",
+        label: "Projects",
+        isActive: currentDirectory === "~/projects",
+      },
+      {
+        command: "cd ~/projects/pinned",
+        label: "Pinned",
+        isActive: currentDirectory === "~/projects/pinned",
+      },
+      {
+        command: "cd ~/hackathons",
+        label: "Hackathons",
+        isActive: currentDirectory === "~/hackathons",
+      },
+      { command: "cd ..", label: "cd .." },
+    ],
+    social: [
+      { command: "social github", label: "GitHub" },
+      { command: "social linkedin", label: "LinkedIn" },
+      { command: "social x", label: "X" },
+    ],
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    setCursorPosition(e.target.selectionStart || 0);
-  };
-
-  const handleFocus = () => {
-    if (cursorRef.current) {
-      cursorRef.current.style.display = "none";
-    }
-  };
-
-  const handleBlur = () => {
-    if (cursorRef.current) {
-      cursorRef.current.style.display = "block";
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && inputValue.trim()) {
-      handleSubmit();
-    }
-  };
-
-  const handleSubmit = () => {
-    if (inputValue.trim()) {
-      onCommand(inputValue.trim());
-      setInputValue("");
-    }
-  };
-
-  const handleQuickCommand = (command: string) => {
-    onCommand(command);
+  // Get current command group based on current directory
+  const getCurrentCommandGroup = () => {
+    if (currentDirectory === "~") return commandGroups.home;
+    if (currentDirectory.includes("projects")) return commandGroups.navigation;
+    if (currentDirectory.includes("hackathons"))
+      return commandGroups.navigation;
+    return commandGroups.home;
   };
 
   return (
-    <Container>
-      <InputWrapper onClick={() => inputRef.current?.focus()}>
-        <Prompt>{`$`}</Prompt>
-        <InputField
-          ref={inputRef}
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          aria-label="Command input"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck="false"
-        />
-        <Cursor ref={cursorRef} className="cursor" />
-      </InputWrapper>
-
-      <ButtonRow>
-        {quickCommands.map((cmd) => (
-          <CommandButton key={cmd} onClick={() => handleQuickCommand(cmd)}>
-            {cmd}
+    <CommandBarContainer>
+      <ScrollContainer>
+        {getCurrentCommandGroup().map((btn) => (
+          <CommandButton
+            key={btn.command}
+            isActive={btn.isActive}
+            onClick={() => onCommand(btn.command)}
+          >
+            {btn.label}
           </CommandButton>
         ))}
-      </ButtonRow>
-    </Container>
+      </ScrollContainer>
+    </CommandBarContainer>
   );
 };
 

@@ -72,7 +72,7 @@ const HelpButton = styled.button`
   }
 `;
 
-const Terminal = ({ onCommand, currentBranch }: TerminalProps) => {
+const Terminal = ({ onCommand, currentDirectory }: TerminalProps) => {
   const [showHelp, setShowHelp] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -113,10 +113,16 @@ const Terminal = ({ onCommand, currentBranch }: TerminalProps) => {
         </div>
       )}
 
-      <TerminalInstance onCommand={onCommand} currentBranch={currentBranch} />
+      <TerminalInstance
+        onCommand={onCommand}
+        currentDirectory={currentDirectory}
+      />
 
       {isMobile && (
-        <TouchCommandBar onCommand={onCommand} currentBranch={currentBranch} />
+        <TouchCommandBar
+          onCommand={onCommand}
+          currentDirectory={currentDirectory}
+        />
       )}
     </TerminalContainer>
   );

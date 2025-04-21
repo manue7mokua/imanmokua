@@ -8,7 +8,7 @@ import { AVAILABLE_COMMANDS } from "@/types";
 
 export default function TerminalInstance({
   onCommand,
-  currentBranch,
+  currentDirectory,
 }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const xtermRef = useRef<XTerm | null>(null);
@@ -39,22 +39,8 @@ export default function TerminalInstance({
   };
 
   const writeHeader = (terminal: XTerm) => {
-    // Smaller header for mobile
-    if (isMobile) {
-      terminal.writeln("\x1B[1;35m╔═════════════════════════════════╗");
-      terminal.writeln("║       (: IMAN MOKUA :)        ║");
-      terminal.writeln("╚═════════════════════════════════╝\x1B[0m\n");
-    } else {
-      terminal.writeln(
-        "\x1B[1;35m╔════════════════════════════════════════════════════════════╗"
-      );
-      terminal.writeln(
-        "║                  (: IMAN MOKUA PORTFOLIO :)                ║"
-      );
-      terminal.writeln(
-        "╚════════════════════════════════════════════════════════════╝\x1B[0m\n"
-      );
-    }
+    // No big header, just a simple welcome line
+    terminal.writeln("\x1B[1;34mWelcome to Iman's Terminal\x1B[0m\n");
   };
 
   const clearLine = (terminal: XTerm) => {
@@ -78,15 +64,15 @@ export default function TerminalInstance({
 
   const writePrompt = useCallback(
     (terminal: XTerm) => {
-      // Shorter prompt for mobile
+      // Format the prompt like a real terminal with username and current directory
       const prompt = isMobile
-        ? `\x1B[1;32m$\x1B[0m `
-        : `\x1B[1;32mimanmokua@portfolio:~/${currentBranch}$\x1B[0m `;
+        ? `\x1B[1;32miman:\x1B[0m\x1B[1;34m${currentDirectory}\x1B[0m$ `
+        : `\x1B[1;32miman@portfolio:\x1B[0m\x1B[1;34m${currentDirectory}\x1B[0m$ `;
       terminal.write("\r"); // Move to start of line
       terminal.write(prompt);
       return prompt;
     },
-    [currentBranch, isMobile]
+    [currentDirectory, isMobile]
   );
 
   // Handle touch gestures for mobile
@@ -110,9 +96,9 @@ export default function TerminalInstance({
     const deltaX = touchEnd.x - touchStartRef.current.x;
     const deltaY = touchEnd.y - touchStartRef.current.y;
 
-    // Horizontal swipe - left to right (back to main)
+    // Horizontal swipe - left to right (back to home)
     if (Math.abs(deltaX) > 100 && Math.abs(deltaY) < 50 && deltaX > 0) {
-      onCommand("git checkout main");
+      onCommand("cd ~");
     }
 
     // Horizontal swipe - right to left (clear)
@@ -169,28 +155,9 @@ export default function TerminalInstance({
     // Write header
     writeHeader(terminal);
 
-    // Display welcome message - smaller for mobile
-    if (isMobile) {
-      terminal.writeln("\x1B[1;34mIman Mokua | Portfolio\x1B[0m\n");
-    } else {
-      terminal.writeln(
-        "\x1B[1;34m    ___                         __  __       _"
-      );
-      terminal.writeln(
-        "   |_ _|_ __ ___   __ _ _ __   |  \\/  | ___ | | ___   _  __ _"
-      );
-      terminal.writeln(
-        "    | || '_ ` _ \\ / _` | '_ \\  | |\\/| |/ _ \\| |/ / | | |/ _` |"
-      );
-      terminal.writeln(
-        "    | || | | | | | (_| | | | | | |  | | (_) |   <| |_| | (_| |"
-      );
-      terminal.writeln(
-        "   |___|_| |_| |_|\\__,_|_| |_| |_|  |_|\\___/|_|\\_\\\\__,_|\\__,_|\x1B[0m\n"
-      );
-    }
+    // Display welcome message
     terminal.writeln(
-      "All Ye are welcome! Type 'help' to see available commands.\n"
+      "Type 'help' to see available commands. Use 'ls' to list files and 'cd' to navigate directories.\n"
     );
 
     // Set prompt
@@ -322,7 +289,7 @@ export default function TerminalInstance({
       window.removeEventListener("resize", handleResize);
       terminal.dispose();
     };
-  }, [currentBranch, onCommand, writePrompt, isMobile]);
+  }, [currentDirectory, onCommand, writePrompt, isMobile]);
 
   useEffect(() => {
     if (xtermRef.current && !isMobile) {

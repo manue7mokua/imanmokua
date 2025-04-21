@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Terminal from "@/components/Terminal";
-import GitTree from "@/components/GitTree";
+import DirectoryTree from "@/components/DirectoryTree";
 import CommandHelp from "@/components/CommandHelp";
 import { AppState } from "@/types";
 import commandHandler from "@/utils/commandHandler";
@@ -65,45 +65,41 @@ const MainContainer = styled.div`
 
 export default function Home() {
   const [state, setState] = useState<AppState>({
-    currentBranch: "main",
-    branches: [
-      "main",
-      "projects",
-      "projects/pinned",
-      "projects/all-repos",
-      "blog",
-      "hackathons",
+    currentDirectory: "~",
+    directories: [
+      "~",
+      "~/projects",
+      "~/projects/pinned",
+      "~/projects/all-repos",
+      "~/hackathons",
     ],
-    currentFiles: ["about.md", "experience.md", "education.md"],
+    currentFiles: ["welcome.md"],
     commandHistory: [],
     historyIndex: -1,
     files: {
-      main: {
-        "about.md": `# About Me
-Hi, I'm Iman Mokua!
+      "~": {
+        "welcome.md": `# Welcome to Iman's Terminal
+I'm Iman Mokua!
 I study Computer Engineering at Howard University with a minor in Computer Science.
 I build web apps, small ML models, and low-level system infra.
-I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.`,
-        "experience.md": `# Experience
-## Meta Platforms, Inc. | Menlo Park, CA
+I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
+
+## Experience
+### Meta Platforms, Inc. | Menlo Park, CA
 
 \x1B[36mSoftware Engineering Intern | June 2024 - August 2024\x1B[0m
 - Improved classification accuracy by 47% using logistic regression and gradient descent optimization
 - Achieved 1.5x server speed-up through database denormalization and query caching
 - Implemented model persistence with local storage checkpointing for seamless page reloads
 
-## Howard University | Washington, D.C
+### Howard University | Washington, D.C
 
 \x1B[36mUndergraduate Research Assistant | October 2023 - January 2025\x1B[0m
 - Developed MIMO network simulations supporting 500+ Mbps throughput for high-capacity scenarios
 - Enhanced RF signal processing with 90% improved fidelity using advanced modulation schemes`,
-        "education.md": `# Education
-
-## Howard University | Washington, DC
-**Bachelor of Science in Computer Engineering, Minor in Computer Science** | Aug. 2022 - May 2026`,
       },
-      projects: {},
-      "projects/pinned": {
+      "~/projects": {},
+      "~/projects/pinned": {
         "HDL_Alien_Shooter.md": `# HDL Alien Shooter - VHDL Game
 
 ## Overview
@@ -194,7 +190,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.`,
 - Chart.js
 - Bootstrap`,
       },
-      "projects/all-repos": {
+      "~/projects/all-repos": {
         "repositories.md": `# All GitHub Repositories
 
 ## Active Projects
@@ -211,16 +207,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.`,
 
 * SigLight (ML Voice-Controlled LED Lighting)`,
       },
-      blog: {
-        "coming-soon.md": `# Blog Coming Soon!
-
-Stay tuned for articles on:
-- Random thoughts
-- Backend Development
-- ML Engineering
-- Design (cause no one likes shitty UIs like Microsoft Outlook)`,
-      },
-      hackathons: {
+      "~/hackathons": {
         "bison-hacks.md": `# BisonHacks 2024 - Autonomy
 
 ## Project Overview
@@ -262,11 +249,13 @@ Stay tuned for articles on:
   const handleCommand = (command: string) => {
     const result = commandHandler(command, state);
 
-    if (result.newBranch) {
+    if (result.newDirectory) {
       setState((prev) => ({
         ...prev,
-        currentBranch: result.newBranch as string,
-        currentFiles: Object.keys(prev.files[result.newBranch as string] || {}),
+        currentDirectory: result.newDirectory as string,
+        currentFiles: Object.keys(
+          prev.files[result.newDirectory as string] || {}
+        ),
       }));
     }
 
@@ -276,17 +265,17 @@ Stay tuned for articles on:
   return (
     <AppContainer>
       <SidebarContainer>
-        <GitTree
-          currentBranch={state.currentBranch}
-          branches={state.branches}
-          onBranchClick={(branch) => handleCommand(`git checkout ${branch}`)}
+        <DirectoryTree
+          currentDirectory={state.currentDirectory}
+          directories={state.directories}
+          onDirectoryClick={(directory) => handleCommand(`cd ${directory}`)}
         />
         <CommandHelp />
       </SidebarContainer>
       <MainContainer>
         <Terminal
           onCommand={handleCommand}
-          currentBranch={state.currentBranch}
+          currentDirectory={state.currentDirectory}
         />
       </MainContainer>
     </AppContainer>
