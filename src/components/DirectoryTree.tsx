@@ -19,11 +19,16 @@ const Title = styled.h3`
   font-size: 1.1em;
 `;
 
-const DirectoryItem = styled.div<{ active: boolean; isSubDir?: boolean }>`
+interface DirectoryItemProps {
+  $active: boolean;
+  $isSubDir?: boolean;
+}
+
+const DirectoryItem = styled.div<DirectoryItemProps>`
   padding: 5px 0;
-  padding-left: ${(props) => (props.isSubDir ? "20px" : "0")};
-  color: ${(props) => (props.active ? "#4169e1" : "#ccc")};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  padding-left: ${(props) => (props.$isSubDir ? "20px" : "0")};
+  color: ${(props) => (props.$active ? "#4169e1" : "#ccc")};
+  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -84,8 +89,8 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
     return (
       <React.Fragment key={directory}>
         <DirectoryItem
-          active={isActive}
-          isSubDir={level > 0}
+          $active={isActive}
+          $isSubDir={level > 0}
           onClick={() => onDirectoryClick(directory)}
         >
           <span className="dir-icon">📁</span>

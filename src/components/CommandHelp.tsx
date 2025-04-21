@@ -59,6 +59,11 @@ const CommandHelp: React.FC = () => {
 
       <CommandGroup>
         <CommandItem>
+          <span className="command">go back home</span>
+          <span className="description">Return to the homepage</span>
+        </CommandItem>
+
+        <CommandItem>
           <span className="command">help</span>
           <span className="description">Show this help menu</span>
         </CommandItem>

@@ -11,12 +11,12 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
 ╚══════════════════════════════════════════════════════════════╝\x1B[0m
 
 \x1B[1;36mNavigation Commands:\x1B[0m
+  go back home          - Return to the homepage
   pwd                   - Show current directory
   ls                    - List files in current directory
   cd [path]             - Change directory (cd .. to go up one level)
   cat [filename]        - View the contents of a file
   clear                 - Clear the terminal screen
-  go back home          - Return to the homepage
 
 \x1B[1;36mDirectory Structure:\x1B[0m
   ~/                    - Home directory with welcome and info

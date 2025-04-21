@@ -19,6 +19,7 @@ export interface TerminalProps {
 }
 
 export const AVAILABLE_COMMANDS = [
+  "go back home",
   "help",
   "pwd",
   "ls",
@@ -29,7 +30,6 @@ export const AVAILABLE_COMMANDS = [
   "cd ~/hackathons",
   "cd ..",
   "clear",
-  "go back home",
   "cat welcome.md",
   "social github",
   "social linkedin",
