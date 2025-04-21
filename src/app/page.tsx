@@ -83,8 +83,7 @@ export default function HomePage() {
               <br />
               incoming summer swe intern @ meta.
               <br />
-              let&apos;s connect—I love talking research, infra, ML and anything
-              about barca
+              currently building @orium. a crm for housemates.
               <span className="animate-pulse">_</span>
             </p>
           </div>
@@ -115,7 +114,7 @@ export default function HomePage() {
               also: co-built a regulatory compliance check engine with BERT +
               regression modeling.
               <br />
-              won 3 hackathons. always shipping & learning. feel free to hmu.
+              won in 3 hackathons. always shipping & learning. feel free to hmu.
             </p>
           </div>
         </div>
