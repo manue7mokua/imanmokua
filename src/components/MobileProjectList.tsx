@@ -3,6 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AppState } from "@/types";
+import { Github } from "lucide-react";
 
 const MobileContainer = styled.div`
   padding: 1rem;
@@ -169,7 +170,7 @@ const MobileProjectList: React.FC<MobileProjectListProps> = ({
 
   return (
     <MobileContainer>
-      <Header>Iman's Projects</Header>
+      <Header>Iman&apos;s Projects</Header>
       <BackButton onClick={onBackClick}>Back to Homepage</BackButton>
 
       <SectionTitle>Featured Projects</SectionTitle>
@@ -191,8 +192,9 @@ const MobileProjectList: React.FC<MobileProjectListProps> = ({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
+              title="View on GitHub"
             >
-              View on GitHub
+              <Github size={16} />
             </ProjectLink>
           )}
         </ProjectCard>

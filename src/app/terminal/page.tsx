@@ -105,6 +105,27 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
       },
       "~/projects": {},
       "~/projects/pinned": {
+        "dogbed_db.md": `# Dogbed_DB - A Simple Key-Value Database
+
+## Overview
+- Lightweight, file-based key-value database implementation in Python
+- Simple dictionary-like interface for storing and retrieving data
+- Persistence across sessions
+
+## Features
+- Simple dictionary-like interface
+- Persistent storage
+- Binary tree-based indexing
+- Transaction support (commit/rollback)
+- Thread-safe operations
+- Support for string values
+
+## Tech Stack
+- Python
+- Binary Tree Data Structure
+- File I/O Operations
+- Unit Testing`,
+
         "HDL_Alien_Shooter.md": `# HDL Alien Shooter - VHDL Game
 
 ## Overview
@@ -125,28 +146,6 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 - VHDL
 - Xilinx Vivado
 - FPGA Development Board`,
-
-        "roids.md": `# Roids - Asteroid Shooter
-
-## Overview
-- Classic asteroid shooting game built with Python
-- Object-oriented design with inheritance
-- Smooth physics-based movement
-- Dynamic difficulty scaling
-
-## Features
-- Multiple asteroid types and behaviors
-- Power-up system
-- High score tracking
-- Progressive difficulty
-- Particle effects system
-- Sound effects and background music
-
-## Tech Stack
-- Python
-- Pygame
-- Object-Oriented Programming
-- Vector Mathematics`,
 
         "SSG.md": `# SSG - Static Site Generator
 
@@ -171,7 +170,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 - YAML Front Matter
 - CSS/SCSS Processing`,
 
-        "FinMe.md": `# FinMe - Student Finance Tracker
+        "FinMe.md": `# FinMe - Automate DCA Investing for Students
 
 ## Overview
 - Financial management tool for students
@@ -213,7 +212,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 * SigLight (ML Voice-Controlled LED Lighting)`,
       },
       "~/hackathons": {
-        "bison-hacks.md": `# BisonHacks 2024 - Autonomy
+        "bison-hacks.md": `# BisonBytes 2025 - Interactive Real-time Knowledge Graph
 
 ## Project Overview
 - Developed a real-time knowledge graph system for local community awareness
@@ -221,7 +220,7 @@ I work with Python, Go, JavaScript/TypeScript, React, and anything CI/CD.
 - Built transformer-based NLP models for semantic understanding
 - Deployed a conversational AI interface for intuitive information retrieval
 - Enabled local communities to query and understand real-time events in their area`,
-        "bison-bytes.md": `# Bison Bytes 2024 - Roblox Obstacle Course
+        "bison-bytes.md": `# Bison Bytes 2025 - Roblox Obstacle Course
 
 ## Project Overview
 - Developed a physics-based obstacle course game in Roblox Studio

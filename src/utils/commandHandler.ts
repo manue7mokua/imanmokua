@@ -30,7 +30,7 @@ const commandHandler = (input: string, state: AppState): CommandResult => {
     Available platforms: github, linkedin, x, instagram
   
   open [project]        - Open project repository
-    Available projects: HDL_Alien_Shooter, roids, SSG, FinMe
+    Available projects: dogbed_db, HDL_Alien_Shooter, SSG, FinMe
 
 \x1B[1;36mTips:\x1B[0m
   - Use Tab for command autocomplete
@@ -256,10 +256,10 @@ const handleOpenCommand = (args: string[]): CommandResult => {
   if (!args.length) {
     return {
       output: `\x1B[1;35mAvailable projects:\x1B[0m
+  \x1B[1;36mdogbed_db\x1B[0m       - A simple key-value database
   \x1B[1;36mHDL_Alien_Shooter\x1B[0m - VHDL-based retro shooting game
-  \x1B[1;36mroids\x1B[0m           - Python asteroid shooter game
   \x1B[1;36mSSG\x1B[0m             - Static site generator
-  \x1B[1;36mFinMe\x1B[0m           - Student finance tracker
+  \x1B[1;36mFinMe\x1B[0m           - Automate DCA investing for students
   \x1B[1;36mimanmokua\x1B[0m       - CLI Portfolio
   \x1B[1;36mEnclave\x1B[0m         - Event QR code tracking
   \x1B[1;36mdabble\x1B[0m          - P2P college video chat
@@ -269,12 +269,11 @@ const handleOpenCommand = (args: string[]): CommandResult => {
 
   const project = args.join("-");
   const projects: Record<string, string> = {
+    dogbed_db: "https://github.com/manue7mokua/dogbed_db",
     HDL_Alien_Shooter: "https://github.com/manue7mokua/HDL_Alien_Shooter",
-    roids: "https://github.com/manue7mokua/roids",
     SSG: "https://github.com/manue7mokua/SSG",
     FinMe: "https://github.com/manue7mokua/FinMe",
     imanmokua: "https://github.com/manue7mokua/imanmokua",
-    Enclave: "https://github.com/Mikito-Coder/Enclave",
     dabble: "https://github.com/Mikito-Coder/bomegleclone",
   };
 
