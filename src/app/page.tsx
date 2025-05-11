@@ -50,8 +50,11 @@ export default function HomePage() {
         <div className="flex items-center justify-center space-x-5 mb-8 md:mb-10">
           {" "}
           {/* Reduced space & margin */}
-          <span className="text-base md:text-lg font-mono text-foreground cursor-pointer">
-            iman mokua
+          <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
+            recs
+            <span className="absolute -left-24 top-1 hidden group-hover:block w-20 px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
+              coming soon...
+            </span>
           </span>
           {/* Active "about" link */}
           <span
@@ -83,7 +86,7 @@ export default function HomePage() {
               <br />
               incoming summer swe intern @ meta.
               <br />
-              currently building @orium. a crm for housemates.
+              currently building @incourse. an ai layer for learning management systems.
               <span className="animate-pulse">_</span>
             </p>
           </div>
@@ -97,11 +100,10 @@ export default function HomePage() {
               {" "}
               {/* Reduced font size & space */}
               <li>
-                building smaller scale infra projects to learn how to optimize
-                real-time user interactions.
+                reading medieval history.
               </li>
               <li>
-                simulating wireless networks as a research assistant @howardu.
+                pentesting wireless networks as a research assistant @howardu.
               </li>
               <li>learning golang and the gRPC toolchain.</li>
             </ul>
@@ -114,7 +116,9 @@ export default function HomePage() {
               also: co-built a regulatory compliance check engine with BERT +
               regression modeling.
               <br />
-              won in 3 hackathons. always shipping & learning. feel free to hmu.
+              won 3 hackathons. always shipping & learning.
+              <br />
+              feel free to hmu.
             </p>
           </div>
         </div>
