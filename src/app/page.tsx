@@ -103,7 +103,7 @@ export default function HomePage() {
                 reading medieval history.
               </li>
               <li>
-                pentesting wireless networks as a research assistant @howardu.
+                DimABSA research @howardu.
               </li>
               <li>learning golang and the gRPC toolchain.</li>
             </ul>
@@ -113,10 +113,9 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              also: co-built a regulatory compliance check engine with BERT +
-              regression modeling.
+              building fathom.
               <br />
-              won 3 hackathons. always shipping & learning.
+              won 4 hackathons. always shipping & learning.
               <br />
               feel free to hmu.
             </p>
