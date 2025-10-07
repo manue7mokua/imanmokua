@@ -84,9 +84,9 @@ export default function HomePage() {
               {/* Reduced font size */}
               hey! i&apos;m iman mokua — student, researcher, and builder.
               <br />
-              incoming summer swe intern @ meta.
+              incoming swe @ meta.
               <br />
-              currently building @incourse. an ai layer for learning management systems.
+              currently building @incourse and @fathom.
               <span className="animate-pulse">_</span>
             </p>
           </div>
@@ -100,12 +100,12 @@ export default function HomePage() {
               {" "}
               {/* Reduced font size & space */}
               <li>
-                reading medieval history.
+                local soccer league.
               </li>
               <li>
                 DimABSA research @howardu.
               </li>
-              <li>learning golang and the gRPC toolchain.</li>
+              <li>getting kickass at tennis.</li>
             </ul>
           </div>
           {/* Block 3: "also:" */}
@@ -113,7 +113,6 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              building fathom.
               <br />
               won 4 hackathons. always shipping & learning.
               <br />
