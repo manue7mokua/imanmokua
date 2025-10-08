@@ -116,7 +116,7 @@ export default function HomePage() {
               <br />
               won 4 hackathons. always shipping & learning.
               <br />
-              feel free to hmu.
+              feel free to hmu on X (most active there).
             </p>
           </div>
         </div>
