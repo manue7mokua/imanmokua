@@ -84,9 +84,9 @@ export default function HomePage() {
               {/* Reduced font size */}
               hey! i&apos;m iman mokua — student, researcher, and builder.
               <br />
-              incoming swe @ meta.
+              incoming swe @ ...
               <br />
-              currently building @incourse and @fathom.
+              currently building <Link href="https://www.incourseai.com/">@incourse</Link> and <Link href="https://www.heyfathom.com/">@fathom</Link>.
               <span className="animate-pulse">_</span>
             </p>
           </div>
@@ -105,7 +105,7 @@ export default function HomePage() {
               <li>
                 DimABSA research @howardu.
               </li>
-              <li>getting kickass at tennis.</li>
+              <li>training to beat Alcaraz at Wimbledon.</li>
             </ul>
           </div>
           {/* Block 3: "also:" */}
