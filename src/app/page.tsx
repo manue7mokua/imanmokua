@@ -105,7 +105,8 @@ export default function HomePage() {
               <li>
                 DimABSA research @howardu.
               </li>
-              <li>training to beat Alcaraz at Wimbledon.</li>
+              <li>hackathons</li>
+              <li>travel</li>
             </ul>
           </div>
           {/* Block 3: "also:" */}
