@@ -66,9 +66,9 @@ export default function HomePage() {
           </span>
           {/* Disabled "yaps" link - adding custom tooltip */}
           <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
-            yaps
-            <span className="absolute -right-24 top-1 hidden group-hover:block w-20 px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
-              coming soon...
+            blog
+            <span className="absolute left-full top-1 ml-2 hidden group-hover:block whitespace-nowrap px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
+              Coming December 1st, 2025
             </span>
           </span>
         </div>
@@ -82,30 +82,26 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              hey! i&apos;m iman mokua — student, researcher, and builder.
-              <br />
-              incoming swe @ ...
-              <br />
-              currently building <Link href="https://www.incourseai.com/">@incourse</Link> and <Link href="https://www.heyfathom.com/">@fathom</Link>.
-              <span className="animate-pulse">_</span>
+              hey! i&apos;m iman mokua — student at Howard University,
+              researcher, and builder @incourse (currently working on a big UI
+              refactor)
             </p>
           </div>
           {/* Block 2: Calendar/List */}
           <div className="space-y-2">
             {" "}
             {/* Reduced space */}
-            <p className="font-mono text-sm md:text-base">my calendar:</p>{" "}
+            <p className="font-mono text-sm md:text-base">
+              what i enjoy:)
+            </p>{" "}
             {/* Reduced font size */}
             <ul className="list-disc list-inside space-y-1 inline-block text-center mx-auto font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size & space */}
-              <li>
-                local soccer league.
-              </li>
-              <li>
-                DimABSA research @howardu.
-              </li>
+              <li>soccer.</li>
+              <li>creative UI</li>
               <li>hackathons</li>
+              <li>philosophy</li>
               <li>travel</li>
             </ul>
           </div>
