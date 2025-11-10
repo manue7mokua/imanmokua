@@ -4,18 +4,35 @@ import type React from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-// Custom Twitter icon component using the SVG
-const TwitterIcon = ({ className }: { className?: string }) => (
-  <Image
-    src="/Twitter Negative Icon.svg"
-    alt="Twitter"
-    width={24}
-    height={24}
-    className={className}
-    unoptimized
-  />
-);
+// Custom Twitter icon component using the SVG based on theme
+const TwitterIcon = ({ className }: { className?: string }) => {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Use original (black) icon for light mode, negative (white) icon for dark mode
+  const iconSrc =
+    mounted && theme === "light"
+      ? "/Twitter Original Icon.svg"
+      : "/Twitter Negative Icon.svg";
+
+  return (
+    <Image
+      src={iconSrc}
+      alt="Twitter"
+      width={24}
+      height={24}
+      className={className}
+      unoptimized
+    />
+  );
+};
 
 type SocialLink = {
   name: string;
