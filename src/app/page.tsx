@@ -82,9 +82,9 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              hey! i&apos;m iman mokua — student at Howard University,
-              researcher, and builder @incourse (currently working on a big UI
-              refactor)
+              hey! i&apos;m Iman Mokua — student at Howard University,
+              researcher, and builder (currently working on a big UI
+              refactor at incourse)
             </p>
           </div>
           {/* Block 2: Calendar/List */}
@@ -98,8 +98,8 @@ export default function HomePage() {
             <ul className="list-disc list-inside space-y-1 inline-block text-center mx-auto font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size & space */}
-              <li>soccer.</li>
-              <li>creative UI</li>
+              <li>soccer</li>
+              <li>creative UI/UX</li>
               <li>hackathons</li>
               <li>philosophy</li>
               <li>travel</li>
