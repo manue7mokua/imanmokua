@@ -92,7 +92,7 @@ export default function HomePage() {
             {" "}
             {/* Reduced space */}
             <p className="font-mono text-sm md:text-base">
-              what i enjoy:)
+              what i enjoy :)
             </p>{" "}
             {/* Reduced font size */}
             <ul className="list-disc list-inside space-y-1 inline-block text-center mx-auto font-mono text-sm md:text-base leading-relaxed">
