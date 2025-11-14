@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Onest:wght@100..900&display=swap');
 @import "tailwindcss";
 @import "@xterm/xterm/css/xterm.css";
 
@@ -29,7 +30,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Onest", sans-serif;
   margin: 0;
   padding: 0;
 }

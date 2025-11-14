@@ -4,6 +4,9 @@ module.exports = {
   darkMode: "class", // Enable dark mode with class strategy
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Onest"', 'sans-serif'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
