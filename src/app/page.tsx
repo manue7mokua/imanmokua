@@ -29,7 +29,7 @@ export default function HomePage() {
 
       {/* Main content container, centered, reduced max-width slightly */}
       <div className="w-full max-w-2xl mx-auto flex flex-col items-center z-10">
-        {/* Top row: Location | Avatar | Theme Toggle - Reduced margin */}
+        {/* Top row: favorite essay download | Avatar | Theme Toggle - Reduced margin */}
         <div className="w-full flex items-center justify-between mb-8 md:mb-10">
           <LocationDisplay />
           {/* Centered User Image - Larger & Rounded */}
