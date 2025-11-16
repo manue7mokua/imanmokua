@@ -82,7 +82,7 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              hey! i&apos;m Iman Mokua — student at Howard University,
+              Hey! I&apos;m Iman — student  @Howard University,
               researcher, and builder (currently working on a big UI
               refactor at incourse)
             </p>
