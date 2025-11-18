@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image"; // Import next/image
 import { SocialIcons } from "@/components/social-icons";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { DotGrid } from "@/components/dot-grid";
 import { XPDownload } from "@/components/xp-download";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { useTheme } from "next-themes";
@@ -21,9 +20,6 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-6 text-foreground bg-background">
-      {/* Only show DotGrid in light mode */}
-      {mounted && theme === "light" && <DotGrid />}
-
       {/* Only show GlowingStarsBackground in dark mode */}
       {mounted && theme === "dark" && <GlowingStarsBackground />}
 
@@ -82,9 +78,8 @@ export default function HomePage() {
             <p className="font-mono text-sm md:text-base leading-relaxed">
               {" "}
               {/* Reduced font size */}
-              Hey! I&apos;m Iman — student  @Howard University,
-              researcher, and builder (currently working on a big UI
-              refactor at incourse)
+              Hey! I&apos;m Iman — student @Howard University, researcher, and
+              builder (currently working on a big UI refactor at incourse)
             </p>
           </div>
           {/* Block 2: Calendar/List */}
