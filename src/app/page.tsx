@@ -6,7 +6,7 @@ import Image from "next/image"; // Import next/image
 import { SocialIcons } from "@/components/social-icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DotGrid } from "@/components/dot-grid";
-import { LocationDisplay } from "@/components/location-display";
+import { XPDownload } from "@/components/xp-download";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { useTheme } from "next-themes";
 
@@ -31,7 +31,7 @@ export default function HomePage() {
       <div className="w-full max-w-2xl mx-auto flex flex-col items-center z-10">
         {/* Top row: favorite essay download | Avatar | Theme Toggle - Reduced margin */}
         <div className="w-full flex items-center justify-between mb-8 md:mb-10">
-          <LocationDisplay />
+          <XPDownload />
           {/* Centered User Image - Larger & Rounded */}
           <div className="flex items-center justify-center">
             <Image
