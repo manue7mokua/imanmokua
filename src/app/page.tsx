@@ -62,7 +62,7 @@ export default function HomePage() {
           </span>
           {/* Disabled "yaps" link - adding custom tooltip */}
           <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
-            blog
+            writing
             <span className="absolute left-full top-1 ml-2 hidden group-hover:block whitespace-nowrap px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
               coming December 1st, 2025
             </span>
@@ -79,7 +79,10 @@ export default function HomePage() {
               {" "}
               {/* Reduced font size */}
               Hey! I&apos;m Iman — student @Howard University, researcher, and
-              builder (currently working on a big UI refactor at incourse)
+              building the best voice-first codebase comprehension agent @
+              <Link href="https://www.heyfathom.com/" className="underline">
+                hey fathom
+              </Link>
             </p>
           </div>
           {/* Block 2: Calendar/List */}
@@ -94,7 +97,7 @@ export default function HomePage() {
               {" "}
               {/* Reduced font size & space */}
               <li>soccer</li>
-              <li>creative UI/UX</li>
+              <li>product design</li>
               <li>hackathons</li>
               <li>philosophy</li>
               <li>travel</li>
