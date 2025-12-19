@@ -2,32 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image"; // Import next/image
 import { SocialIcons } from "@/components/social-icons";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { XPDownload } from "@/components/xp-download";
+import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-6 text-foreground bg-background">
+      <AppHeader barClassName="h-14 items-end pb-2" />
+
       {/* Main content container, centered, reduced max-width slightly */}
       <div className="w-full max-w-2xl mx-auto flex flex-col items-center z-10">
-        {/* Top row: favorite essay download | Avatar | Theme Toggle - Reduced margin */}
-        <div className="w-full flex items-center justify-between mb-8 md:mb-10">
-          <XPDownload />
-          {/* Centered User Image - Larger & Rounded */}
-          <div className="flex items-center justify-center">
-            <Image
-              src="https://api.dicebear.com/9.x/adventurer/svg?seed=Sara"
-              alt="Iman Mokua Avatar"
-              width={80}
-              height={80}
-              className="rounded-full object-cover h-20 w-20"
-              unoptimized={true} // Important for external SVG URLs
-            />
-          </div>
-          <ThemeToggle />
-        </div>
 
         {/* Nav row: Name | About | Yaps - Reduced margin */}
         <div className="flex items-center justify-center space-x-5 mb-8 md:mb-10">
