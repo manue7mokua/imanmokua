@@ -1,7 +1,13 @@
 "use client";
 
 import { useMemo, useState, useCallback, useRef } from "react";
-import { BookData, generateBooks, distributeBooks, ARTIFACTS } from "./types";
+import {
+  BookData,
+  generateBooks,
+  distributeBooks,
+  ARTIFACTS,
+  SHELF_CONFIG,
+} from "./types";
 import { Compartment } from "./Compartment";
 import { ReadingModal } from "./ReadingModal";
 
@@ -66,7 +72,8 @@ export function Bookshelf() {
 
   const getBookAnimationClass = (bookId: number): string => {
     if (selectedBookId !== bookId) return "";
-    if (animationPhase === "pulling" || animationPhase === "closing") return "pulling";
+    if (animationPhase === "pulling" || animationPhase === "closing")
+      return "pulling";
     if (animationPhase === "open") return "open";
     return "";
   };
@@ -80,35 +87,46 @@ export function Bookshelf() {
       onClick={handleBgClick}
     >
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-[3px] z-40 pointer-events-none transition-all duration-500 ease-out ${shouldBlurBackground ? "opacity-100" : "opacity-0"}`}
+        className={`fixed inset-0 bg-black/50 backdrop-blur-[3px] z-40 pointer-events-none transition-all duration-500 ease-out ${
+          shouldBlurBackground ? "opacity-100" : "opacity-0"
+        }`}
       ></div>
 
       <div className="w-full max-w-7xl px-4 md:px-8 relative z-30 scale-[0.85] origin-center">
-        <div className="bg-neutral-900 shadow-2xl border-4 border-amber-950/50 rounded-lg overflow-hidden relative">
+        <div className="bg-neutral-900 shadow-2xl border-12 border-amber-950/50 rounded-lg overflow-hidden relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-full bg-gradient-to-b from-amber-500/5 via-transparent to-transparent pointer-events-none z-20 mix-blend-overlay blur-3xl"></div>
 
           {shelfLayout.map((row, rowIndex) => (
             <div key={rowIndex} className="flex flex-col">
               <div className="flex bg-stone-900 relative">
-                {row.map((section, sectionIndex) => (
-                  <div key={sectionIndex} className="flex-1" style={{ minWidth: 0 }}>
-                    <Compartment
-                      items={section.items}
-                      artifacts={ARTIFACTS.filter(
-                        (a) => a.row === rowIndex && a.section === sectionIndex
-                      )}
-                      isAnySelected={isAnySelected}
-                      selectedBookId={selectedBookId}
-                      onSelectBook={handleSelectBook}
-                      getBookAnimationClass={getBookAnimationClass}
-                    />
-                  </div>
-                ))}
+                {row.map((section, sectionIndex) => {
+                  const rowConfig = SHELF_CONFIG[rowIndex];
+                  const isWide = rowConfig.wideSections?.includes(sectionIndex);
+
+                  return (
+                    <div
+                      key={sectionIndex}
+                      className={isWide ? "flex-[2]" : "flex-[1.2]"}
+                      style={{ minWidth: 0 }}
+                    >
+                      <Compartment
+                        items={section.items}
+                        artifacts={ARTIFACTS.filter(
+                          (a) =>
+                            a.row === rowIndex && a.section === sectionIndex
+                        )}
+                        isAnySelected={isAnySelected}
+                        selectedBookId={selectedBookId}
+                        onSelectBook={handleSelectBook}
+                        getBookAnimationClass={getBookAnimationClass}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
-              <div className="h-3 relative z-20">
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-950 via-amber-900 to-stone-950 wood-grain shadow-lg"></div>
-                <div className="absolute bottom-[-8px] left-0 right-0 h-3 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none"></div>
+              <div className="h-6 relative z-20">
+                <div className="absolute inset-0 bg-stone-900"></div>
               </div>
             </div>
           ))}
@@ -117,7 +135,11 @@ export function Bookshelf() {
         <div className="h-16 bg-gradient-to-b from-black/80 to-transparent mt-[-4px] relative z-0 mx-4 blur-xl opacity-60"></div>
       </div>
 
-      <ReadingModal book={selectedBook} isVisible={showModal} onClose={handleClose} />
+      <ReadingModal
+        book={selectedBook}
+        isVisible={showModal}
+        onClose={handleClose}
+      />
     </div>
   );
 }

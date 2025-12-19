@@ -26,6 +26,7 @@ export interface ShelfRowConfig {
   id: number;
   sections: number;
   empty: number[];
+  wideSections?: number[]; // indices of sections that should be 2x width
 }
 
 export const BOOK_COLORS = [
@@ -146,9 +147,9 @@ export const BOOK_AUTHORS = [
 ];
 
 export const SHELF_CONFIG: ShelfRowConfig[] = [
-  { id: 0, sections: 6, empty: [2] },
-  { id: 1, sections: 5, empty: [3] },
-  { id: 2, sections: 6, empty: [1, 4, 5] },
+  { id: 0, sections: 5, empty: [2], wideSections: [3] }, // small, small, small(empty), BIG, small
+  { id: 1, sections: 4, empty: [3], wideSections: [1] }, // small, BIG, small, small(empty)
+  { id: 2, sections: 5, empty: [1, 4], wideSections: [2] }, // small, small(empty), BIG, small, small(empty)
 ];
 
 export const ARTIFACTS: ArtifactData[] = [
