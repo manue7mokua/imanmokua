@@ -102,12 +102,18 @@ export function Bookshelf() {
                 {row.map((section, sectionIndex) => {
                   const rowConfig = SHELF_CONFIG[rowIndex];
                   const isWide = rowConfig.wideSections?.includes(sectionIndex);
+                  const customFlex = rowConfig.customFlex?.[sectionIndex];
+
+                  const flexValue = customFlex
+                    ? customFlex
+                    : isWide
+                    ? "2"
+                    : "1.2";
 
                   return (
                     <div
                       key={sectionIndex}
-                      className={isWide ? "flex-[2]" : "flex-[1.2]"}
-                      style={{ minWidth: 0 }}
+                      style={{ minWidth: 0, flex: flexValue }}
                     >
                       <Compartment
                         items={section.items}

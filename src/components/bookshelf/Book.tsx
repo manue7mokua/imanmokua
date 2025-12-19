@@ -8,16 +8,35 @@ interface BookProps {
   animationClass: string;
   onSelect: (book: BookData | null) => void;
   isDimmed: boolean;
+  isFirstInSection?: boolean;
 }
 
-export function Book({ data, isSelected, animationClass, onSelect, isDimmed }: BookProps) {
+export function Book({
+  data,
+  isSelected,
+  animationClass,
+  onSelect,
+  isDimmed,
+  isFirstInSection = false,
+}: BookProps) {
   const wearClass =
     data.state === "worn"
       ? "opacity-95"
       : data.state === "aged"
-        ? "opacity-90 saturate-[0.75]"
-        : "";
-  const spineTitleSize = data.thickness < 30 ? "text-[0.5rem]" : "text-[0.55rem]";
+      ? "opacity-90 saturate-[0.75]"
+      : "";
+  const spineTitleSize =
+    data.thickness < 30 ? "text-[0.5rem]" : "text-[0.55rem]";
+
+  // Only apply slant if book has one and is not the first in section (has a book to lean against)
+  const shouldSlant = data.slant && !isFirstInSection;
+
+  // Calculate horizontal offset to prevent slanted books from overlapping into adjacent books
+  let horizontalOffset = 0;
+  if (shouldSlant && data.slant) {
+    const slantRadians = (Math.abs(data.slant) * Math.PI) / 180;
+    horizontalOffset = data.height * Math.sin(slantRadians);
+  }
 
   return (
     <div
@@ -26,6 +45,10 @@ export function Book({ data, isSelected, animationClass, onSelect, isDimmed }: B
         height: `${data.height}px`,
         width: `${data.thickness}px`,
         zIndex: isSelected ? 50 : 10,
+        transform: shouldSlant
+          ? `translateX(${horizontalOffset}px) rotate(${data.slant}deg)`
+          : undefined,
+        transformOrigin: shouldSlant ? "bottom center" : undefined,
       }}
       onClick={(e) => {
         e.stopPropagation();
@@ -35,7 +58,11 @@ export function Book({ data, isSelected, animationClass, onSelect, isDimmed }: B
       }}
     >
       <div
-        className={`book-spine ${data.color} ${wearClass} shadow-inner flex flex-col items-center justify-center border-l border-white/5 border-r border-black/20 overflow-hidden transition-all duration-700 ease-out ${isDimmed ? "brightness-[0.6] opacity-50 blur-[3px]" : ""}`}
+        className={`book-spine ${
+          data.color
+        } ${wearClass} shadow-inner flex flex-col items-center justify-center border-l border-white/5 border-r border-black/20 overflow-hidden transition-all duration-700 ease-out ${
+          isDimmed ? "brightness-[0.6] opacity-50 blur-[3px]" : ""
+        }`}
       >
         <div className="absolute inset-0 book-texture opacity-20 pointer-events-none"></div>
 
@@ -62,7 +89,9 @@ export function Book({ data, isSelected, animationClass, onSelect, isDimmed }: B
             {data.title}
           </h3>
           <div className="w-8 h-[1px] bg-amber-200/50 mb-2"></div>
-          <p className="font-serif italic text-amber-100/70 text-sm">{data.author}</p>
+          <p className="font-serif italic text-amber-100/70 text-sm">
+            {data.author}
+          </p>
         </div>
       </div>
     </div>

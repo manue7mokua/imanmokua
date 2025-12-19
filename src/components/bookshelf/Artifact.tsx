@@ -1,16 +1,27 @@
 "use client";
 
 interface ArtifactProps {
-  type: "sculpture" | "notebook" | "camera" | "abstract";
+  type:
+    | "sculpture"
+    | "notebook"
+    | "camera"
+    | "abstract"
+    | "f1car"
+    | "champsball"
+    | "mercurial";
   isDimmed: boolean;
 }
 
 export function Artifact({ type, isDimmed }: ArtifactProps) {
-  const baseClass = `transition-all duration-500 ${isDimmed ? "brightness-[0.7] opacity-60 blur-[2px]" : "hover:brightness-110"}`;
+  const baseClass = `transition-all duration-500 ${
+    isDimmed ? "brightness-[0.7] opacity-60 blur-[2px]" : "hover:brightness-110"
+  }`;
 
   if (type === "sculpture") {
     return (
-      <div className={`relative w-[40px] h-[85px] mx-auto mt-auto ${baseClass}`}>
+      <div
+        className={`relative w-[40px] h-[85px] mx-auto mt-auto ${baseClass}`}
+      >
         <div className="w-full h-full bg-gradient-to-br from-stone-400 via-stone-500 to-stone-600 rounded-[50%] transform rotate-12 shadow-lg"></div>
       </div>
     );
@@ -30,12 +41,27 @@ export function Artifact({ type, isDimmed }: ArtifactProps) {
   if (type === "camera") {
     return (
       <div
-        className={`relative w-[60px] h-[55px] mx-auto mt-auto bg-slate-800 rounded-lg shadow-xl flex items-center justify-center ${baseClass}`}
+        className={`absolute left-1/2 -translate-x-1/2 w-[160px] h-[120px] ${baseClass}`}
+        style={{
+          bottom: "-32px",
+          marginBottom: 0,
+          paddingBottom: 0,
+          lineHeight: 0,
+        }}
       >
-        <div className="w-12 h-12 rounded-full bg-slate-900 border-3 border-slate-700 shadow-inner flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-indigo-900/50 backdrop-blur-sm"></div>
-        </div>
-        <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-900 rounded-full"></div>
+        <img
+          src="/djiosmoaction.png"
+          alt="DJI Osmo Action"
+          className="w-full h-full object-contain"
+          style={{
+            display: "block",
+            objectPosition: "center bottom",
+            marginBottom: 0,
+            paddingBottom: 0,
+            verticalAlign: "bottom",
+            lineHeight: 0,
+          }}
+        />
       </div>
     );
   }
@@ -47,6 +73,90 @@ export function Artifact({ type, isDimmed }: ArtifactProps) {
       >
         <div className="w-6 h-6 border-2 border-amber-500/50 transform rotate-45"></div>
         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-stone-800 to-stone-600 shadow-lg"></div>
+      </div>
+    );
+  }
+
+  if (type === "f1car") {
+    return (
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 w-[400px] h-[160px] ${baseClass}`}
+        style={{
+          bottom: "-56px",
+          marginBottom: 0,
+          paddingBottom: 0,
+          lineHeight: 0,
+        }}
+      >
+        <img
+          src="/rb16b_2021_transparent.png"
+          alt="Red Bull RB16B F1 Car"
+          className="w-full h-full object-contain"
+          style={{
+            display: "block",
+            objectPosition: "center bottom",
+            marginBottom: 0,
+            paddingBottom: 0,
+            verticalAlign: "bottom",
+            lineHeight: 0,
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (type === "champsball") {
+    return (
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 w-[210px] h-[210px] ${baseClass}`}
+        style={{
+          bottom: "-40px",
+          marginBottom: 0,
+          paddingBottom: 0,
+          lineHeight: 0,
+        }}
+      >
+        <img
+          src="/champs_ball.png"
+          alt="Championship Ball"
+          className="w-full h-full object-contain"
+          style={{
+            display: "block",
+            objectPosition: "center bottom",
+            marginBottom: 0,
+            paddingBottom: 0,
+            verticalAlign: "bottom",
+            lineHeight: 0,
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (type === "mercurial") {
+    return (
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 w-[140px] h-[140px] ${baseClass}`}
+        style={{
+          bottom: "-30px",
+          marginBottom: 0,
+          paddingBottom: 0,
+          lineHeight: 0,
+        }}
+      >
+        <img
+          src="/neymar_mercurial.png"
+          alt="Neymar Mercurial Boots"
+          className="w-full h-full object-contain"
+          style={{
+            display: "block",
+            objectPosition: "center bottom",
+            marginBottom: 0,
+            paddingBottom: 0,
+            verticalAlign: "bottom",
+            lineHeight: 0,
+          }}
+        />
       </div>
     );
   }
