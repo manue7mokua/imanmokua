@@ -29,16 +29,22 @@ export function ReadingModal({ book, isVisible, onClose }: ReadingModalProps) {
       }`}
     >
       <div
-        className={`bg-white text-neutral-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col md:flex-row transform origin-center pointer-events-auto ${
+        className={`text-neutral-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col md:flex-row transform origin-center pointer-events-auto ${
           isVisible ? "animate-modal-in" : "animate-modal-out"
         }`}
+        style={{
+          backgroundImage: "url('/paper_background.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={`md:w-2/5 ${book.color} p-8 md:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden`}
+          className="md:w-2/5 p-8 md:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-black/10 book-texture mix-blend-overlay"></div>
-          <div className="relative z-10 border-4 border-white/20 p-6 md:p-8 rounded-lg shadow-xl aspect-[2/3] max-h-full flex flex-col justify-center bg-white/5 backdrop-blur-sm">
+          <div
+            className={`relative z-10 border-4 border-neutral-300/50 p-6 md:p-8 rounded-lg shadow-xl aspect-[2/3] max-h-full flex flex-col justify-center ${book.color}`}
+          >
             <h2 className="font-serif text-3xl md:text-4xl text-white mb-4 leading-tight">
               {book.title}
             </h2>
@@ -48,13 +54,13 @@ export function ReadingModal({ book, isVisible, onClose }: ReadingModalProps) {
           </div>
 
           <div className="mt-8 flex gap-2">
-            <span className="px-3 py-1 bg-black/20 rounded-full text-xs text-white/70 uppercase tracking-widest backdrop-blur-md border border-white/10">
+            <span className="px-3 py-1 bg-neutral-700/60 rounded-full text-xs text-neutral-200 uppercase tracking-widest border border-neutral-500/30">
               {getCategoryLabel(book.category)}
             </span>
           </div>
         </div>
 
-        <div className="md:w-3/5 p-8 md:p-12 overflow-y-auto custom-scrollbar bg-white relative">
+        <div className="md:w-3/5 p-8 md:p-12 overflow-y-auto custom-scrollbar relative">
           <button
             onClick={onClose}
             title="Close"
