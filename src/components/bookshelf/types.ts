@@ -32,7 +32,8 @@ export interface ArtifactData {
     | "abstract"
     | "f1car"
     | "champsball"
-    | "mercurial";
+    | "mercurial"
+    | "mug";
 }
 
 export interface ShelfSection {
@@ -339,6 +340,7 @@ export const ARTIFACTS: ArtifactData[] = [
   { row: 0, section: 2, type: "champsball" }, // Changed from sculpture
   { row: 1, section: 1, type: "f1car" }, // Big section of middle row
   { row: 1, section: 3, type: "mercurial" }, // Rightmost section of middle row
+  { row: 2, section: 1, type: "mug" }, // Second section of bottom row - mom's gift mug
   { row: 2, section: 4, type: "camera" },
 ];
 

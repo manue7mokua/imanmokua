@@ -8,7 +8,8 @@ interface ArtifactProps {
     | "abstract"
     | "f1car"
     | "champsball"
-    | "mercurial";
+    | "mercurial"
+    | "mug";
   isDimmed: boolean;
 }
 
@@ -147,6 +148,34 @@ export function Artifact({ type, isDimmed }: ArtifactProps) {
         <img
           src="/neymar_mercurial.png"
           alt="Neymar Mercurial Boots"
+          className="w-full h-full object-contain"
+          style={{
+            display: "block",
+            objectPosition: "center bottom",
+            marginBottom: 0,
+            paddingBottom: 0,
+            verticalAlign: "bottom",
+            lineHeight: 0,
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (type === "mug") {
+    return (
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 w-[200px] h-[200px] ${baseClass}`}
+        style={{
+          bottom: "-44px",
+          marginBottom: 0,
+          paddingBottom: 0,
+          lineHeight: 0,
+        }}
+      >
+        <img
+          src="/mom_gift_mug.png"
+          alt="Mom's Gift Mug"
           className="w-full h-full object-contain"
           style={{
             display: "block",

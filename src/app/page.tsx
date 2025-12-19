@@ -35,7 +35,7 @@ export default function HomePage() {
           <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
             writing
             <span className="absolute left-full top-1 ml-2 hidden group-hover:block whitespace-nowrap px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
-              coming December 1st, 2025
+              coming December 21st, 2025
             </span>
           </span>
         </div>
