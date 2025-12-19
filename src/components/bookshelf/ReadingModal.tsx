@@ -22,10 +22,10 @@ export function ReadingModal({ book, isVisible, onClose }: ReadingModalProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-8 transition-opacity duration-300 ${isVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      className={`fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-8 transition-opacity duration-300 pointer-events-none ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`bg-white text-neutral-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col md:flex-row transform origin-center ${isVisible ? "animate-modal-in" : "animate-modal-out"}`}
+        className={`bg-white text-neutral-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col md:flex-row transform origin-center pointer-events-auto ${isVisible ? "animate-modal-in" : "animate-modal-out"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div
