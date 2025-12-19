@@ -1,28 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image"; // Import next/image
 import { SocialIcons } from "@/components/social-icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { XPDownload } from "@/components/xp-download";
-import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
-import { useTheme } from "next-themes";
 
 export default function HomePage() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Only show stars once component is mounted to avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-6 text-foreground bg-background">
-      {/* Only show GlowingStarsBackground in dark mode */}
-      {mounted && theme === "dark" && <GlowingStarsBackground />}
-
       {/* Main content container, centered, reduced max-width slightly */}
       <div className="w-full max-w-2xl mx-auto flex flex-col items-center z-10">
         {/* Top row: favorite essay download | Avatar | Theme Toggle - Reduced margin */}
