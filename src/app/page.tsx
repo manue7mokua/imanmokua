@@ -46,12 +46,12 @@ export default function HomePage() {
         <div className="flex items-center justify-center space-x-5 mb-8 md:mb-10">
           {" "}
           {/* Reduced space & margin */}
-          <span className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200 relative group">
+          <Link
+            href="/recs"
+            className="text-base md:text-lg font-mono text-muted-foreground cursor-pointer hover:text-accent/70 transition-colors duration-200"
+          >
             recs
-            <span className="absolute right-full top-1 mr-2 hidden group-hover:block whitespace-nowrap px-1.5 py-0.5 bg-background/80 border border-accent/20 rounded text-[10px] font-mono text-accent/80 text-center z-10">
-              coming soon...
-            </span>
-          </span>
+          </Link>
           {/* Active "about" link */}
           <span
             className="text-base md:text-lg font-mono text-accent relative cursor-pointer
