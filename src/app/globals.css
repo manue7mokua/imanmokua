@@ -214,3 +214,23 @@ body {
 .font-cinzel {
   font-family: "Cinzel", serif;
 }
+
+/* 404 Ghost Animation */
+@keyframes ghostFloat {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-8px) translateX(3px);
+  }
+  50% {
+    transform: translateY(-4px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(2px);
+  }
+}
+
+.ghost-animation {
+  animation: ghostFloat 4s ease-in-out infinite;
+}
