@@ -7,7 +7,7 @@ import type { TerminalProps, TerminalInstanceProps } from "@/types/terminal";
 
 const TerminalContainer = styled.div`
   height: 100vh;
-  background-color: #000000;
+  background-color: #14120B;
   padding: 1rem;
   border-radius: 4px;
   display: flex;

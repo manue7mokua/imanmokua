@@ -135,11 +135,11 @@ export default function TerminalInstance({
       fontSize: isMobile ? 14 : 16, // Smaller font for mobile
       fontFamily: 'Menlo, Monaco, "Courier New", monospace',
       theme: {
-        background: "#000000",
+        background: "#14120B",
         foreground: "#ffffff",
         cursor: "#87CEEB",
         selectionBackground: "#4169E1",
-        black: "#000000",
+        black: "#14120B",
         red: "#E06C75",
         green: "#98C379",
         yellow: "#E5C07B",

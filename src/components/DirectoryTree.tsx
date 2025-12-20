@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const TreeContainer = styled.div`
   padding: 10px;
-  background-color: #000000;
+  background-color: #14120B;
   border: 1px solid #1a1a1a;
   border-radius: 4px;
   color: #fff;
