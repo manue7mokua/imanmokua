@@ -23,12 +23,12 @@ export default function RecsPage() {
             ← Back to home
           </Link>
         </div>
-        <div className="shrink-0 pt-12 pb-0 text-center">
+        <div className="shrink-0 pt-12 pb-2 text-center">
           <h1 
             className="font-cinzel text-xs tracking-[0.3em] uppercase translate-y-1"
             style={{ color: isDark ? "rgb(245 158 11 / 0.8)" : "#000000" }}
           >
-            A Dig Into My World
+            LIBRARY
           </h1>
         </div>
 

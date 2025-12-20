@@ -20,7 +20,7 @@ export function AppHeader({
 }: AppHeaderProps) {
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-4 left-0 right-0 z-50"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="bg-background/70 backdrop-blur-md">
