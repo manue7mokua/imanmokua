@@ -29,7 +29,9 @@ export function Book({
     data.thickness < 30 ? "text-[0.5rem]" : "text-[0.55rem]";
 
   // Only apply slant if book has one and is not the first in section (has a book to lean against)
-  const shouldSlant = data.slant && !isFirstInSection;
+  // Also disable slant when animation is active to let CSS animation take over
+  const isAnimating = animationClass !== "";
+  const shouldSlant = data.slant && !isFirstInSection && !isAnimating;
 
   // Calculate horizontal offset to prevent slanted books from overlapping into adjacent books
   let horizontalOffset = 0;
@@ -45,6 +47,7 @@ export function Book({
         height: `${data.height}px`,
         width: `${data.thickness}px`,
         zIndex: isSelected ? 50 : 10,
+        marginLeft: data.offsetX ? `${data.offsetX}px` : undefined,
         transform: shouldSlant
           ? `translateX(${horizontalOffset}px) rotate(${data.slant}deg)`
           : undefined,
@@ -81,18 +84,14 @@ export function Book({
       </div>
 
       <div
-        className={`book-cover ${data.color} rounded-r-sm shadow-2xl flex flex-col items-center justify-center p-4 border border-white/10`}
+        className="book-cover rounded-r-sm shadow-2xl overflow-hidden border border-white/10"
       >
-        <div className="absolute inset-0 book-texture opacity-10 pointer-events-none"></div>
-        <div className="w-full h-full border border-amber-100/10 p-2 flex flex-col items-center justify-center text-center">
-          <h3 className="font-serif text-xl text-amber-50 mb-2 leading-tight">
-            {data.title}
-          </h3>
-          <div className="w-8 h-[1px] bg-amber-200/50 mb-2"></div>
-          <p className="font-serif italic text-amber-100/70 text-sm">
-            {data.author}
-          </p>
-        </div>
+        <img
+          src={data.coverImage}
+          alt={`${data.title} by ${data.author}`}
+          className="w-full h-full object-cover"
+          draggable={false}
+        />
       </div>
     </div>
   );

@@ -13,6 +13,8 @@ export interface BookData {
   state: BookState;
   row: number;
   slant?: number; // Rotation angle in degrees for natural leaning effect
+  coverImage: string; // Path to cover image
+  offsetX?: number; // Optional horizontal offset
 }
 
 export interface BookInfo {
@@ -20,6 +22,10 @@ export interface BookInfo {
   author: string;
   description: string;
   category: BookCategory;
+  coverImage: string; // Path to cover image
+  height?: number; // Optional custom height override
+  thickness?: number; // Optional custom thickness override
+  offsetX?: number; // Optional horizontal offset
 }
 
 export interface ArtifactData {
@@ -68,6 +74,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "A profound exploration of faith, doubt, and the human condition that left me questioning everything I thought I knew about morality and existence.",
     category: "personalFavorites",
+    coverImage: "/book_covers/the_brothers_karamazov.png",
   },
   {
     title: "The Courage to Be Disliked",
@@ -75,6 +82,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "This book fundamentally shifted how I think about happiness and personal responsibility—freedom comes from accepting that not everyone will like you.",
     category: "personalFavorites",
+    coverImage: "/book_covers/the_courage_to_be_disliked.png",
   },
   {
     title: "Normal People",
@@ -82,6 +90,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "A beautifully intimate portrait of love and miscommunication that captures how small moments can shape entire relationships.",
     category: "personalFavorites",
+    coverImage: "/book_covers/normal_people.png",
   },
   {
     title: "Tomorrow, and Tomorrow, and Tomorrow",
@@ -89,6 +98,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "A story about creativity, friendship, and the games we play—both digital and emotional. It reminded me why I fell in love with building things.",
     category: "personalFavorites",
+    coverImage: "/book_covers/tomorrow_and_tomorrow_and_tomorrow.png",
   },
   {
     title: "The Unlikely Spy",
@@ -96,6 +106,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "A masterfully crafted WWII thriller that kept me turning pages late into the night. The tension and historical detail are impeccable.",
     category: "personalFavorites",
+    coverImage: "/book_covers/the_unlikely_spy.png",
   },
   {
     title: "Atomic Habits",
@@ -103,6 +114,7 @@ const PERSONAL_FAVORITES: BookInfo[] = [
     description:
       "The most practical book on behavior change I've ever read. Small habits, compounded over time, have transformed how I approach goals.",
     category: "personalFavorites",
+    coverImage: "/book_covers/atomic_habits.png",
   },
 ];
 
@@ -114,6 +126,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Where it all began. Will's journey from orphan to apprentice Ranger sparked my lifelong love of reading and adventure.",
     category: "passionStart",
+    coverImage: "/book_covers/the_ruins_of_gorlan.png",
   },
   {
     title: "The Burning Bridge",
@@ -121,6 +134,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "The stakes got real here. This book taught me that heroes face impossible choices and growth comes from adversity.",
     category: "passionStart",
+    coverImage: "/book_covers/the_burning_bridge.png",
   },
   {
     title: "The Icebound Land",
@@ -128,6 +142,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "The darkest entry in the series. Watching Will struggle and Halt's unwavering determination to find him was gripping.",
     category: "passionStart",
+    coverImage: "/book_covers/the_icebound_land.png",
   },
   {
     title: "The Battle for Skandia",
@@ -135,6 +150,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Epic battles, strategic warfare, and the power of unlikely alliances. This book had everything young me could ask for.",
     category: "passionStart",
+    coverImage: "/book_covers/the_battle_for_skandia.png",
   },
   {
     title: "The Sorcerer in the North",
@@ -142,6 +158,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Will finally becoming a full Ranger and facing new mysteries. The growth from apprentice to master is so satisfying.",
     category: "passionStart",
+    coverImage: "/book_covers/the_sorcerer_in_the_north.png",
   },
   {
     title: "The Siege of Macindaw",
@@ -149,6 +166,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Teamwork, infiltration, and clever tactics. This duology showed me how patience and planning beat brute force.",
     category: "passionStart",
+    coverImage: "/book_covers/the_siege_of_macindaw.png",
   },
   {
     title: "Erak's Ransom",
@@ -156,6 +174,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Desert adventures and debt repayment between former enemies. A reminder that honor transcends nationality.",
     category: "passionStart",
+    coverImage: "/book_covers/eraks_ransom.png",
   },
   {
     title: "The Kings of Clonmel",
@@ -163,6 +182,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Cult manipulation and the power of belief. Surprisingly mature themes woven into an adventure story.",
     category: "passionStart",
+    coverImage: "/book_covers/the_kings_of_clonmel.png",
   },
   {
     title: "Halt's Peril",
@@ -170,6 +190,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "The most emotional book in the series. Halt's vulnerability and Will's desperation had me genuinely worried.",
     category: "passionStart",
+    coverImage: "/book_covers/halts_peril.png",
   },
   {
     title: "The Emperor of Nihon-Ja",
@@ -177,6 +198,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "An empire far from home, warrior codes, and the bonds of friendship tested across cultures.",
     category: "passionStart",
+    coverImage: "/book_covers/the_emperor_of_nihon-ja.png",
   },
   {
     title: "The Lost Stories",
@@ -184,6 +206,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Short stories filling gaps in the timeline. Like catching up with old friends and learning secrets from their past.",
     category: "passionStart",
+    coverImage: "/book_covers/the_lost_stories.png",
   },
   {
     title: "The Royal Ranger",
@@ -191,6 +214,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "Full circle. Will becomes the mentor, and a new generation begins. Bittersweet but perfect.",
     category: "passionStart",
+    coverImage: "/book_covers/the_royal_ranger.png",
   },
   {
     title: "Theodore Boone",
@@ -198,6 +222,7 @@ const PASSION_START: BookInfo[] = [
     description:
       "A kid lawyer solving crimes? This series made me believe young people could make a real difference.",
     category: "passionStart",
+    coverImage: "/book_covers/theodore_boone.png",
   },
 ];
 
@@ -209,6 +234,8 @@ const GENERAL: BookInfo[] = [
     description:
       "A complex portrait of genius and obsession. Jobs' relentless pursuit of perfection is both inspiring and cautionary.",
     category: "general",
+    coverImage: "/book_covers/steve_jobs.png",
+    height: 195, // Taller book
   },
   {
     title: "Design for How People Think",
@@ -216,6 +243,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Understanding cognitive psychology transformed how I approach product design and user experience.",
     category: "general",
+    coverImage: "/book_covers/design_for_how_people_think.png",
   },
   {
     title: "The Daily Stoic",
@@ -223,6 +251,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Daily wisdom that grounds me. Ancient philosophy made practical for modern challenges.",
     category: "general",
+    coverImage: "/book_covers/the_daily_stoic.png",
   },
   {
     title: "Forbes Greatest Business Stories",
@@ -230,6 +259,7 @@ const GENERAL: BookInfo[] = [
     description:
       "From Carnegie to Disney—patterns of ambition, innovation, and persistence that shaped industries.",
     category: "general",
+    coverImage: "/book_covers/the_greatest_business_stories_of_all_time.png",
   },
   {
     title: "Your Next Five Moves",
@@ -237,6 +267,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Strategic thinking applied to business and life. Think ahead, plan backwards.",
     category: "general",
+    coverImage: "/book_covers/your_next_five_moves.png",
   },
   {
     title: "The Way of the Superior Man",
@@ -244,6 +275,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Challenging perspectives on purpose, relationships, and masculine energy that sparked deep reflection.",
     category: "general",
+    coverImage: "/book_covers/the_way_of_superior_man.png",
   },
   {
     title: "Rich Dad Poor Dad",
@@ -251,6 +283,7 @@ const GENERAL: BookInfo[] = [
     description:
       "The book that first opened my eyes to financial literacy and the difference between assets and liabilities.",
     category: "general",
+    coverImage: "/book_covers/rich_dad_poor_dad.png",
   },
   {
     title: "Invent and Wander",
@@ -258,6 +291,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Bezos' letters reveal a mind obsessed with long-term thinking and customer obsession. Day 1 mentality.",
     category: "general",
+    coverImage: "/book_covers/invent_and_wander.png",
   },
   {
     title: "The Laws of Human Nature",
@@ -265,6 +299,7 @@ const GENERAL: BookInfo[] = [
     description:
       "A deep dive into what drives human behavior. Understanding others starts with understanding yourself.",
     category: "general",
+    coverImage: "/book_covers/laws_of_human_nature.png",
   },
   {
     title: "Sapiens",
@@ -272,6 +307,7 @@ const GENERAL: BookInfo[] = [
     description:
       "A sweeping history of humanity that reframes everything from agriculture to capitalism as shared fictions.",
     category: "general",
+    coverImage: "/book_covers/sapiens.png",
   },
   {
     title: "The Lords of Easy Money",
@@ -279,6 +315,7 @@ const GENERAL: BookInfo[] = [
     description:
       "How the Fed's decisions ripple through the economy. Essential reading for understanding modern finance.",
     category: "general",
+    coverImage: "/book_covers/the_lords_of_easy_money.png",
   },
   {
     title: "Thinking, Fast and Slow",
@@ -286,6 +323,7 @@ const GENERAL: BookInfo[] = [
     description:
       "System 1 and System 2 thinking explained. This book made me aware of my own cognitive biases.",
     category: "general",
+    coverImage: "/book_covers/thinking_fast_and_slow.png",
   },
   {
     title: "Python Pocket Reference",
@@ -293,6 +331,10 @@ const GENERAL: BookInfo[] = [
     description:
       "My trusty companion during late-night coding sessions. Dog-eared and coffee-stained.",
     category: "general",
+    coverImage: "/book_covers/python_pocket_reference.png",
+    height: 160, // Short book with better aspect ratio for cover
+    thickness: 22, // Thin book
+    offsetX: 25, // Move right to avoid overlapping with slanted book
   },
   {
     title: "Search Patterns",
@@ -300,6 +342,7 @@ const GENERAL: BookInfo[] = [
     description:
       "Information architecture and the art of findability. How we navigate digital spaces matters.",
     category: "general",
+    coverImage: "/book_covers/search_patterns.png",
   },
   {
     title: "$100M Leads",
@@ -307,6 +350,8 @@ const GENERAL: BookInfo[] = [
     description:
       "Tactical, no-nonsense guide to generating leads. Hormozi's frameworks are refreshingly actionable.",
     category: "general",
+    coverImage: "/book_covers/100M_leads.png",
+    height: 215, // Tallest book
   },
   {
     title: "$100M Offers",
@@ -314,6 +359,9 @@ const GENERAL: BookInfo[] = [
     description:
       "How to create offers so good people feel stupid saying no. Changed how I think about value.",
     category: "general",
+    coverImage: "/book_covers/100M_offers.png",
+    height: 215, // Tallest book
+    thickness: 18, // Thinnest book
   },
 ];
 
@@ -355,8 +403,8 @@ export function generateBooks(): BookData[] {
   const random = seededRandom(42);
 
   return BOOKS_DATA.map((bookInfo, i) => {
-    const height = 130 + random() * 45;
-    const thickness = 24 + random() * 22;
+    const height = bookInfo.height ?? (155 + random() * 50);
+    const thickness = bookInfo.thickness ?? (24 + random() * 22);
     const color = BOOK_COLORS[Math.floor(random() * BOOK_COLORS.length)];
     const stateRand = random();
     const state: BookState =
@@ -395,6 +443,8 @@ export function generateBooks(): BookData[] {
       state,
       row,
       slant,
+      coverImage: bookInfo.coverImage,
+      offsetX: bookInfo.offsetX,
     };
   });
 }

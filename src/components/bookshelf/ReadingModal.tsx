@@ -43,14 +43,14 @@ export function ReadingModal({ book, isVisible, onClose }: ReadingModalProps) {
           className="md:w-2/5 p-8 md:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden"
         >
           <div
-            className={`relative z-10 border-4 border-neutral-300/50 p-6 md:p-8 rounded-lg shadow-xl aspect-[2/3] max-h-full flex flex-col justify-center ${book.color}`}
+            className="relative z-10 border-4 border-neutral-300/50 rounded-lg shadow-xl aspect-[2/3] max-h-full overflow-hidden"
           >
-            <h2 className="font-serif text-3xl md:text-4xl text-white mb-4 leading-tight">
-              {book.title}
-            </h2>
-            <p className="text-amber-100/80 font-serif italic text-xl">
-              {book.author}
-            </p>
+            <img
+              src={book.coverImage}
+              alt={`${book.title} by ${book.author}`}
+              className="w-full h-full object-cover"
+              draggable={false}
+            />
           </div>
 
           <div className="mt-8 flex gap-2">
