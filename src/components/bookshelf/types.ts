@@ -29,6 +29,7 @@ export interface BookInfo {
 }
 
 export interface ArtifactData {
+  id: string; // unique identifier (e.g., "artifact-f1car")
   row: number;
   section: number;
   type:
@@ -40,6 +41,14 @@ export interface ArtifactData {
     | "champsball"
     | "mercurial"
     | "mug";
+  imagePath: string; // e.g., "/rb16b_2021_transparent.png"
+  title: string; // e.g., "Red Bull RB16B F1 Car"
+}
+
+export interface SelectedItem {
+  id: string | number;
+  imagePath: string;
+  title: string;
 }
 
 export interface ShelfSection {
@@ -385,11 +394,46 @@ export const SHELF_CONFIG: ShelfRowConfig[] = [
 ];
 
 export const ARTIFACTS: ArtifactData[] = [
-  { row: 0, section: 2, type: "champsball" }, // Changed from sculpture
-  { row: 1, section: 1, type: "f1car" }, // Big section of middle row
-  { row: 1, section: 3, type: "mercurial" }, // Rightmost section of middle row
-  { row: 2, section: 1, type: "mug" }, // Second section of bottom row - mom's gift mug
-  { row: 2, section: 4, type: "camera" },
+  { 
+    id: "artifact-champsball",
+    row: 0, 
+    section: 2, 
+    type: "champsball",
+    imagePath: "/champs_ball.png",
+    title: "Championship Ball"
+  },
+  { 
+    id: "artifact-f1car",
+    row: 1, 
+    section: 1, 
+    type: "f1car",
+    imagePath: "/rb16b_2021_transparent.png",
+    title: "Red Bull RB16B F1 Car"
+  },
+  { 
+    id: "artifact-mercurial",
+    row: 1, 
+    section: 3, 
+    type: "mercurial",
+    imagePath: "/neymar_mercurial.png",
+    title: "Neymar Mercurial Boots"
+  },
+  { 
+    id: "artifact-mug",
+    row: 2, 
+    section: 1, 
+    type: "mug",
+    imagePath: "/mom_gift_mug.png",
+    title: "Mom's Gift Mug"
+  },
+  { 
+    id: "artifact-camera",
+    row: 2, 
+    section: 4, 
+    type: "camera",
+    imagePath: "/djiosmoaction.png",
+    title: "DJI Osmo Action"
+  },
 ];
 
 function seededRandom(seed: number): () => number {

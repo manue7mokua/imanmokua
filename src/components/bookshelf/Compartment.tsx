@@ -9,8 +9,11 @@ interface CompartmentProps {
   artifacts: ArtifactData[];
   isAnySelected: boolean;
   selectedBookId: number | null;
+  selectedArtifactId: string | null;
   onSelectBook: (book: BookData | null) => void;
+  onSelectArtifact: (artifact: ArtifactData | null) => void;
   getBookAnimationClass: (bookId: number) => string;
+  getArtifactAnimationClass: (artifactId: string) => string;
 }
 
 export function Compartment({
@@ -18,8 +21,11 @@ export function Compartment({
   artifacts,
   isAnySelected,
   selectedBookId,
+  selectedArtifactId,
   onSelectBook,
+  onSelectArtifact,
   getBookAnimationClass,
+  getArtifactAnimationClass,
 }: CompartmentProps) {
   return (
     <div className="relative h-56 bg-neutral-900 border-x-8 border-stone-900 overflow-visible group">
@@ -31,8 +37,15 @@ export function Compartment({
         className="absolute bottom-0 inset-x-0 px-2 flex items-end justify-start z-10 perspective-1000"
         style={{ paddingBottom: 0 }}
       >
-        {artifacts.map((art, i) => (
-          <Artifact key={`art-${i}`} type={art.type} isDimmed={isAnySelected} />
+        {artifacts.map((art) => (
+          <Artifact 
+            key={art.id} 
+            artifact={art}
+            isSelected={selectedArtifactId === art.id}
+            animationClass={getArtifactAnimationClass(art.id)}
+            onSelect={onSelectArtifact}
+            isDimmed={isAnySelected && selectedArtifactId !== art.id} 
+          />
         ))}
 
         {items.map((book, index) => (

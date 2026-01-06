@@ -3,6 +3,8 @@
 import { useMemo, useState, useCallback, useRef } from "react";
 import {
   BookData,
+  ArtifactData,
+  SelectedItem,
   generateBooks,
   distributeBooks,
   ARTIFACTS,
@@ -15,6 +17,7 @@ type AnimationPhase = "idle" | "pulling" | "open" | "closing";
 
 export function Bookshelf() {
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+  const [selectedArtifactId, setSelectedArtifactId] = useState<string | null>(null);
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>("idle");
   const [showModal, setShowModal] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -26,6 +29,29 @@ export function Bookshelf() {
     () => books.find((b) => b.id === selectedBookId) || null,
     [books, selectedBookId]
   );
+
+  const selectedArtifact = useMemo(
+    () => ARTIFACTS.find((a) => a.id === selectedArtifactId) || null,
+    [selectedArtifactId]
+  );
+
+  const selectedItem = useMemo<SelectedItem | null>(() => {
+    if (selectedBook) {
+      return {
+        id: selectedBook.id,
+        imagePath: selectedBook.coverImage,
+        title: selectedBook.title,
+      };
+    }
+    if (selectedArtifact) {
+      return {
+        id: selectedArtifact.id,
+        imagePath: selectedArtifact.imagePath,
+        title: selectedArtifact.title,
+      };
+    }
+    return null;
+  }, [selectedBook, selectedArtifact]);
 
   const clearTimeouts = useCallback(() => {
     if (timeoutRef.current) {
@@ -39,7 +65,26 @@ export function Bookshelf() {
       clearTimeouts();
 
       if (book && animationPhase === "idle") {
+        setSelectedArtifactId(null);
         setSelectedBookId(book.id);
+        setAnimationPhase("pulling");
+
+        timeoutRef.current = setTimeout(() => {
+          setAnimationPhase("open");
+          setShowModal(true);
+        }, 700);
+      }
+    },
+    [animationPhase, clearTimeouts]
+  );
+
+  const handleSelectArtifact = useCallback(
+    (artifact: ArtifactData | null) => {
+      clearTimeouts();
+
+      if (artifact && animationPhase === "idle") {
+        setSelectedBookId(null);
+        setSelectedArtifactId(artifact.id);
         setAnimationPhase("pulling");
 
         timeoutRef.current = setTimeout(() => {
@@ -61,6 +106,7 @@ export function Bookshelf() {
     timeoutRef.current = setTimeout(() => {
       setAnimationPhase("idle");
       setSelectedBookId(null);
+      setSelectedArtifactId(null);
     }, 700);
   }, [animationPhase, clearTimeouts]);
 
@@ -72,6 +118,14 @@ export function Bookshelf() {
 
   const getBookAnimationClass = (bookId: number): string => {
     if (selectedBookId !== bookId) return "";
+    if (animationPhase === "pulling" || animationPhase === "closing")
+      return "pulling";
+    if (animationPhase === "open") return "open";
+    return "";
+  };
+
+  const getArtifactAnimationClass = (artifactId: string): string => {
+    if (selectedArtifactId !== artifactId) return "";
     if (animationPhase === "pulling" || animationPhase === "closing")
       return "pulling";
     if (animationPhase === "open") return "open";
@@ -123,8 +177,11 @@ export function Bookshelf() {
                         )}
                         isAnySelected={isAnySelected}
                         selectedBookId={selectedBookId}
+                        selectedArtifactId={selectedArtifactId}
                         onSelectBook={handleSelectBook}
+                        onSelectArtifact={handleSelectArtifact}
                         getBookAnimationClass={getBookAnimationClass}
+                        getArtifactAnimationClass={getArtifactAnimationClass}
                       />
                     </div>
                   );
@@ -142,7 +199,7 @@ export function Bookshelf() {
       </div>
 
       <ReadingModal
-        book={selectedBook}
+        item={selectedItem}
         isVisible={showModal}
         onClose={handleClose}
       />

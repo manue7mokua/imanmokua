@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
@@ -11,15 +12,28 @@ export default function HomePage() {
 
       {/* Main content container, centered */}
       <div className="w-full max-w-2xl mx-auto z-10 mb-24 md:mb-32">
-        {/* H1 Header */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-10">
-          Iman Mokua
-        </h1>
+        {/* H1 Header with Profile Photo */}
+        <div className="flex items-center justify-start gap-4 md:gap-6 mb-8 md:mb-10">
+          <div className="relative flex-shrink-0">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-transparent">
+              <Image
+                src="/imanmokua_profile.jpeg"
+                alt="Iman Mokua"
+                width={80}
+                height={80}
+                className="w-full h-full rounded-full object-cover"
+                priority
+              />
+            </div>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold">Iman Mokua</h1>
+        </div>
 
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
           <p>
-            currently, i'm building the best voice-first codebase comprehension agent{" "}
+            currently, i'm building the best voice-first codebase comprehension
+            agent{" "}
             <Link
               href="https://www.heyfathom.com/"
               className="underline"
@@ -32,7 +46,10 @@ export default function HomePage() {
           </p>
 
           <p>
-            i care deeply about developer experience, how product design shapes the way we use tools and the results we get, and building small autonomous systems (rn: drone mission software) that operate with minimal human-in-the-loop intervention.
+            i care deeply about developer experience, how product design shapes
+            the way we use tools and the results we get, and building small
+            autonomous systems (rn: drone mission software) that operate with
+            minimal human-in-the-loop intervention.
           </p>
 
           <p>
@@ -47,7 +64,9 @@ export default function HomePage() {
             , or{" "}
             <Link href="/recs" className="underline">
               see what i’m reading
-            </Link>. if you're building something interesting or thinking deeply about developer experience, feel free to reach out.
+            </Link>
+            . if you're building something interesting or thinking deeply about
+            developer experience, feel free to reach out.
           </p>
 
           <p>

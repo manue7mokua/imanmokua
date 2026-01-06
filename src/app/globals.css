@@ -157,6 +157,34 @@ body {
     0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
+.artifact-container {
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  transform-origin: center center;
+}
+
+.artifact-container:hover:not(.pulling):not(.open) {
+  transform: translateY(-4px) translateZ(10px);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.artifact-container.pulling {
+  transform: translateY(-20px) translateZ(80px) scale(1.1);
+  z-index: 50;
+  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4));
+}
+
+.artifact-container.open {
+  transform: translateY(-20px) translateZ(80px) scale(1.1);
+  z-index: 50;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.45));
+}
+
 .vertical-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
