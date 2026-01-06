@@ -19,12 +19,14 @@ const blogPosts: YearSection[] = [
   {
     year: "2026",
     posts: [
-      { title: "what we can learn from neymar", slug: "what-we-can-learn-from-neymar" },
-    ],
-  },
-  {
-    year: "2025",
-    posts: [
+      {
+        title: "the inner game of confidence",
+        slug: "the-inner-game-of-confidence",
+      },
+      {
+        title: "what we can learn from neymar",
+        slug: "what-we-can-learn-from-neymar",
+      },
       { title: "meaningful outcomes", slug: "meaningful-outcomes" },
       { title: "try, pray, try again", slug: "try-pray-try-again" },
     ],
@@ -39,8 +41,8 @@ export default function WritingPage() {
       <div className="pt-14 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
         {/* Back to home link */}
         <div className="pt-6 pb-8">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="font-mono text-sm text-foreground underline hover:opacity-70 transition-opacity"
           >
             ← Back to home
@@ -48,9 +50,7 @@ export default function WritingPage() {
         </div>
 
         {/* Page title */}
-        <h1 className="font-mono text-lg font-bold mb-10">
-          Thoughts...
-        </h1>
+        <h1 className="font-mono text-lg font-bold mb-10">Thoughts...</h1>
 
         {/* Blog posts by year */}
         <div className="space-y-1">
@@ -60,7 +60,7 @@ export default function WritingPage() {
               <div className="w-16 md:w-20 shrink-0 font-mono text-sm text-foreground/60">
                 {yearSection.year}
               </div>
-              
+
               {/* Posts for this year */}
               <div className="flex-1 space-y-1">
                 {yearSection.posts.map((post, index) => (
