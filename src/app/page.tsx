@@ -54,7 +54,16 @@ export default function HomePage() {
           <p>
             i care deeply about design; specifically, how product design shapes
             the way we use tools and the results we get, and building small
-            autonomous systems (rn: drone mission software) that operate with
+            autonomous systems (rn:{" "}
+            <Link
+              href="https://github.com/Xplorer07/Bison_Vision"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              drone mission software
+            </Link>
+            ) that operate with
             minimal human-in-the-loop intervention.
           </p>
 
@@ -72,7 +81,7 @@ export default function HomePage() {
               see what i’m reading
             </Link>
             . if you're building something interesting or thinking deeply about
-            developer experience, feel free to reach out.
+            de, feel free to reach out.
           </p>
 
           <p>
