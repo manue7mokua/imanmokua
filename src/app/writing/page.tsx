@@ -20,15 +20,27 @@ const blogPosts: YearSection[] = [
     year: "2026",
     posts: [
       {
+        title: "better-sibling",
+        slug: "better-sibling",
+      },
+      {
         title: "the inner game of confidence",
         slug: "the-inner-game-of-confidence",
+      },
+      {
+        title: "read highly technical blogs",
+        slug: "read-highly-technical-blogs",
       },
       {
         title: "what we can learn from neymar",
         slug: "what-we-can-learn-from-neymar",
       },
-      { title: "meaningful outcomes", slug: "meaningful-outcomes" },
-      { title: "try, pray, try again", slug: "try-pray-try-again" },
+      { title: "meaningful outcomes", 
+        slug: "meaningful-outcomes" 
+      },
+      { title: "try, pray, try again", 
+        slug: "try-pray-try-again" 
+      },
     ],
   },
 ];
