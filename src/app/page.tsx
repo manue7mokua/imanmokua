@@ -105,8 +105,7 @@ export default function HomePage() {
             <Link href="/recs" className="underline">
               see what i’m reading
             </Link>
-            . if you're building something interesting or thinking deeply about
-            de, feel free to reach out.
+            . if you're building something interesting or have a good book rec, feel free to reach out.
           </p>
 
           <p>
