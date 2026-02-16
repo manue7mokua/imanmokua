@@ -286,3 +286,14 @@ body {
 .icon-shake:hover {
   animation: shake 0.8s ease-in-out;
 }
+
+/* Kenya flag GIF on name hover */
+@keyframes flagFadeIn {
+  0%   { opacity: 0; transform: scale(0.5); }
+  50%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.flag-gif {
+  animation: flagFadeIn 0.3s ease-out forwards;
+}

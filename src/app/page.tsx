@@ -1,11 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
+  const [showFlag, setShowFlag] = useState(false);
+  const flagTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleNameHover = useCallback(() => {
+    if (flagTimeoutRef.current) clearTimeout(flagTimeoutRef.current);
+    setShowFlag(true);
+    flagTimeoutRef.current = setTimeout(() => {
+      setShowFlag(false);
+    }, 2000);
+  }, []);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
       <AppHeader barClassName="h-14 items-end pb-2" />
@@ -26,7 +37,21 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold">Iman Mokua</h1>
+          <h1
+            className="text-3xl md:text-4xl font-bold cursor-default"
+            onMouseEnter={handleNameHover}
+          >
+            Iman Mokua
+          </h1>
+          {showFlag && (
+            <img
+              src={`/Kenya-xl.gif?t=${Date.now()}`}
+              alt="Kenya flag"
+              width={64}
+              height={64}
+              className="flag-gif -ml-3"
+            />
+          )}
         </div>
 
         {/* Body copy - narrative style */}
