@@ -32,8 +32,7 @@ export default function HomePage() {
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
           <p>
-            currently, i'm building the best voice-first codebase comprehension
-            agent{" "}
+            currently, i'm building {" "}
             <Link
               href="https://www.heyfathom.com/"
               className="underline"
@@ -42,11 +41,18 @@ export default function HomePage() {
             >
               @hey_fathom
             </Link>
-            .
+            , so i can talk to my VMs in swahili.{" "}
+            <Image
+              src="/Iron Man Icon.svg"
+              alt="Iron Man Icon"
+              width={28}
+              height={28}
+              className="inline-block align-middle icon-shake"
+            />
           </p>
 
           <p>
-            i care deeply about developer experience, how product design shapes
+            i care deeply about design; specifically, how product design shapes
             the way we use tools and the results we get, and building small
             autonomous systems (rn: drone mission software) that operate with
             minimal human-in-the-loop intervention.

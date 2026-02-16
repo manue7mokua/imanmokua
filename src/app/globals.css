@@ -262,3 +262,27 @@ body {
 .ghost-animation {
   animation: ghostFloat 4s ease-in-out infinite;
 }
+
+/* Iron Man icon shake */
+@keyframes shake {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(45deg); }
+  20%  { transform: rotate(-45deg); }
+  30%  { transform: rotate(30deg); }
+  40%  { transform: rotate(-30deg); }
+  50%  { transform: rotate(15deg); }
+  60%  { transform: rotate(-15deg); }
+  70%  { transform: rotate(5deg); }
+  80%  { transform: rotate(-5deg); }
+  90%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.icon-shake {
+  display: inline-block;
+  transition: transform 0.1s ease;
+}
+
+.icon-shake:hover {
+  animation: shake 0.8s ease-in-out;
+}
