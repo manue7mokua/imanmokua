@@ -98,7 +98,7 @@ export default function HomePage() {
               writing
             </Link>
             , explore{" "}
-            <Link href="/terminal" className="underline">
+            <Link href="/projects" className="underline">
               things i've built
             </Link>
             , or{" "}

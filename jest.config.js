@@ -9,8 +9,6 @@ const customJestConfig = {
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "^@xterm/xterm$": "<rootDir>/src/__mocks__/@xterm/xterm.ts",
-    "^@xterm/addon-fit$": "<rootDir>/src/__mocks__/@xterm/xterm.ts",
   },
   testMatch: ["**/__tests__/**/*.test.[jt]s?(x)"],
   moduleDirectories: ["node_modules", "<rootDir>/src"],

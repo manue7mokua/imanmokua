@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Iman Mokua",
-  description: "Interactive terminal-based portfolio",
+  description: "Personal portfolio",
   manifest: "/manifest.json",
   icons: {
     icon: [{ url: "/iman-mokua.png", type: "image/png" }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Iman Mokua",
-    description: "Interactive terminal-based portfolio",
+    description: "Personal portfolio",
     url: "https://imanmokua.me",
     siteName: "Iman Mokua",
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Iman Mokua",
-    description: "Interactive terminal-based portfolio",
+    description: "Personal portfolio",
     images: ["/iman-mokua.png"],
   },
 };

@@ -13,8 +13,6 @@
   "dependencies": {
     "@vercel/analytics": "^1.0.0",
     "@vercel/speed-insights": "^1.0.0",
-    "@xterm/addon-fit": "^0.10.0",
-    "@xterm/xterm": "^5.5.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.501.0",

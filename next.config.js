@@ -2,7 +2,6 @@
 const nextConfig = {
   output: "export",
   reactStrictMode: true,
-  transpilePackages: ["@xterm/xterm", "@xterm/addon-fit"],
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
