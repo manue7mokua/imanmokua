@@ -57,7 +57,7 @@ export default function HomePage() {
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
           <p>
-            currently, i'm building {" "}
+            currently, i&apos;m building {" "}
             <Link
               href="https://www.heyfathom.com/"
               className="underline"
@@ -99,13 +99,13 @@ export default function HomePage() {
             </Link>
             , explore{" "}
             <Link href="/projects" className="underline">
-              things i've built
+              things i&apos;ve built
             </Link>
             , or{" "}
             <Link href="/recs" className="underline">
               see what i’m reading
             </Link>
-            . if you're building something interesting or have a good book rec, feel free to reach out.
+            . if you&apos;re building something interesting or have a good book rec, feel free to reach out.
           </p>
 
           <p>

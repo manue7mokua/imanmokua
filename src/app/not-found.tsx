@@ -44,7 +44,7 @@ export default function NotFound() {
       {/* Text and Link */}
       <div className="mt-8 text-center relative z-10">
         <p className="text-lg md:text-xl font-mono mb-6 opacity-70">
-          Oops! This page doesn't exist yet.
+          Oops! This page doesn&apos;t exist yet.
         </p>
         <Link
           href="/writing"

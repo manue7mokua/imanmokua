@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useCallback, useRef } from "react";
+import { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import {
   BookData,
   ArtifactData,
@@ -12,10 +12,12 @@ import {
 } from "./types";
 import { Compartment } from "./Compartment";
 import { ReadingModal } from "./ReadingModal";
+import { MobileCoverFeed } from "./MobileCoverFeed";
 
 type AnimationPhase = "idle" | "pulling" | "open" | "closing";
 
 export function Bookshelf() {
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
   const [selectedArtifactId, setSelectedArtifactId] = useState<string | null>(null);
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>("idle");
@@ -53,6 +55,29 @@ export function Bookshelf() {
     return null;
   }, [selectedBook, selectedArtifact]);
 
+  useEffect(() => {
+    const evaluateLayout = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      const shortSide = Math.min(width, height);
+      const isPhoneViewport = shortSide < 768;
+      const isTabletPortrait = width <= 1024 && isPortrait;
+      const shouldUseMobileLayout = isPhoneViewport || isTabletPortrait;
+
+      setIsMobileLayout(shouldUseMobileLayout);
+    };
+
+    evaluateLayout();
+    window.addEventListener("resize", evaluateLayout);
+    window.addEventListener("orientationchange", evaluateLayout);
+
+    return () => {
+      window.removeEventListener("resize", evaluateLayout);
+      window.removeEventListener("orientationchange", evaluateLayout);
+    };
+  }, []);
+
   const clearTimeouts = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -63,6 +88,15 @@ export function Bookshelf() {
   const handleSelectBook = useCallback(
     (book: BookData | null) => {
       clearTimeouts();
+
+      if (isMobileLayout && book) {
+        if (showModal) return;
+        setSelectedArtifactId(null);
+        setSelectedBookId(book.id);
+        setAnimationPhase("open");
+        setShowModal(true);
+        return;
+      }
 
       if (book && animationPhase === "idle") {
         setSelectedArtifactId(null);
@@ -75,7 +109,7 @@ export function Bookshelf() {
         }, 700);
       }
     },
-    [animationPhase, clearTimeouts]
+    [animationPhase, clearTimeouts, isMobileLayout, showModal]
   );
 
   const handleSelectArtifact = useCallback(
@@ -97,8 +131,17 @@ export function Bookshelf() {
   );
 
   const handleClose = useCallback(() => {
-    if (animationPhase !== "open") return;
     clearTimeouts();
+
+    if (isMobileLayout) {
+      setShowModal(false);
+      setAnimationPhase("idle");
+      setSelectedBookId(null);
+      setSelectedArtifactId(null);
+      return;
+    }
+
+    if (animationPhase !== "open") return;
 
     setShowModal(false);
     setAnimationPhase("closing");
@@ -108,7 +151,7 @@ export function Bookshelf() {
       setSelectedBookId(null);
       setSelectedArtifactId(null);
     }, 700);
-  }, [animationPhase, clearTimeouts]);
+  }, [animationPhase, clearTimeouts, isMobileLayout]);
 
   const handleBgClick = () => {
     if (animationPhase === "open") {
@@ -134,6 +177,28 @@ export function Bookshelf() {
 
   const isAnySelected = animationPhase !== "idle";
   const shouldBlurBackground = animationPhase === "open";
+
+  if (isMobileLayout) {
+    return (
+      <div className="h-full relative overflow-hidden">
+        <MobileCoverFeed
+          books={books}
+          isPaused={showModal}
+          onSelectBook={handleSelectBook}
+        />
+        <div
+          className={`fixed inset-0 bg-black/20 backdrop-blur-[3px] pointer-events-none z-40 transition-opacity duration-300 ${
+            showModal ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        <ReadingModal
+          item={selectedItem}
+          isVisible={showModal}
+          onClose={handleClose}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
