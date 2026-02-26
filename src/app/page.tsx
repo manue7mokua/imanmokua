@@ -18,11 +18,11 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
-      <AppHeader barClassName="h-14 items-end pb-2" />
+    <div className="relative min-h-dvh flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
+      <AppHeader barClassName="h-14 items-center" />
 
       {/* Main content container, centered */}
-      <div className="w-full max-w-2xl mx-auto z-10 mb-24 md:mb-32">
+      <div className="w-full max-w-2xl mx-auto z-10">
         {/* H1 Header with Profile Photo */}
         <div className="flex items-center justify-start gap-4 md:gap-6 mb-8 md:mb-10">
           <div className="relative flex-shrink-0">

@@ -20,12 +20,12 @@ export function AppHeader({
 }: AppHeaderProps) {
   return (
     <header
-      className="fixed top-4 left-0 right-0 z-50"
+      className="fixed top-0 left-0 right-0 z-50"
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="bg-background/70 backdrop-blur-md">
+      <div className="bg-background/70 pt-[env(safe-area-inset-top)] backdrop-blur-md">
         <div className={`mx-auto px-4 flex justify-center ${barClassName}`}>
-          <div className="w-full max-w-sm flex items-center justify-between translate-y-0.5">
+          <div className="w-full max-w-sm flex items-center justify-between">
             <XPDownload />
 
             <Link
