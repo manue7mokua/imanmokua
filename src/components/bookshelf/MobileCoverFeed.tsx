@@ -14,7 +14,7 @@ const AUTO_SCROLL_SPEED_PX_PER_SECOND = 26;
 
 function getCoverPattern(index: number) {
   const rotation = ((index * 17) % 13) - 6;
-  const verticalOffset = ((index * 23) % 4) * 10;
+  const verticalOffset = ((index * 23) % 4) * 7;
   const horizontalNudge = ((index * 29) % 3) - 1;
 
   return {
@@ -33,28 +33,31 @@ interface CoverSetProps {
 function CoverSet({ books, setOffset, onSelectBook }: CoverSetProps) {
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 md:gap-y-12">
+      <div className="grid grid-cols-3 gap-x-2 gap-y-7 sm:gap-x-3 sm:gap-y-8 md:gap-x-6 md:gap-y-12">
         {books.map((book, index) => {
           const patternIndex = setOffset + index;
           const { rotation, verticalOffset, horizontalNudge } =
             getCoverPattern(patternIndex);
+          const shouldPrioritize = setOffset === 0 && index < 9;
 
           return (
             <button
               key={`${book.id}-${setOffset}-${index}`}
               type="button"
               onClick={() => onSelectBook(book)}
-              className="group relative w-[92%] justify-self-center md:w-[90%]"
+              className="group relative w-[96%] justify-self-center sm:w-[93%] md:w-[90%]"
               style={{
-                transform: `translate(${horizontalNudge * 4}px, ${verticalOffset}px) rotate(${rotation}deg)`,
+                transform: `translate(${horizontalNudge * 3}px, ${verticalOffset}px) rotate(${rotation}deg)`,
               }}
             >
-              <div className="relative aspect-[2/3] overflow-hidden rounded-sm border border-black/5 bg-neutral-200 shadow-[0_14px_32px_rgba(0,0,0,0.22)] transition-transform duration-300 group-active:scale-[0.985]">
+              <div className="relative aspect-[2/3] overflow-hidden rounded-sm border border-black/5 bg-neutral-800/80 shadow-[0_14px_32px_rgba(0,0,0,0.22)] transition-transform duration-300 group-active:scale-[0.985]">
                 <Image
                   src={book.coverImage}
                   alt={`${book.title} by ${book.author}`}
                   fill
-                  sizes="(max-width: 767px) 48vw, (max-width: 1024px) 32vw, 220px"
+                  sizes="(max-width: 639px) 31vw, (max-width: 1024px) 30vw, 220px"
+                  priority={shouldPrioritize}
+                  fetchPriority={shouldPrioritize ? "high" : undefined}
                   className="object-cover"
                   draggable={false}
                 />
