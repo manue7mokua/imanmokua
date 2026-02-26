@@ -296,3 +296,26 @@ body {
 .flag-gif {
   animation: flagFadeIn 0.3s ease-out forwards;
 }
+
+/* Resume preview tilt on FileDigit hover */
+@keyframes resumePreviewTiltLeft {
+  0% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}
+
+.resume-preview-card {
+  transform: rotate(0deg);
+  transform-origin: top right;
+}
+
+.group:hover .resume-preview-card,
+.group:focus-within .resume-preview-card {
+  animation: resumePreviewTiltLeft 0.35s ease-out forwards;
+}
