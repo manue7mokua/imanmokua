@@ -50,16 +50,19 @@ export default function ProjectsPage() {
       <AppHeader barClassName="h-14 items-end pb-2" />
 
       <div className="mx-auto max-w-4xl px-6 pt-14 md:px-12 lg:px-24">
-        <div className="pb-8 pt-6">
+        <div
+          className="sticky top-[calc(env(safe-area-inset-top)+3.5rem)] z-30 isolate pt-6 pb-5"
+          style={{ backgroundColor: "var(--background)" }}
+        >
           <Link
             href="/"
             className="font-mono text-sm text-foreground underline transition-opacity hover:opacity-70"
           >
             ← Back to home
           </Link>
-        </div>
 
-        <h1 className="mb-10 font-mono text-lg font-bold">Projects...</h1>
+          <h1 className="mt-8 font-mono text-lg font-bold">Projects...</h1>
+        </div>
 
         <ul className="space-y-8 pb-12">
           {projects.map((project) => (
