@@ -286,17 +286,6 @@ body {
   animation: shake 0.8s ease-in-out;
 }
 
-/* Kenya flag GIF on name hover */
-@keyframes flagFadeIn {
-  0%   { opacity: 0; transform: translateY(-50%) scale(0.5); }
-  50%  { opacity: 1; transform: translateY(-50%) scale(1.1); }
-  100% { opacity: 1; transform: translateY(-50%) scale(1); }
-}
-
-.flag-gif {
-  animation: flagFadeIn 0.3s ease-out forwards;
-}
-
 /* Resume preview tilt on FileDigit hover */
 @keyframes resumePreviewTiltLeft {
   0% {

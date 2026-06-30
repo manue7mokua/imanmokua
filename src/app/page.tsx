@@ -1,22 +1,11 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
-  const [showFlag, setShowFlag] = useState(false);
-  const flagTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleNameHover = useCallback(() => {
-    if (flagTimeoutRef.current) clearTimeout(flagTimeoutRef.current);
-    setShowFlag(true);
-    flagTimeoutRef.current = setTimeout(() => {
-      setShowFlag(false);
-    }, 2000);
-  }, []);
-
   return (
     <div className="relative min-h-dvh flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
       <AppHeader barClassName="h-14 items-center" />
@@ -25,26 +14,9 @@ export default function HomePage() {
       <div className="w-full max-w-2xl mx-auto z-10">
         {/* H1 Header */}
         <div className="flex items-center justify-start mb-8 md:mb-10">
-          <div className="relative inline-flex items-center">
-            <h1
-              className="text-3xl md:text-4xl font-bold cursor-default"
-              onMouseEnter={handleNameHover}
-            >
-              Iman Mokua
-            </h1>
-            <img
-              src="/Kenya-xl.gif"
-              alt=""
-              aria-hidden="true"
-              width={64}
-              height={64}
-              className={`pointer-events-none absolute left-full top-1/2 ml-1 -translate-y-1/2 transition-all duration-200 ${
-                showFlag
-                  ? "flag-gif opacity-100 scale-100"
-                  : "opacity-0 scale-75"
-              }`}
-            />
-          </div>
+          <h1 className="text-3xl md:text-4xl font-bold cursor-default">
+            Iman Mokua
+          </h1>
         </div>
 
         {/* Body copy - narrative style */}
