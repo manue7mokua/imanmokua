@@ -24,22 +24,27 @@ export default function HomePage() {
       {/* Main content container, centered */}
       <div className="w-full max-w-2xl mx-auto z-10">
         {/* H1 Header */}
-        <div className="flex items-center justify-start gap-4 md:gap-6 mb-8 md:mb-10">
-          <h1
-            className="text-3xl md:text-4xl font-bold cursor-default"
-            onMouseEnter={handleNameHover}
-          >
-            Iman Mokua
-          </h1>
-          {showFlag && (
+        <div className="flex items-center justify-start mb-8 md:mb-10">
+          <div className="relative inline-flex items-center">
+            <h1
+              className="text-3xl md:text-4xl font-bold cursor-default"
+              onMouseEnter={handleNameHover}
+            >
+              Iman Mokua
+            </h1>
             <img
-              src={`/Kenya-xl.gif?t=${Date.now()}`}
-              alt="Kenya flag"
+              src="/Kenya-xl.gif"
+              alt=""
+              aria-hidden="true"
               width={64}
               height={64}
-              className="flag-gif -ml-3"
+              className={`pointer-events-none absolute left-full top-1/2 ml-1 -translate-y-1/2 transition-all duration-200 ${
+                showFlag
+                  ? "flag-gif opacity-100 scale-100"
+                  : "opacity-0 scale-75"
+              }`}
             />
-          )}
+          </div>
         </div>
 
         {/* Body copy - narrative style */}
