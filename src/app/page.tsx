@@ -23,20 +23,8 @@ export default function HomePage() {
 
       {/* Main content container, centered */}
       <div className="w-full max-w-2xl mx-auto z-10">
-        {/* H1 Header with Profile Photo */}
+        {/* H1 Header */}
         <div className="flex items-center justify-start gap-4 md:gap-6 mb-8 md:mb-10">
-          <div className="relative flex-shrink-0">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-transparent">
-              <Image
-                src="/imanmokua_profile.jpeg"
-                alt="Iman Mokua"
-                width={80}
-                height={80}
-                className="w-full h-full rounded-full object-cover"
-                priority
-              />
-            </div>
-          </div>
           <h1
             className="text-3xl md:text-4xl font-bold cursor-default"
             onMouseEnter={handleNameHover}
