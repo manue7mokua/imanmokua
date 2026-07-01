@@ -20,7 +20,7 @@ export default function HomePage() {
 
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
-          <p>currently work at meta</p>
+          <p>currently work at meta.</p>
 
           <p>
             i care deeply about design; specifically, how product design shapes
