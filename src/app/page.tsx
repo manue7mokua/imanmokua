@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
@@ -21,29 +20,7 @@ export default function HomePage() {
 
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
-          <p>
-            currently, i&apos;m building {" "}
-            <span className="relative inline-flex items-center group">
-              <Link
-                href="https://www.heyfathom.com/"
-                className="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @hey_fathom
-              </Link>
-              <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-0 -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                <Image
-                  src="/Iron Man Icon.svg"
-                  alt="Iron Man Icon"
-                  width={28}
-                  height={28}
-                  className="icon-shake"
-                />
-              </span>
-            </span>
-            , so i can talk to my VMs in swahili.
-          </p>
+          <p>currently work at meta</p>
 
           <p>
             i care deeply about design; specifically, how product design shapes
