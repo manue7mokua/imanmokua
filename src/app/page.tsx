@@ -23,19 +23,9 @@ export default function HomePage() {
           <p>currently work at meta.</p>
 
           <p>
-            i care deeply about design; specifically, how product design shapes
-            the way we use tools and the results we get, and building small
-            autonomous systems (rn:{" "}
-            <Link
-              href="https://github.com/Xplorer07/Bison_Vision"
-              className="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              drone mission software
-            </Link>
-            ) that operate with
-            minimal human-in-the-loop intervention.
+            i care a lot about design; i think it's pretty cool how things are 
+            structured can affect how we think. i like football (brazil will win the wc). 
+            i wanna build my own version of TARS someday :)
           </p>
 
           <p>
