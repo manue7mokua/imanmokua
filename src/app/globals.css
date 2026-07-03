@@ -394,7 +394,7 @@ body {
 }
 
 .dotted-message-status {
-  flex: 0 0 2.5rem;
+  flex: 0 0 3.75rem;
   color: color-mix(in srgb, var(--foreground) 48%, transparent);
   font-size: 0.75em;
   line-height: 1;
@@ -403,6 +403,19 @@ body {
 
 .dotted-message-form.is-sent .dotted-message-status {
   color: var(--foreground);
+}
+
+.dotted-message-form.is-error .dotted-message-status {
+  color: color-mix(in srgb, #ef4444 82%, var(--foreground));
+}
+
+.dotted-message-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 640px) {

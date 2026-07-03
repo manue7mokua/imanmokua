@@ -7,12 +7,15 @@ import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState("");
   const sentTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const canSend = message.trim().length > 0;
-  const isActive = isFocused || message.length > 0;
+  const isActive = isFocused || message.length > 0 || isSubmitting;
 
   useEffect(() => {
     return () => {
@@ -22,36 +25,67 @@ export default function HomePage() {
     };
   }, []);
 
-  function runFakeSubmit() {
-    if (!canSend) return;
+  async function runSubmit() {
+    if (!canSend || isSubmitting) return;
 
-    setIsSent(true);
-    setMessage("");
+    setIsSubmitting(true);
+    setError("");
 
-    if (sentTimeoutRef.current) {
-      clearTimeout(sentTimeoutRef.current);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message,
+          website,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send message");
+      }
+
+      setIsSent(true);
+      setMessage("");
+      setWebsite("");
+
+      if (sentTimeoutRef.current) {
+        clearTimeout(sentTimeoutRef.current);
+      }
+
+      sentTimeoutRef.current = setTimeout(() => {
+        setIsSent(false);
+      }, 1400);
+    } catch {
+      setError("error");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    sentTimeoutRef.current = setTimeout(() => {
-      setIsSent(false);
-    }, 1400);
   }
 
-  function handleFakeSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    runFakeSubmit();
+    void runSubmit();
   }
 
   function handleMessageChange(event: React.ChangeEvent<HTMLInputElement>) {
     setMessage(event.target.value.slice(0, 50));
+    setError("");
+    setIsSent(false);
   }
 
   function handleMessageKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key !== "Enter") return;
 
     event.preventDefault();
-    runFakeSubmit();
+    void runSubmit();
   }
+
+  const statusText = isSubmitting
+    ? "sending"
+    : error || (isSent ? "sent" : `${message.length}/50`);
 
   return (
     <div className="relative min-h-dvh flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
@@ -93,8 +127,8 @@ export default function HomePage() {
             <form
               className={`dotted-message-form ${
                 isActive ? "is-active" : ""
-              } ${isSent ? "is-sent" : ""}`}
-              onSubmit={handleFakeSubmit}
+              } ${isSent ? "is-sent" : ""} ${error ? "is-error" : ""}`}
+              onSubmit={handleSubmit}
               aria-label="send a short note"
             >
               <label className="sr-only" htmlFor="home-message">
@@ -114,16 +148,26 @@ export default function HomePage() {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
               />
+              <input
+                aria-hidden="true"
+                autoComplete="off"
+                className="dotted-message-honeypot"
+                name="website"
+                tabIndex={-1}
+                type="text"
+                value={website}
+                onChange={(event) => setWebsite(event.target.value)}
+              />
               <button
                 className="dotted-message-button"
                 type="submit"
-                disabled={!canSend}
-                aria-label="fake send note"
+                disabled={!canSend || isSubmitting}
+                aria-label="send note"
               >
                 <Send aria-hidden="true" size={14} strokeWidth={1.75} />
               </button>
               <span className="dotted-message-status" aria-live="polite">
-                {isSent ? "sent" : `${message.length}/50`}
+                {statusText}
               </span>
             </form>
           </div>
