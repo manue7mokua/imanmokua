@@ -61,9 +61,6 @@ export default function WritingPage() {
           </Link>
         </div>
 
-        {/* Page title */}
-        <h1 className="font-mono text-lg font-bold mb-10">Thoughts...</h1>
-
         {/* Blog posts by year */}
         <div className="space-y-1">
           {blogPosts.map((yearSection) => (
