@@ -394,7 +394,7 @@ body {
 }
 
 .dotted-message-status {
-  flex: 0 0 3.75rem;
+  flex: 0 0 5.25rem;
   color: color-mix(in srgb, var(--foreground) 48%, transparent);
   font-size: 0.75em;
   line-height: 1;

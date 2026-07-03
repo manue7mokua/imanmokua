@@ -59,7 +59,7 @@ export default function HomePage() {
         setIsSent(false);
       }, 1400);
     } catch {
-      setError("error");
+      setError(":( try again");
     } finally {
       setIsSubmitting(false);
     }
