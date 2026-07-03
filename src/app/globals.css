@@ -373,19 +373,17 @@ body {
   height: 1.75rem;
   color: var(--foreground);
   background: transparent;
-  border: 1px dotted color-mix(in srgb, var(--foreground) 42%, transparent);
-  border-radius: 999px;
+  border: 0;
+  border-radius: 0;
   cursor: pointer;
   opacity: 0.72;
   transition:
-    border-color 180ms ease,
     opacity 180ms ease,
     transform 180ms ease;
 }
 
 .dotted-message-button:hover:not(:disabled),
 .dotted-message-button:focus-visible {
-  border-color: color-mix(in srgb, var(--foreground) 74%, transparent);
   opacity: 1;
   transform: translateY(-1px);
 }
