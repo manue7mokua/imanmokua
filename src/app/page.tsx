@@ -132,7 +132,7 @@ export default function HomePage() {
               aria-label="send a short note"
             >
               <label className="sr-only" htmlFor="home-message">
-                book rec or thing you&apos;re building
+                name: what r u excited about
               </label>
               <input
                 id="home-message"
@@ -140,7 +140,7 @@ export default function HomePage() {
                 type="text"
                 value={message}
                 maxLength={50}
-                placeholder="book rec or thing you&apos;re building..."
+                placeholder="name: what r u excited about"
                 autoComplete="off"
                 spellCheck="true"
                 onChange={handleMessageChange}
