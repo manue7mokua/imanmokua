@@ -398,7 +398,7 @@ body {
   color: color-mix(in srgb, var(--foreground) 48%, transparent);
   font-size: 0.75em;
   line-height: 1;
-  text-align: right;
+  text-align: left;
 }
 
 .dotted-message-form.is-sent .dotted-message-status {
