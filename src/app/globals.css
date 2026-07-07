@@ -75,6 +75,21 @@ body {
   outline-offset: 3px;
 }
 
+.home-inline-link {
+  color: color-mix(in srgb, var(--foreground) 36%, transparent);
+  transition: color 180ms ease;
+}
+
+.home-inline-link:hover,
+.home-inline-link:focus-visible {
+  color: var(--foreground);
+}
+
+.home-inline-link:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animated-link,
   .animated-link::after {
