@@ -106,7 +106,7 @@ export default function HomePage() {
 
           <p>
             i care a lot about design; i think it&apos;s pretty cool how things are 
-            structured can affect how we think. i like football (brazil will win the wc). 
+            structured can affect how we think. i like football ('Zonal Marking' is a great read). 
             i wanna build my own version of TARS someday :)
           </p>
 
