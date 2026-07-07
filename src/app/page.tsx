@@ -112,15 +112,15 @@ export default function HomePage() {
 
           <div>
             you can read my{" "}
-            <Link href="/writing" className="home-inline-link underline">
+            <Link href="/writing" className="home-inline-link">
               writing
             </Link>
             , explore{" "}
-            <Link href="/projects" className="home-inline-link underline">
+            <Link href="/projects" className="home-inline-link">
               things i&apos;ve built
             </Link>
             , or{" "}
-            <Link href="/recs" className="home-inline-link underline">
+            <Link href="/recs" className="home-inline-link">
               see what i’m reading
             </Link>
             .

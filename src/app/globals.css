@@ -76,13 +76,34 @@ body {
 }
 
 .home-inline-link {
+  position: relative;
+  display: inline;
   color: color-mix(in srgb, var(--foreground) 36%, transparent);
-  transition: color 180ms ease;
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--foreground), var(--foreground)),
+    linear-gradient(
+      color-mix(in srgb, var(--foreground) 36%, transparent),
+      color-mix(in srgb, var(--foreground) 36%, transparent)
+    );
+  background-position:
+    0 100%,
+    0 100%;
+  background-repeat: no-repeat;
+  background-size:
+    0 1px,
+    100% 1px;
+  transition:
+    color 220ms ease,
+    background-size 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .home-inline-link:hover,
 .home-inline-link:focus-visible {
   color: var(--foreground);
+  background-size:
+    100% 1px,
+    100% 1px;
 }
 
 .home-inline-link:focus-visible {
@@ -92,7 +113,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .animated-link,
-  .animated-link::after {
+  .animated-link::after,
+  .home-inline-link {
     transition: none;
   }
 
