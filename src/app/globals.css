@@ -50,14 +50,15 @@ body {
 }
 
 .animated-link::after {
-  content: "↗";
+  content: "→";
   position: absolute;
   right: 0;
   top: 50%;
   font-size: 0.78em;
   line-height: 1;
   opacity: 0.68;
-  transform: translateY(-52%);
+  transform: translateY(-52%) rotate(-45deg);
+  transform-origin: center;
   transition:
     opacity 180ms ease,
     transform 180ms ease;
@@ -65,9 +66,8 @@ body {
 
 .animated-link:hover::after,
 .animated-link:focus-visible::after {
-  content: "→";
   opacity: 1;
-  transform: translateY(-52%) translateX(0.08em);
+  transform: translateY(-52%) translateX(0.08em) rotate(0deg);
 }
 
 .animated-link:focus-visible {
