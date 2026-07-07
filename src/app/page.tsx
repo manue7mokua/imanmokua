@@ -95,8 +95,8 @@ export default function HomePage() {
       <div className="w-full max-w-2xl mx-auto z-10">
         {/* H1 Header */}
         <div className="flex items-center justify-start mb-8 md:mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold cursor-default">
-            Iman Mokua
+          <h1 className="text-2xl md:text-2xl font-bold cursor-default">
+            hey, i'm Iman
           </h1>
         </div>
 
