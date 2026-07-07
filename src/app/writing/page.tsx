@@ -55,7 +55,7 @@ export default function WritingPage() {
         <div className="pt-6 pb-8">
           <Link
             href="/"
-            className="font-mono text-sm text-foreground underline hover:opacity-70 transition-opacity"
+            className="animated-link font-mono text-sm text-foreground hover:opacity-70 transition-opacity"
           >
             ← Back to home
           </Link>
@@ -79,15 +79,14 @@ export default function WritingPage() {
                         href={post.externalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-sm underline hover:opacity-70 transition-opacity inline-flex items-center gap-1"
+                        className="animated-link font-mono text-sm hover:opacity-70 transition-opacity"
                       >
                         {post.title}
-                        <span className="text-xs">↗</span>
                       </a>
                     ) : (
                       <Link
                         href={`/writing/${post.slug}`}
-                        className="font-mono text-sm underline hover:opacity-70 transition-opacity"
+                        className="animated-link font-mono text-sm hover:opacity-70 transition-opacity"
                       >
                         {post.title}
                       </Link>

@@ -112,15 +112,15 @@ export default function HomePage() {
 
           <div>
             you can read my{" "}
-            <Link href="/writing" className="underline">
+            <Link href="/writing" className="animated-link">
               writing
             </Link>
             , explore{" "}
-            <Link href="/projects" className="underline">
+            <Link href="/projects" className="animated-link">
               things i&apos;ve built
             </Link>
             , or{" "}
-            <Link href="/recs" className="underline">
+            <Link href="/recs" className="animated-link">
               see what i’m reading
             </Link>
             .
@@ -176,7 +176,7 @@ export default function HomePage() {
             connect with me on{" "}
             <Link
               href="https://x.com/imanmokua"
-              className="underline"
+              className="animated-link"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -185,7 +185,7 @@ export default function HomePage() {
             ,{" "}
             <Link
               href="https://github.com/manue7mokua"
-              className="underline"
+              className="animated-link"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -194,7 +194,7 @@ export default function HomePage() {
             ,{" "}
             <Link
               href="https://www.linkedin.com/in/mokua-emmanuel-43b798269/"
-              className="underline"
+              className="animated-link"
               target="_blank"
               rel="noopener noreferrer"
             >

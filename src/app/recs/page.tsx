@@ -157,7 +157,7 @@ export default function RecsPage() {
         <div className="relative mx-auto flex h-12 w-full max-w-5xl items-center px-6">
           <Link
             href="/"
-            className="font-mono text-sm text-foreground underline hover:opacity-70 transition-opacity"
+            className="animated-link font-mono text-sm text-foreground hover:opacity-70 transition-opacity"
           >
             ← Back to home
           </Link>
