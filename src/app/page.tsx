@@ -173,34 +173,15 @@ export default function HomePage() {
           </div>
 
           <p>
-            connect with me on{" "}
+            i post sometimes on{" "}
             <Link
               href="https://x.com/imanmokua"
               className="animated-link"
               target="_blank"
               rel="noopener noreferrer"
             >
-              X (twitter)
+              X
             </Link>
-            ,{" "}
-            <Link
-              href="https://github.com/manue7mokua"
-              className="animated-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github
-            </Link>
-            ,{" "}
-            <Link
-              href="https://www.linkedin.com/in/mokua-emmanuel-43b798269/"
-              className="animated-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              linkedin
-            </Link>
-            .
           </p>
         </div>
       </div>
