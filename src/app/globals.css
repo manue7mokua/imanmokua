@@ -43,7 +43,7 @@ body {
   text-decoration: none;
   vertical-align: baseline;
   background-image: linear-gradient(currentColor, currentColor);
-  background-position: left calc(100% - 0.06em);
+  background-position: left 100%;
   background-repeat: no-repeat;
   background-size: calc(100% - 1em) 1px;
   transition: opacity 180ms ease;
@@ -111,10 +111,27 @@ body {
   outline-offset: 3px;
 }
 
+.social-arrow-link {
+  color: color-mix(in srgb, var(--foreground) 36%, transparent);
+  background-image: none;
+  transition: color 220ms ease;
+}
+
+.social-arrow-link:hover,
+.social-arrow-link:focus-visible {
+  color: var(--foreground);
+}
+
+.social-arrow-link:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animated-link,
   .animated-link::after,
-  .home-inline-link {
+  .home-inline-link,
+  .social-arrow-link {
     transition: none;
   }
 

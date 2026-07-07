@@ -176,7 +176,7 @@ export default function HomePage() {
             i post sometimes on{" "}
             <Link
               href="https://x.com/imanmokua"
-              className="animated-link"
+              className="animated-link social-arrow-link"
               target="_blank"
               rel="noopener noreferrer"
             >
