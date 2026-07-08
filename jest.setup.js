@@ -28,6 +28,3 @@ global.ResizeObserver = class ResizeObserver {
 // Mock requestAnimationFrame
 global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
 global.cancelAnimationFrame = (id) => clearTimeout(id);
-
-// Mock sound
-jest.mock("use-sound", () => () => [jest.fn(), { sound: null }]);

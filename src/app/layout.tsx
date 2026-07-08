@@ -2,7 +2,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
-import StyledComponentsRegistry from "./registry";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -57,18 +56,16 @@ export default function RootLayout({
         )}
       </head>
       <body>
-        <StyledComponentsRegistry>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem={false}
-            storageKey="iman-mokua-theme"
-          >
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </ThemeProvider>
-        </StyledComponentsRegistry>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          storageKey="iman-mokua-theme"
+        >
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );
