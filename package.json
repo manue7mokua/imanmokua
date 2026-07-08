@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src",
-    "test": "jest"
+    "lint": "next lint --dir src"
   },
   "dependencies": {
     "@vercel/analytics": "^1.0.0",
@@ -22,24 +21,13 @@
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
-    "@babel/preset-react": "^7.29.7",
-    "@babel/preset-typescript": "^7.29.7",
     "@eslint/eslintrc": "^3.3.5",
     "@tailwindcss/postcss": "^4",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "babel-jest": "^30.4.1",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.18",
-    "jest": "^30.4.2",
-    "jest-canvas-mock": "^2.5.2",
-    "jest-environment-jsdom": "^30.4.1",
     "postcss": "8.5.10",
     "tailwindcss": "^4.1.4",
     "typescript": "^5"
