@@ -55,7 +55,7 @@ export default function WritingPage() {
         <div className="pt-6 pb-8">
           <Link
             href="/"
-            className="animated-link font-mono text-sm text-foreground hover:opacity-70 transition-opacity"
+            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
           >
             ← Back to home
           </Link>

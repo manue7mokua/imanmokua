@@ -56,7 +56,7 @@ export default function ProjectsPage() {
         >
           <Link
             href="/"
-            className="animated-link font-mono text-sm text-foreground transition-opacity hover:opacity-70"
+            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
           >
             ← Back to home
           </Link>
