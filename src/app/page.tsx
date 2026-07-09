@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Send } from "lucide-react";
 import { AppHeader } from "@/components/AppHeader";
 
@@ -89,15 +90,24 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-dvh flex flex-col items-center justify-center p-6 md:p-12 text-foreground bg-background">
-      <AppHeader barClassName="h-14 items-center" />
+      <AppHeader barClassName="h-14 items-center" showAvatar={false} />
 
       {/* Main content container, centered */}
       <div className="w-full max-w-2xl mx-auto z-10">
         {/* H1 Header */}
-        <div className="flex items-center justify-start mb-8 md:mb-10">
+        <div className="flex items-center justify-start gap-3 mb-8 md:mb-10">
           <h1 className="text-2xl md:text-2xl font-bold cursor-default">
             hey, i'm Iman
           </h1>
+          <Image
+            src="https://api.dicebear.com/9.x/adventurer/svg?seed=Sara"
+            alt=""
+            width={42}
+            height={42}
+            className="h-10 w-10 rounded-full object-cover"
+            aria-hidden="true"
+            unoptimized={true}
+          />
         </div>
 
         {/* Body copy - narrative style */}
