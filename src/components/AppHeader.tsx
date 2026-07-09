@@ -45,12 +45,18 @@ export function AppHeader({
                 />
               </Link>
             ) : (
-              <div aria-hidden="true" />
+              <div className="justify-self-center">
+                <ThemeToggle />
+              </div>
             )}
 
-            <div className="justify-self-end">
-              <ThemeToggle />
-            </div>
+            {showAvatar ? (
+              <div className="justify-self-end">
+                <ThemeToggle />
+              </div>
+            ) : (
+              <div aria-hidden="true" />
+            )}
           </div>
         </div>
       </div>
