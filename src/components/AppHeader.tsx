@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { XPDownload } from "@/components/xp-download";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 interface AppHeaderProps {
@@ -25,12 +24,12 @@ export function AppHeader({
     >
       <div className="bg-background/70 pt-[env(safe-area-inset-top)] backdrop-blur-md">
         <div className={`mx-auto px-4 flex justify-center ${barClassName}`}>
-          <div className="w-full max-w-sm flex items-center justify-between">
-            <XPDownload />
+          <div className="grid w-full max-w-sm grid-cols-3 items-center">
+            <div aria-hidden="true" />
 
             <Link
               href={centerHref}
-              className="flex items-center justify-center rounded-full hover:bg-accent/10 transition-colors duration-200"
+              className="flex items-center justify-center justify-self-center rounded-full hover:bg-accent/10 transition-colors duration-200"
               aria-label="Go to homepage"
             >
               <Image
@@ -43,7 +42,9 @@ export function AppHeader({
               />
             </Link>
 
-            <ThemeToggle />
+            <div className="justify-self-end">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

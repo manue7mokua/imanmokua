@@ -368,29 +368,6 @@ body {
   animation: ghostFloat 4s ease-in-out infinite;
 }
 
-/* Resume preview tilt on FileDigit hover */
-@keyframes resumePreviewTiltLeft {
-  0% {
-    transform: rotate(0deg);
-  }
-  70% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-30deg);
-  }
-}
-
-.resume-preview-card {
-  transform: rotate(0deg);
-  transform-origin: top right;
-}
-
-.group:hover .resume-preview-card,
-.group:focus-within .resume-preview-card {
-  animation: resumePreviewTiltLeft 0.35s ease-out forwards;
-}
-
 @keyframes dottedMessageTrack {
   from {
     background-position: 0 100%;
