@@ -47,7 +47,7 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-background">
-      <AppHeader barClassName="h-14 items-end pb-2" />
+      <AppHeader barClassName="h-14 items-center" showAvatar={false} />
 
       <div className="mx-auto max-w-4xl px-6 pt-14 md:px-12 lg:px-24">
         <div
