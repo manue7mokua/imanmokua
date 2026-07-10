@@ -148,7 +148,7 @@ export default function RecsPage() {
 
   return (
     <main className="bg-background h-dvh overflow-hidden">
-      <AppHeader barClassName="h-14 items-center" />
+      <AppHeader barClassName="h-14 items-center" showAvatar={false} />
 
       <div
         className="fixed left-0 right-0 z-[45] bg-background/65 backdrop-blur-md"
