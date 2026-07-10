@@ -60,8 +60,6 @@ export default function ProjectsPage() {
           >
             ← Back to home
           </Link>
-
-          <h1 className="mt-8 font-mono text-lg font-bold">Projects...</h1>
         </div>
 
         <ul className="space-y-8 pb-12">
