@@ -56,7 +56,7 @@ export function Artifact({ artifact, isSelected, animationClass, onSelect, isDim
   if (type === "camera") {
     return (
       <div
-        className={`${containerClass} absolute left-1/2 -translate-x-1/2 w-[160px] h-[120px]`}
+        className={`${containerClass} artifact-centered absolute left-1/2 -translate-x-1/2 w-[160px] h-[120px]`}
         style={{
           bottom: "-32px",
           marginBottom: 0,
@@ -97,7 +97,7 @@ export function Artifact({ artifact, isSelected, animationClass, onSelect, isDim
   if (type === "f1car") {
     return (
       <div
-        className={`${containerClass} absolute left-1/2 -translate-x-1/2 w-[400px] h-[160px]`}
+        className={`${containerClass} artifact-centered absolute left-1/2 -translate-x-1/2 w-[400px] h-[160px]`}
         style={{
           bottom: "-56px",
           marginBottom: 0,
@@ -126,7 +126,7 @@ export function Artifact({ artifact, isSelected, animationClass, onSelect, isDim
   if (type === "champsball") {
     return (
       <div
-        className={`${containerClass} absolute left-1/2 -translate-x-1/2 w-[210px] h-[210px]`}
+        className={`${containerClass} artifact-centered absolute left-1/2 -translate-x-1/2 w-[210px] h-[210px]`}
         style={{
           bottom: "-40px",
           marginBottom: 0,
@@ -155,7 +155,7 @@ export function Artifact({ artifact, isSelected, animationClass, onSelect, isDim
   if (type === "mercurial") {
     return (
       <div
-        className={`${containerClass} absolute left-1/2 -translate-x-1/2 w-[140px] h-[140px]`}
+        className={`${containerClass} artifact-centered absolute left-1/2 -translate-x-1/2 w-[140px] h-[140px]`}
         style={{
           bottom: "-30px",
           marginBottom: 0,
@@ -184,7 +184,7 @@ export function Artifact({ artifact, isSelected, animationClass, onSelect, isDim
   if (type === "mug") {
     return (
       <div
-        className={`${containerClass} absolute left-1/2 -translate-x-1/2 w-[200px] h-[200px]`}
+        className={`${containerClass} artifact-centered absolute left-1/2 -translate-x-1/2 w-[200px] h-[200px]`}
         style={{
           bottom: "-44px",
           marginBottom: 0,
