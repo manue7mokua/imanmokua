@@ -49,6 +49,7 @@ export interface SelectedItem {
   id: string | number;
   imagePath: string;
   title: string;
+  kind: "book" | "artifact";
 }
 
 export interface ShelfSection {

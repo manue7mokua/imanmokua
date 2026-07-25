@@ -43,6 +43,7 @@ export function Bookshelf() {
         id: selectedBook.id,
         imagePath: selectedBook.coverImage,
         title: selectedBook.title,
+        kind: "book",
       };
     }
     if (selectedArtifact) {
@@ -50,6 +51,7 @@ export function Bookshelf() {
         id: selectedArtifact.id,
         imagePath: selectedArtifact.imagePath,
         title: selectedArtifact.title,
+        kind: "artifact",
       };
     }
     return null;

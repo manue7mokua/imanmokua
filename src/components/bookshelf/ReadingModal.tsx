@@ -31,6 +31,17 @@ export function ReadingModal({ item, isVisible, onClose }: ReadingModalProps) {
 
   if (!item) return null;
 
+  const frameSize =
+    item.kind === "book"
+      ? {
+          width: "min(82vw, 620px)",
+          height: "min(78dvh, 820px)",
+        }
+      : {
+          width: "min(86vw, 980px)",
+          height: "min(74dvh, 760px)",
+        };
+
   return (
     <div
       className={`fixed inset-0 z-[60] h-dvh w-screen transition-opacity duration-300 ${
@@ -69,16 +80,21 @@ export function ReadingModal({ item, isVisible, onClose }: ReadingModalProps) {
           onClick={(e) => e.stopPropagation()}
         >
           <div 
-            className="relative w-auto max-w-[66vw] max-h-[56vh] sm:max-w-[70vw] sm:max-h-[62vh] md:max-w-[76vw] md:max-h-[70vh] lg:max-w-[84vw] lg:max-h-[78vh] xl:max-w-[90vw] xl:max-h-[85vh]"
+            className="relative flex items-center justify-center"
             style={{
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3)',
-              ...(isTabletPortrait ? { maxWidth: "52vw", maxHeight: "54vh" } : {}),
+              ...frameSize,
+              ...(isTabletPortrait
+                ? { width: "min(72vw, 620px)", height: "min(56dvh, 680px)" }
+                : {}),
             }}
           >
             <img
               src={item.imagePath}
               alt={item.title}
-              className="w-auto h-auto max-w-full max-h-full object-contain"
+              className="block h-auto w-auto max-h-full max-w-full object-contain"
+              style={{
+                filter: "drop-shadow(0 25px 35px rgba(0, 0, 0, 0.45))",
+              }}
               draggable={false}
             />
           </div>
