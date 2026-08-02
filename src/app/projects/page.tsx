@@ -14,6 +14,10 @@ const projects: Project[] = [
     description: "Tireless repo improvement agents.",
   },
   {
+    name: "cruyffchess",
+    description: "Tactics board for small-sided games.",
+  },
+  {
     name: "datagolf",
     description:
       "Coding golf for analyzing data using prompts instead of SQL statements.",
