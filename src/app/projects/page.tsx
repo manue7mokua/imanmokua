@@ -10,6 +10,10 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: "wazza",
+    description: "Tireless repo improvement agents.",
+  },
+  {
     name: "datagolf",
     description:
       "Coding golf for analyzing data using prompts instead of SQL statements.",
