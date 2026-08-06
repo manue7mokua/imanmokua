@@ -22,7 +22,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className={styles.cardInner}>
         <div className={styles.cardContent}>
           <div>
-            <h2 className={styles.cardTitle}>{project.name}</h2>
+            <h2 className={styles.cardTitle}>
+              {project.url ? (
+                <Link
+                  className={styles.cardTitleLink}
+                  href={project.url}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {project.name}
+                </Link>
+              ) : (
+                project.name
+              )}
+            </h2>
             <p className={styles.cardDescription}>{project.description}</p>
           </div>
 

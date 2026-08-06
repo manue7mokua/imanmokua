@@ -37,4 +37,5 @@ export interface Project {
   links?: ProjectLink[];
   media?: ProjectMedia;
   name: string;
+  url?: string;
 }

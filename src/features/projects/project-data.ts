@@ -6,6 +6,7 @@ export const projects: Project[] = [
     name: "wazza",
     description: "Tireless repo improvement agents.",
     layout: "featured",
+    url: "https://github.com/manue7mokua/wazza",
     links: [
       {
         href: "https://github.com/manue7mokua/wazza",
@@ -32,6 +33,7 @@ export const projects: Project[] = [
     name: "cruyffchess",
     description: "Tactics board for small-sided games.",
     layout: "tall",
+    url: "https://github.com/manue7mokua/cruyffchess",
     media: {
       kind: "video",
       src:
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     description:
       "Coding golf for analyzing data using prompts instead of SQL statements.",
     layout: "tall",
+    url: "https://github.com/manue7mokua/datagolf",
     media: {
       kind: "video",
       src:
@@ -57,15 +60,33 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "baby-fathom",
-    name: "baby-fathom",
+    id: "fathom",
+    name: "fathom",
     description:
-      "A small, fast version of Fathom for exploring voice-first code intelligence.",
+      "Voice-first AI for understanding and operating complex codebases. Winner at the Codex GPT-5 Hackathon.",
     layout: "tall",
+    url: "https://www.heyfathom.com/",
+    links: [
+      {
+        href: "https://www.linkedin.com/posts/200-startup-teams-were-able-to-ship-fast-ugcPost-7379229907295293441-dY8b/",
+        label: "see post",
+        type: "project",
+      },
+    ],
     media: {
-      kind: "image",
-      poster: "/projects/posters/baby-fathom.png",
-      alt: "Baby Fathom voice intelligence flow",
+      kind: "image-stack",
+      poster: "/projects/fathom/team.webp",
+      alt: "Fathom team at the Codex GPT-5 Hackathon",
+      images: [
+        {
+          src: "/projects/fathom/team.webp",
+          alt: "Fathom team at the Codex GPT-5 Hackathon",
+        },
+        {
+          src: "/projects/fathom/result.webp",
+          alt: "Fathom listed among the hackathon winners",
+        },
+      ],
     },
   },
   {
@@ -95,6 +116,7 @@ export const projects: Project[] = [
     name: "mem_arctec",
     description: "Verilog implementation of a two-level CPU cache system.",
     layout: "compact",
+    url: "https://github.com/manue7mokua/mem_arctec",
     media: {
       kind: "video",
       src:

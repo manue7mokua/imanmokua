@@ -4,6 +4,7 @@
 
 - Source visual truth: `/Users/imanmokua/.codex/generated_images/019fd5c3-9dab-78a1-a295-6c61b9f213f1/call_qMFmdV1BddvTDkrsGGULl9c3.png`
 - Pathfinder interaction target: `/var/folders/t7/9n3jtrfd019bt3b8p3vd242m0000gn/T/codex-clipboard-f2355a93-5aea-4294-bf92-3f69cca31bc1.png`
+- Fathom source photography: `/Users/imanmokua/Downloads/IMG_1986.HEIC` and `/Users/imanmokua/Downloads/IMG_1979.HEIC`
 - Implementation: `http://localhost:3000/projects`
 - Implementation screenshot: `design-qa/implementation-desktop.png`
 - Full-view comparison: `design-qa/full-comparison.png`
@@ -22,10 +23,10 @@ No actionable P0, P1, or P2 differences remain.
 - Fonts and typography: the implementation uses a native monospace stack for the navigation, heading, project names, descriptions, and actions. Sizes, weights, wrapping, line heights, and zero letter spacing follow the reference hierarchy.
 - Spacing and layout rhythm: the 16-column desktop grid preserves the featured-left and stacked-right proportions within a centered two-thirds-width bento. At 1487px the grid measures 991px with equal 248px side space. The original card tracks remain unchanged.
 - Colors and visual tokens: the near-black background, low-contrast card borders, warm white type, muted body copy, and orange action/status accent match the source treatment.
-- Image quality and asset fidelity: Pathfinder uses optimized 1600px WebP exports of the supplied drone and UGV photography. Wazza, Cruyffchess, Datagolf, and Mem Arctec use optimized H.264 demos with fast-start metadata and poster fallbacks.
-- Copy and content: Pathfinder replaces InCourse AI in the same grid slot and uses the supplied rescue-mission description. The requested subtitle, top divider, footer, `dogbed_db`, `ss-devices-proj`, and `mini_cursorISH` remain removed.
+- Image quality and asset fidelity: Pathfinder and Fathom use optimized 1600px WebP exports of the supplied photography. Wazza, Cruyffchess, Datagolf, and Mem Arctec use optimized H.264 demos with fast-start metadata and poster fallbacks. Wazza and Mem Arctec no longer add an inner gray frame around their video previews.
+- Copy and content: Fathom replaces Baby Fathom with a concise product description, the Codex GPT-5 Hackathon win, and a `see post` link to OpenAI's LinkedIn post. Pathfinder remains in the InCourse AI slot. The requested subtitle, top divider, footer, `dogbed_db`, `ss-devices-proj`, and `mini_cursorISH` remain removed.
 - Responsive behavior: the page remains one viewport tall while the bento region owns vertical scrolling. At 390 x 844 the grid stacks into one column, all six cards remain readable in the intended order, and `scrollWidth` equals the 390px viewport width.
-- Interaction and accessibility: clicking either Pathfinder photo promotes it to the front with a smooth depth transition. The stack uses native buttons, visible keyboard focus, pressed-state semantics, descriptive labels, and a polite live-region update. Reduced-motion preferences disable the transition.
+- Interaction and accessibility: clicking either Pathfinder or Fathom photo promotes it to the front with a smooth depth transition. Project titles link to their supplied GitHub or production destinations, with Fathom routed to `heyfathom.com`. The stacks use native buttons, visible keyboard focus, pressed-state semantics, descriptive labels, and a polite live-region update. Reduced-motion preferences disable the transition.
 
 ## Comparison History
 
@@ -36,6 +37,7 @@ No actionable P0, P1, or P2 differences remain.
 5. Follow-up annotations moved InCourse AI into Datagolf's large slot, returned Datagolf to a compact slot, removed Mini CursorISH and the footer, and expanded Cruyffchess to keep both desktop grid columns filled. Project titles now use the orange accent on card hover.
 6. The latest annotation keeps the established grid tracks, moves Datagolf into the large InCourse AI slot, and makes only the centered bento region scrollable. The navigation and `/projects` heading remain fixed within the viewport.
 7. The Pathfinder pass replaced InCourse AI without moving its slot, added the supplied drone and UGV photo stack, connected four local demo videos, and narrowed the desktop bento to two-thirds of the viewport. Focused comparison evidence: `design-qa/pathfinder-comparison.png`.
+8. The Fathom pass replaced Baby Fathom in place, introduced the supplied hackathon photo stack, linked every provided project title, added the OpenAI post action, and removed the remaining Wazza and Mem Arctec preview borders.
 
 ## Primary Checks
 
@@ -45,6 +47,8 @@ No actionable P0, P1, or P2 differences remain.
 - Horizontal overflow: none at desktop or mobile
 - Scroll ownership: document remains fixed; bento region scrolls independently
 - Pathfinder image swap: passed for both front/back states
+- Fathom image swap: passed for both front/back states
+- Project title destinations: passed for Wazza, Cruyffchess, Datagolf, Fathom, and Mem Arctec
 - Demo playback: four H.264 videos loaded with non-zero intrinsic dimensions
 - Projects feature ESLint: passed
 - Browser console errors: none
