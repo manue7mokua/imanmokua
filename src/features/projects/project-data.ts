@@ -29,7 +29,7 @@ export const projects: Project[] = [
     id: "cruyffchess",
     name: "cruyffchess",
     description: "Tactics board for small-sided games.",
-    layout: "landscape",
+    layout: "tall",
     media: {
       kind: "image",
       poster: "/projects/posters/cruyffchess.png",
@@ -37,15 +37,15 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "incourseai",
-    name: "incourseai",
+    id: "datagolf",
+    name: "datagolf",
     description:
-      "General AI agents that help college students learn and complete coursework more effectively.",
+      "Coding golf for analyzing data using prompts instead of SQL statements.",
     layout: "landscape",
     media: {
       kind: "image",
-      poster: "/projects/posters/incourseai.png",
-      alt: "InCourse AI coursework workflow",
+      poster: "/projects/posters/datagolf.png",
+      alt: "Datagolf code challenge interface",
     },
   },
   {
@@ -61,27 +61,15 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "datagolf",
-    name: "datagolf",
+    id: "incourseai",
+    name: "incourseai",
     description:
-      "Coding golf for analyzing data using prompts instead of SQL statements.",
+      "General AI agents that help college students learn and complete coursework more effectively.",
     layout: "tall",
     media: {
       kind: "image",
-      poster: "/projects/posters/datagolf.png",
-      alt: "Datagolf code challenge interface",
-    },
-  },
-  {
-    id: "mini-cursorish",
-    name: "mini_cursorISH",
-    description:
-      "Mini Claude Code that automatically detects and fixes small bugs in my portfolio site.",
-    layout: "compact",
-    media: {
-      kind: "image",
-      poster: "/projects/posters/mini-cursorish.png",
-      alt: "Mini CursorISH code edit interface",
+      poster: "/projects/posters/incourseai.png",
+      alt: "InCourse AI coursework workflow",
     },
   },
   {

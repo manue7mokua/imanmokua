@@ -27,8 +27,7 @@
 
 .backLink,
 .identity,
-.cardLink,
-.footer a {
+.cardLink {
   color: inherit;
   text-decoration: none;
 }
@@ -47,15 +46,13 @@
 }
 
 .backLink:hover,
-.identity:hover,
-.footer a:hover {
+.identity:hover {
   opacity: 0.68;
 }
 
 .backLink:focus-visible,
 .identity:focus-visible,
-.cardLink:focus-visible,
-.footer a:focus-visible {
+.cardLink:focus-visible {
   outline: 1px solid currentColor;
   outline-offset: 4px;
 }
@@ -125,6 +122,11 @@
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0;
+  transition: color 180ms ease;
+}
+
+.card:hover .cardTitle {
+  color: #ee8a2f;
 }
 
 .cardDescription {
@@ -228,12 +230,12 @@
 
 .cruyffchess {
   grid-column: 11 / span 6;
-  grid-row: 1;
+  grid-row: 1 / span 2;
 }
 
-.incourseai {
+.datagolf {
   grid-column: 11 / span 6;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .tall .cardInner {
@@ -257,43 +259,14 @@
   grid-row: 3 / span 2;
 }
 
-.datagolf {
+.incourseai {
   grid-column: 7 / span 4;
   grid-row: 3 / span 2;
-}
-
-.mini-cursorish {
-  grid-column: 11 / span 6;
-  grid-row: 3;
 }
 
 .mem-arctec {
   grid-column: 11 / span 6;
   grid-row: 4;
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 34px 0 2px;
-  color: var(--project-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    monospace;
-  font-size: 11px;
-}
-
-.footer p {
-  margin: 0;
-}
-
-.footerNav {
-  display: flex;
-  gap: 30px;
-}
-
-.footer a {
-  transition: opacity 160ms ease;
 }
 
 @media (max-width: 1100px) {
@@ -310,27 +283,22 @@
 
   .cruyffchess {
     grid-column: 1 / span 3;
-    grid-row: 3;
+    grid-row: 3 / span 2;
   }
 
-  .incourseai {
+  .datagolf {
     grid-column: 4 / span 3;
     grid-row: 3;
   }
 
   .baby-fathom {
     grid-column: 1 / span 3;
-    grid-row: 4 / span 2;
+    grid-row: 5 / span 2;
   }
 
-  .datagolf {
+  .incourseai {
     grid-column: 4 / span 3;
     grid-row: 4 / span 2;
-  }
-
-  .mini-cursorish {
-    grid-column: 1 / span 3;
-    grid-row: 6;
   }
 
   .mem-arctec {
@@ -396,17 +364,6 @@
     font-size: 11px;
     line-height: 1.65;
   }
-
-  .footer {
-    align-items: flex-start;
-    gap: 24px;
-  }
-
-  .footerNav {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 12px 22px;
-  }
 }
 
 @media (max-width: 440px) {
@@ -435,8 +392,8 @@
   .backLink,
   .identity,
   .card,
-  .cardLink,
-  .footer a {
+  .cardTitle,
+  .cardLink {
     transition: none;
   }
 
