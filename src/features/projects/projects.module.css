@@ -4,15 +4,18 @@
   --project-border: rgba(238, 238, 232, 0.22);
   --project-muted: rgba(238, 238, 232, 0.66);
   --project-text: #eeeeea;
-  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
   background: var(--project-bg);
   color: var(--project-text);
 }
 
 .shell {
+  display: flex;
   width: min(100%, 1680px);
+  height: 100%;
   margin: 0 auto;
-  padding: 0 clamp(18px, 2.2vw, 36px) 30px;
+  flex-direction: column;
 }
 
 .header {
@@ -20,6 +23,7 @@
   min-height: 60px;
   align-items: center;
   justify-content: space-between;
+  padding-inline: clamp(18px, 2.2vw, 36px);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 13px;
@@ -65,7 +69,7 @@
 }
 
 .title {
-  margin: 32px 0 46px;
+  margin: 32px clamp(18px, 2.2vw, 36px) 46px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: clamp(30px, 2.5vw, 40px);
@@ -76,6 +80,12 @@
 
 .grid {
   display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 clamp(18px, 2.2vw, 36px) 30px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
   grid-auto-rows: 160px;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   grid-template-rows: 220px 198px 170px 170px;
@@ -233,7 +243,7 @@
   grid-row: 1 / span 2;
 }
 
-.datagolf {
+.incourseai {
   grid-column: 11 / span 6;
   grid-row: 3;
 }
@@ -259,7 +269,7 @@
   grid-row: 3 / span 2;
 }
 
-.incourseai {
+.datagolf {
   grid-column: 7 / span 4;
   grid-row: 3 / span 2;
 }
@@ -286,7 +296,7 @@
     grid-row: 3 / span 2;
   }
 
-  .datagolf {
+  .incourseai {
     grid-column: 4 / span 3;
     grid-row: 3;
   }
@@ -296,7 +306,7 @@
     grid-row: 5 / span 2;
   }
 
-  .incourseai {
+  .datagolf {
     grid-column: 4 / span 3;
     grid-row: 4 / span 2;
   }
@@ -309,20 +319,22 @@
 
 @media (max-width: 740px) {
   .shell {
-    padding-inline: 14px;
+    width: 100%;
   }
 
   .header {
     min-height: 58px;
+    padding-inline: 14px;
   }
 
   .title {
-    margin: 28px 2px 36px;
+    margin: 28px 16px 36px;
     font-size: 31px;
   }
 
   .grid {
     display: flex;
+    padding-inline: 14px;
     flex-direction: column;
   }
 

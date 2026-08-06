@@ -41,7 +41,7 @@ export const projects: Project[] = [
     name: "datagolf",
     description:
       "Coding golf for analyzing data using prompts instead of SQL statements.",
-    layout: "landscape",
+    layout: "tall",
     media: {
       kind: "image",
       poster: "/projects/posters/datagolf.png",
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     name: "incourseai",
     description:
       "General AI agents that help college students learn and complete coursework more effectively.",
-    layout: "tall",
+    layout: "landscape",
     media: {
       kind: "image",
       poster: "/projects/posters/incourseai.png",
