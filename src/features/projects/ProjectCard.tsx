@@ -36,13 +36,37 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 project.name
               )}
             </h2>
-            <p className={styles.cardDescription}>{project.description}</p>
+            <p className={styles.cardDescription}>
+              {project.description}
+              {project.emphasis ? (
+                <span className={styles.cardEmphasis}>{project.emphasis}</span>
+              ) : null}
+            </p>
           </div>
 
           {project.links ? (
             <div className={styles.cardLinks}>
               {project.links.map((link) => {
                 const Icon = link.type === "project" ? ArrowUpRight : FileText;
+                const content = (
+                  <>
+                    <Icon aria-hidden="true" size={17} strokeWidth={1.6} />
+                    <span>{link.label}</span>
+                  </>
+                );
+
+                if (!link.href) {
+                  return (
+                    <button
+                      aria-label={`${link.label} (coming soon)`}
+                      className={styles.cardLink}
+                      key={link.label}
+                      type="button"
+                    >
+                      {content}
+                    </button>
+                  );
+                }
 
                 return (
                   <Link
@@ -52,8 +76,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <Icon aria-hidden="true" size={17} strokeWidth={1.6} />
-                    <span>{link.label}</span>
+                    {content}
                   </Link>
                 );
               })}

@@ -158,6 +158,14 @@
   letter-spacing: 0;
 }
 
+.cardEmphasis {
+  display: block;
+  margin-top: 5px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .cardLinks {
   display: grid;
   gap: 10px;
@@ -177,6 +185,16 @@
   transition:
     color 160ms ease,
     opacity 160ms ease;
+}
+
+button.cardLink {
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .cardLink:first-child {
@@ -372,6 +390,11 @@
 
 .fathom .mediaFrame {
   overflow: visible;
+}
+
+.fathom .cardLinks {
+  padding-top: 0;
+  border-top: 0;
 }
 
 .fathom .photoStackButton {

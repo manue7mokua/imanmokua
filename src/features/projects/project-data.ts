@@ -14,7 +14,6 @@ export const projects: Project[] = [
         type: "project",
       },
       {
-        href: "https://github.com/manue7mokua/wazza#readme",
         label: "view notes",
         type: "notes",
       },
@@ -47,7 +46,7 @@ export const projects: Project[] = [
     id: "datagolf",
     name: "datagolf",
     description:
-      "Coding golf for analyzing data using prompts instead of SQL statements.",
+      "Coding golf for analyzing data using prompts (built to make tutoring interactive).",
     layout: "tall",
     url: "https://github.com/manue7mokua/datagolf",
     media: {
@@ -63,7 +62,8 @@ export const projects: Project[] = [
     id: "fathom",
     name: "fathom",
     description:
-      "Voice-first AI for understanding and operating complex codebases. Winner at the Codex GPT-5 Hackathon.",
+      "Multilingual voice AI for understanding and operating complex codebases",
+    emphasis: "(winner at the Codex GPT-5 Hackathon)",
     layout: "tall",
     url: "https://www.heyfathom.com/",
     links: [

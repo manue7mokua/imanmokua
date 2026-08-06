@@ -25,13 +25,14 @@ export type ProjectMedia =
     });
 
 export interface ProjectLink {
-  href: string;
+  href?: string;
   label: string;
   type: "project" | "notes";
 }
 
 export interface Project {
   description: string;
+  emphasis?: string;
   id: string;
   layout: ProjectLayout;
   links?: ProjectLink[];
