@@ -2,8 +2,7 @@ export type ProjectLayout =
   | "featured"
   | "landscape"
   | "tall"
-  | "compact"
-  | "text";
+  | "compact";
 
 export interface ProjectMedia {
   alt: string;

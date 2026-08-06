@@ -22,8 +22,8 @@ No actionable P0, P1, or P2 differences remain.
 - Spacing and layout rhythm: the 16-column desktop grid reproduces the featured-left and stacked-right proportions. The top and lower rows align with the source, cards use 18px radii, and the shell keeps narrow edge padding at wide viewports.
 - Colors and visual tokens: the near-black background, low-contrast card borders, warm white type, muted body copy, and orange action/status accent match the source treatment.
 - Image quality and asset fidelity: temporary project posters are direct crops from the approved visual source and use `object-fit: contain`. They remain sharp at their rendered sizes and can be replaced by final screenshots or video URLs without layout changes.
-- Copy and content: production project descriptions were preserved instead of adopting mock-only copy. The requested subtitle and top divider were intentionally removed. Two existing projects remain below the first viewport rather than being dropped.
-- Responsive behavior: at 390 x 844 the grid stacks into one column, all nine cards remain readable, and `scrollWidth` equals the 390px viewport width.
+- Copy and content: production project descriptions were preserved instead of adopting mock-only copy. The requested subtitle, top divider, `dogbed_db`, and `ss-devices-proj` were removed.
+- Responsive behavior: at 390 x 844 the grid stacks into one column, all seven cards remain readable in the intended order, and `scrollWidth` equals the 390px viewport width.
 - Interaction and accessibility: Back to Home navigation was exercised successfully. Links have visible focus states, project imagery has alt text, and the page uses semantic headings, articles, and navigation regions.
 
 ## Comparison History
@@ -31,6 +31,7 @@ No actionable P0, P1, or P2 differences remain.
 1. Initial pass found P2 proportion drift: the featured card and right stack were too evenly sized. Fixed by moving to a 16-column grid with explicit desktop row heights. Post-fix evidence: `design-qa/full-comparison.png`.
 2. Initial pass found P2 image cropping in Wazza, Baby Fathom, and InCourse AI. Fixed by containing the supplied artwork and matching the featured media frame dimensions. Post-fix evidence: `design-qa/focused-comparison.png`.
 3. Route-change testing found P2 zero-height image warnings. Fixed by adding stable minimum media heights. A fresh page load produced no console errors or warnings from the projects feature.
+4. Annotation pass enlarged the Wazza media frame and exchanged the complete InCourse AI and Datagolf card positions. Datagolf now owns the taller slot, and the same order is preserved on mobile.
 
 ## Primary Checks
 

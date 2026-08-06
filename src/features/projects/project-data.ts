@@ -37,15 +37,15 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "datagolf",
-    name: "datagolf",
+    id: "incourseai",
+    name: "incourseai",
     description:
-      "Coding golf for analyzing data using prompts instead of SQL statements.",
+      "General AI agents that help college students learn and complete coursework more effectively.",
     layout: "landscape",
     media: {
       kind: "image",
-      poster: "/projects/posters/datagolf.png",
-      alt: "Datagolf code challenge interface",
+      poster: "/projects/posters/incourseai.png",
+      alt: "InCourse AI coursework workflow",
     },
   },
   {
@@ -61,15 +61,15 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "incourseai",
-    name: "incourseai",
+    id: "datagolf",
+    name: "datagolf",
     description:
-      "General AI agents that help college students learn and complete coursework more effectively.",
+      "Coding golf for analyzing data using prompts instead of SQL statements.",
     layout: "tall",
     media: {
       kind: "image",
-      poster: "/projects/posters/incourseai.png",
-      alt: "InCourse AI coursework workflow",
+      poster: "/projects/posters/datagolf.png",
+      alt: "Datagolf code challenge interface",
     },
   },
   {
@@ -94,18 +94,5 @@ export const projects: Project[] = [
       poster: "/projects/posters/mem-arctec.png",
       alt: "Memory architecture diagram",
     },
-  },
-  {
-    id: "dogbed-db",
-    name: "dogbed_db",
-    description: "Playground to explore internals of dogbed databases.",
-    layout: "text",
-  },
-  {
-    id: "ss-devices",
-    name: "ss-devices-proj",
-    description:
-      "Analysis of semiconductor carrier properties across doping levels and temperature.",
-    layout: "text",
   },
 ];
