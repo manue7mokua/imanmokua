@@ -441,7 +441,7 @@ button.cardLink {
   top: 3px;
   right: auto;
   bottom: auto;
-  left: 70%;
+  left: calc(50% + 56px);
   transform: translateX(-50%) rotate(3.2deg) scale(0.9);
 }
 
@@ -449,7 +449,7 @@ button.cardLink {
   top: 7px;
   right: auto;
   bottom: auto;
-  left: 30%;
+  left: calc(50% - 56px);
   transform: translateX(-50%) rotate(-3.4deg) scale(0.84);
 }
 
