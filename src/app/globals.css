@@ -111,6 +111,30 @@ body {
   outline-offset: 3px;
 }
 
+.wearables-reveal {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.wearables-glasses {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 7px) rotate(-5deg) scale(0.72);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 160ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wearables-reveal:hover .wearables-glasses {
+  opacity: 0.9;
+  transform: translate(-50%, 0) rotate(0deg) scale(1);
+}
+
 .social-arrow-link {
   color: color-mix(in srgb, var(--foreground) 36%, transparent);
   background-image: none;
@@ -131,8 +155,13 @@ body {
   .animated-link,
   .animated-link::after,
   .home-inline-link,
+  .wearables-glasses,
   .social-arrow-link {
     transition: none;
+  }
+
+  .wearables-reveal:hover .wearables-glasses {
+    transform: translate(-50%, 0);
   }
 
   .animated-link:hover::after,

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Send } from "lucide-react";
+import { Glasses, Send } from "lucide-react";
 import { AppHeader } from "@/components/AppHeader";
 
 export default function HomePage() {
@@ -112,7 +112,19 @@ export default function HomePage() {
 
         {/* Body copy - narrative style */}
         <div className="space-y-6 font-mono text-sm md:text-base leading-relaxed">
-          <p>currently work at meta.</p>
+          <p>
+            currently working on{" "}
+            <span className="wearables-reveal">
+              wearable devices
+              <Glasses
+                aria-hidden="true"
+                className="wearables-glasses"
+                size={25}
+                strokeWidth={1.55}
+              />
+            </span>{" "}
+            at Meta.
+          </p>
 
           <p>
             i care a lot about design; i think it&apos;s pretty cool how things are 
