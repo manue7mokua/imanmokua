@@ -20,7 +20,7 @@
   min-height: 60px;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 13px;
 }
@@ -68,8 +68,8 @@
 }
 
 .title {
-  margin: 22px 0 34px;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  margin: 32px 0 46px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: clamp(30px, 2.5vw, 40px);
   font-weight: 500;
@@ -79,8 +79,9 @@
 
 .grid {
   display: grid;
-  grid-auto-rows: 190px;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: 160px;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  grid-template-rows: 220px 198px 170px 170px 160px;
   gap: 12px;
 }
 
@@ -118,7 +119,7 @@
 .cardTitle {
   margin: 0;
   overflow-wrap: anywhere;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 18px;
   font-weight: 500;
@@ -130,7 +131,7 @@
   max-width: 34ch;
   margin: 14px 0 0;
   color: var(--project-muted);
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 12px;
   line-height: 1.75;
@@ -150,7 +151,7 @@
   width: fit-content;
   align-items: center;
   gap: 11px;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 12px;
   transition:
@@ -178,20 +179,21 @@
 .mediaAsset {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .featured {
-  grid-column: 1 / span 7;
+  grid-column: 1 / span 10;
   grid-row: 1 / span 2;
 }
 
 .featured .cardInner {
-  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.48fr);
+  grid-template-columns: minmax(260px, 0.88fr) minmax(0, 1.42fr);
 }
 
 .featured .cardContent {
-  padding: 34px 26px;
+  justify-content: flex-start;
+  padding: 64px 26px 30px;
 }
 
 .featured .cardTitle {
@@ -204,27 +206,33 @@
   line-height: 1.65;
 }
 
+.featured .cardLinks {
+  margin-top: 38px;
+}
+
 .featured .mediaFrame {
-  margin: 20px 20px 20px 0;
+  min-height: 240px;
+  margin: 20px 20px 75px 0;
 }
 
 .landscape .cardInner,
 .compact .cardInner {
-  grid-template-columns: minmax(145px, 0.88fr) minmax(180px, 1.12fr);
+  grid-template-columns: minmax(145px, 1.05fr) minmax(180px, 1fr);
 }
 
 .landscape .mediaFrame,
 .compact .mediaFrame {
+  min-height: 120px;
   margin: 14px 14px 14px 0;
 }
 
 .cruyffchess {
-  grid-column: 8 / span 5;
+  grid-column: 11 / span 6;
   grid-row: 1;
 }
 
 .datagolf {
-  grid-column: 8 / span 5;
+  grid-column: 11 / span 6;
   grid-row: 2;
 }
 
@@ -237,26 +245,30 @@
 }
 
 .tall .mediaFrame {
+  min-height: 150px;
   margin: 0 18px 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .baby-fathom {
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 6;
   grid-row: 3 / span 2;
 }
 
 .incourseai {
-  grid-column: 5 / span 3;
+  grid-column: 7 / span 4;
   grid-row: 3 / span 2;
 }
 
 .mini-cursorish {
-  grid-column: 8 / span 5;
+  grid-column: 11 / span 6;
   grid-row: 3;
 }
 
 .mem-arctec {
-  grid-column: 8 / span 5;
+  grid-column: 11 / span 6;
   grid-row: 4;
 }
 
@@ -269,12 +281,12 @@
 }
 
 .dogbed-db {
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 8;
   grid-row: 5;
 }
 
 .ss-devices {
-  grid-column: 7 / span 6;
+  grid-column: 9 / span 8;
   grid-row: 5;
 }
 
@@ -284,7 +296,7 @@
   justify-content: space-between;
   padding: 34px 0 2px;
   color: var(--project-muted);
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 11px;
 }
@@ -304,7 +316,9 @@
 
 @media (max-width: 1100px) {
   .grid {
+    grid-auto-rows: 190px;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: none;
   }
 
   .featured {
@@ -363,7 +377,7 @@
   }
 
   .title {
-    margin: 22px 2px 28px;
+    margin: 28px 2px 36px;
     font-size: 31px;
   }
 
