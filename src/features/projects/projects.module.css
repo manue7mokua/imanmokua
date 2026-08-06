@@ -504,6 +504,10 @@ button.cardLink {
     line-height: 1.55;
   }
 
+  .pathfinder .photoStackButton {
+    width: min(74%, 150px);
+  }
+
   .featured {
     grid-column: 1 / span 6;
     grid-row: 1 / span 2;
@@ -607,6 +611,14 @@ button.cardLink {
     min-height: 184px;
   }
 
+  .pathfinder .photoStackButton {
+    width: min(72%, 142px);
+  }
+
+  .pathfinder .photoStackButtonFront {
+    bottom: 18px;
+  }
+
   .tall {
     min-height: 390px;
   }
@@ -643,12 +655,12 @@ button.cardLink {
   }
 
   .pathfinder .mediaFrame {
-    min-height: 200px;
+    min-height: 170px;
     margin: 14px 14px 14px 0;
   }
 
   .pathfinder {
-    min-height: 230px;
+    min-height: 200px;
   }
 
   .pathfinder .cardInner {
@@ -657,7 +669,11 @@ button.cardLink {
   }
 
   .pathfinder .photoStack {
-    min-height: 200px;
+    min-height: 170px;
+  }
+
+  .pathfinder .photoStackButton {
+    width: min(70%, 136px);
   }
 }
 
