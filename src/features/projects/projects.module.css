@@ -89,11 +89,15 @@
   padding: 0 0 30px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-width: none;
   grid-auto-rows: 160px;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   grid-template-rows: 220px 198px 170px 170px;
   gap: 12px;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
