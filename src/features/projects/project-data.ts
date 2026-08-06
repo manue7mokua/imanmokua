@@ -20,7 +20,9 @@ export const projects: Project[] = [
     ],
     media: {
       kind: "video",
-      src: process.env.NEXT_PUBLIC_WAZZA_DEMO_URL,
+      src:
+        process.env.NEXT_PUBLIC_WAZZA_DEMO_URL ??
+        "/projects/demos/wazza-terminal-demo.mp4",
       poster: "/projects/posters/wazza.png",
       alt: "Wazza interview copilot interface",
     },
@@ -31,7 +33,10 @@ export const projects: Project[] = [
     description: "Tactics board for small-sided games.",
     layout: "tall",
     media: {
-      kind: "image",
+      kind: "video",
+      src:
+        process.env.NEXT_PUBLIC_CRUYFFCHESS_DEMO_URL ??
+        "/projects/demos/cruyffchess-tactical-demo.mp4",
       poster: "/projects/posters/cruyffchess.png",
       alt: "Cruyffchess football tactics board",
     },
@@ -43,7 +48,10 @@ export const projects: Project[] = [
       "Coding golf for analyzing data using prompts instead of SQL statements.",
     layout: "tall",
     media: {
-      kind: "image",
+      kind: "video",
+      src:
+        process.env.NEXT_PUBLIC_DATAGOLF_DEMO_URL ??
+        "/projects/demos/datagolf-data-flow-demo.mp4",
       poster: "/projects/posters/datagolf.png",
       alt: "Datagolf code challenge interface",
     },
@@ -61,15 +69,25 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "incourseai",
-    name: "incourseai",
+    id: "pathfinder",
+    name: "pathfinder",
     description:
-      "General AI agents that help college students learn and complete coursework more effectively.",
+      "Autonomously guiding drones and UGVs for rescue missions.",
     layout: "landscape",
     media: {
-      kind: "image",
-      poster: "/projects/posters/incourseai.png",
-      alt: "InCourse AI coursework workflow",
+      kind: "image-stack",
+      poster: "/projects/pathfinder/ugv.webp",
+      alt: "Pathfinder autonomous rescue vehicles",
+      images: [
+        {
+          src: "/projects/pathfinder/ugv.webp",
+          alt: "Pathfinder unmanned ground vehicle",
+        },
+        {
+          src: "/projects/pathfinder/drone.webp",
+          alt: "Pathfinder autonomous rescue drone",
+        },
+      ],
     },
   },
   {
@@ -78,7 +96,10 @@ export const projects: Project[] = [
     description: "Verilog implementation of a two-level CPU cache system.",
     layout: "compact",
     media: {
-      kind: "image",
+      kind: "video",
+      src:
+        process.env.NEXT_PUBLIC_MEM_ARCTEC_DEMO_URL ??
+        "/projects/demos/mem-arctec-terminal-demo.mp4",
       poster: "/projects/posters/mem-arctec.png",
       alt: "Memory architecture diagram",
     },

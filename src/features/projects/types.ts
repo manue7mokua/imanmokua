@@ -4,12 +4,25 @@ export type ProjectLayout =
   | "tall"
   | "compact";
 
-export interface ProjectMedia {
+interface ProjectMediaBase {
   alt: string;
-  kind: "image" | "video";
   poster: string;
-  src?: string;
 }
+
+export interface ProjectStackImage {
+  alt: string;
+  src: string;
+}
+
+export type ProjectMedia =
+  | (ProjectMediaBase & {
+      kind: "image" | "video";
+      src?: string;
+    })
+  | (ProjectMediaBase & {
+      images: [ProjectStackImage, ProjectStackImage];
+      kind: "image-stack";
+    });
 
 export interface ProjectLink {
   href: string;
