@@ -643,7 +643,21 @@ button.cardLink {
   }
 
   .pathfinder .mediaFrame {
-    margin: 0 14px 14px;
+    min-height: 200px;
+    margin: 14px 14px 14px 0;
+  }
+
+  .pathfinder {
+    min-height: 230px;
+  }
+
+  .pathfinder .cardInner {
+    grid-template-columns: minmax(120px, 0.85fr) minmax(0, 1.15fr);
+    grid-template-rows: 1fr;
+  }
+
+  .pathfinder .photoStack {
+    min-height: 200px;
   }
 }
 
