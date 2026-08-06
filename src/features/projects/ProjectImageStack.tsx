@@ -6,7 +6,7 @@ import type { ProjectStackImage } from "./types";
 import styles from "./projects.module.css";
 
 interface ProjectImageStackProps {
-  images: [ProjectStackImage, ProjectStackImage];
+  images: [ProjectStackImage, ProjectStackImage, ...ProjectStackImage[]];
   label: string;
 }
 
@@ -20,6 +20,13 @@ export function ProjectImageStack({
     <div aria-label={label} className={styles.photoStack} role="group">
       {images.map((image, index) => {
         const isFront = index === frontIndex;
+        const depth = (index - frontIndex + images.length) % images.length;
+        const depthClass =
+          depth === 0
+            ? styles.photoStackButtonFront
+            : depth === 1
+              ? styles.photoStackButtonBack
+              : styles.photoStackButtonRear;
 
         return (
           <button
@@ -29,11 +36,7 @@ export function ProjectImageStack({
                 : `Bring ${image.alt.toLowerCase()} to the front`
             }
             aria-pressed={isFront}
-            className={`${styles.photoStackButton} ${
-              isFront
-                ? styles.photoStackButtonFront
-                : styles.photoStackButtonBack
-            }`}
+            className={`${styles.photoStackButton} ${depthClass}`}
             key={image.src}
             onClick={() => setFrontIndex(index)}
             type="button"

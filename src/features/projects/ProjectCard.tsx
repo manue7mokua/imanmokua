@@ -39,7 +39,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <p className={styles.cardDescription}>
               {project.description}
               {project.emphasis ? (
-                <span className={styles.cardEmphasis}>{project.emphasis}</span>
+                <>
+                  {" "}
+                  <span className={styles.cardEmphasis}>
+                    {project.emphasis}
+                  </span>
+                </>
               ) : null}
             </p>
           </div>

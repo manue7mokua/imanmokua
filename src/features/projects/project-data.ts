@@ -86,6 +86,10 @@ export const projects: Project[] = [
           src: "/projects/fathom/result.webp",
           alt: "Fathom listed among the hackathon winners",
         },
+        {
+          src: "/projects/fathom/stage.webp",
+          alt: "OpenAI GPT-5 Startup Hackathon stage",
+        },
       ],
     },
   },

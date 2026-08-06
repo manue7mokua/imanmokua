@@ -20,7 +20,7 @@ export type ProjectMedia =
       src?: string;
     })
   | (ProjectMediaBase & {
-      images: [ProjectStackImage, ProjectStackImage];
+      images: [ProjectStackImage, ProjectStackImage, ...ProjectStackImage[]];
       kind: "image-stack";
     });
 

@@ -345,10 +345,25 @@ button.cardLink {
   transform: translate(5%, -4%) rotate(2.2deg) scale(0.88);
 }
 
+.photoStackButtonRear {
+  top: 8%;
+  right: 8%;
+  z-index: 1;
+  opacity: 0.5;
+  filter: brightness(0.62) saturate(0.72);
+  transform: translate(8%, -2%) rotate(3.8deg) scale(0.78);
+}
+
 .photoStackButtonBack:hover {
   opacity: 0.94;
   filter: brightness(0.9) saturate(0.95);
   transform: translate(3%, -3%) rotate(1.4deg) scale(0.92);
+}
+
+.photoStackButtonRear:hover {
+  opacity: 0.8;
+  filter: brightness(0.82) saturate(0.9);
+  transform: translate(6%, -1%) rotate(2.8deg) scale(0.82);
 }
 
 .photoStackImage {
@@ -389,16 +404,57 @@ button.cardLink {
 }
 
 .fathom .mediaFrame {
+  min-height: 122px;
+  margin-bottom: 10px;
   overflow: visible;
 }
 
 .fathom .cardLinks {
+  margin-top: 16px;
   padding-top: 0;
   border-top: 0;
 }
 
+.fathom .photoStack {
+  min-height: 122px;
+}
+
 .fathom .photoStackButton {
-  width: min(74%, 220px);
+  width: min(22%, 66px);
+  border-radius: 14px;
+  aspect-ratio: 9 / 16;
+}
+
+.fathom .photoStackButtonFront {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.2deg) scale(1);
+}
+
+.fathom .photoStackButtonBack {
+  top: 3px;
+  right: auto;
+  bottom: auto;
+  left: 70%;
+  transform: translateX(-50%) rotate(3.2deg) scale(0.9);
+}
+
+.fathom .photoStackButtonRear {
+  top: 7px;
+  right: auto;
+  bottom: auto;
+  left: 30%;
+  transform: translateX(-50%) rotate(-3.4deg) scale(0.84);
+}
+
+.fathom .photoStackButtonBack:hover {
+  transform: translateX(-50%) rotate(2.2deg) scale(0.94);
+}
+
+.fathom .photoStackButtonRear:hover {
+  transform: translateX(-50%) rotate(-2.4deg) scale(0.88);
 }
 
 .datagolf {
@@ -462,6 +518,15 @@ button.cardLink {
   .fathom {
     grid-column: 1 / span 3;
     grid-row: 5 / span 2;
+  }
+
+  .fathom .mediaFrame,
+  .fathom .photoStack {
+    min-height: 150px;
+  }
+
+  .fathom .photoStackButton {
+    width: min(26%, 78px);
   }
 
   .datagolf {
