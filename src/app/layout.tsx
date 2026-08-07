@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://imanmokua.me"),
   title: "Iman Mokua",
   description: "Personal portfolio",
   manifest: "/manifest.json",
