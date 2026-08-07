@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { AppHeader } from "@/components/AppHeader";
+import { WritingHeader } from "@/features/writing/WritingHeader";
+import styles from "@/features/writing/writing.module.css";
 
 interface BlogPost {
   title: string;
@@ -48,25 +49,15 @@ const blogPosts: YearSection[] = [
 export default function WritingPage() {
   return (
     <main className="bg-background min-h-screen">
-      <AppHeader barClassName="h-14 items-end pb-2" />
+      <WritingHeader />
 
-      <div className="pt-14 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
-        {/* Back to home link */}
-        <div className="pt-6 pb-8">
-          <Link
-            href="/"
-            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
-          >
-            ← Back to home
-          </Link>
-        </div>
-
+      <div className="mx-auto max-w-4xl px-6 pt-10 md:px-12 lg:px-24">
         {/* Blog posts by year */}
-        <div className="space-y-1">
+        <div className={`${styles.postList} space-y-1`}>
           {blogPosts.map((yearSection) => (
             <div key={yearSection.year} className="flex">
               {/* Year label */}
-              <div className="w-16 md:w-20 shrink-0 font-mono text-sm text-foreground/60">
+              <div className="w-16 shrink-0 text-foreground/60 md:w-20">
                 {yearSection.year}
               </div>
 
@@ -79,14 +70,14 @@ export default function WritingPage() {
                         href={post.externalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="animated-link font-mono text-sm hover:opacity-70 transition-opacity"
+                        className="animated-link transition-opacity hover:opacity-70"
                       >
                         {post.title}
                       </a>
                     ) : (
                       <Link
                         href={`/writing/${post.slug}`}
-                        className="animated-link font-mono text-sm hover:opacity-70 transition-opacity"
+                        className="animated-link transition-opacity hover:opacity-70"
                       >
                         {post.title}
                       </Link>

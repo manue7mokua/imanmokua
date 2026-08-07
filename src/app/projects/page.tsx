@@ -1,88 +1,16 @@
-"use client";
-
-import Link from "next/link";
-import { AppHeader } from "@/components/AppHeader";
-
-interface Project {
-  name: string;
-  description: string;
-}
-
-const projects: Project[] = [
-  {
-    name: "wazza",
-    description: "Tireless repo improvement agents.",
-  },
-  {
-    name: "cruyffchess",
-    description: "Tactics board for small-sided games.",
-  },
-  {
-    name: "datagolf",
-    description:
-      "Coding golf for analyzing data using prompts instead of SQL statements.",
-  },
-  {
-    name: "baby-fathom",
-    description:
-      "A small, fast, and easily iterable version of Fathom for exploring voice-first code intelligence.",
-  },
-  {
-    name: "dogbed_db",
-    description: "Playground to explore internals of dogbed databases.",
-  },
-  {
-    name: "ss-devices-proj",
-    description:
-      "Analysis of semiconductor carrier properties changes with doping levels and temperature.",
-  },
-  {
-    name: "incourseai",
-    description:
-      "General AI agents to help college students learn and complete coursework more effectively.",
-  },
-  {
-    name: "mini_cursorISH",
-    description:
-      "Mini Claude Code to automatically detect and fix small bugs in my portfolio site.",
-  },
-  {
-    name: "mem_arctec",
-    description: "Verilog implementation of a two-level CPU cache system.",
-  },
-];
+import { ProjectsBento } from "@/features/projects/ProjectsBento";
+import { ProjectsHeader } from "@/features/projects/ProjectsHeader";
+import styles from "@/features/projects/projects.module.css";
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-background">
-      <AppHeader barClassName="h-14 items-center" showAvatar={false} />
-
-      <div className="mx-auto max-w-4xl px-6 pt-14 md:px-12 lg:px-24">
-        <div
-          className="sticky top-[calc(env(safe-area-inset-top)+3.5rem)] z-30 isolate pt-6 pb-5"
-          style={{ backgroundColor: "var(--background)" }}
-        >
-          <Link
-            href="/"
-            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
-          >
-            ← Back to home
-          </Link>
-        </div>
-
-        <ul className="space-y-8 pb-12">
-          {projects.map((project) => (
-            <li key={project.name}>
-              <h2 className="font-mono text-sm font-bold md:text-base">
-                {project.name}
-              </h2>
-
-              <p className="mt-2 text-sm leading-relaxed md:text-base">
-                {project.description}
-              </p>
-            </li>
-          ))}
-        </ul>
+    <main className={styles.page}>
+      <div className={styles.shell}>
+        <ProjectsHeader />
+        <p className={styles.intro}>
+          this sprung from some late-night frolicking (among many others)...
+        </p>
+        <ProjectsBento />
       </div>
     </main>
   );

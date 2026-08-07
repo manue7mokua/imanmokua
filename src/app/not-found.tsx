@@ -43,12 +43,12 @@ export default function NotFound() {
 
       {/* Text and Link */}
       <div className="mt-8 text-center relative z-10">
-        <p className="text-lg md:text-xl font-mono mb-6 opacity-70">
-          Oops! This page doesn&apos;t exist yet.
+        <p className="mb-6 text-[12px] font-normal leading-[18px] opacity-70 [font-family:var(--font-ui-mono)]">
+          Oops, still scrunching!
         </p>
         <Link
           href="/writing"
-          className="px-6 py-3 font-mono text-sm no-underline transition-opacity hover:opacity-70 md:text-base"
+          className="px-6 py-3 text-[13px] font-normal no-underline transition-opacity hover:opacity-70 [font-family:var(--font-ui-mono)]"
         >
           ← go back
         </Link>
