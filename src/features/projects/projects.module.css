@@ -53,6 +53,7 @@
   margin-inline: auto;
   padding: 8px 0 30px;
   overflow-y: auto;
+  overflow-anchor: none;
   overscroll-behavior: contain;
   scrollbar-width: none;
   grid-auto-rows: 160px;

@@ -4,11 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Bookshelf } from "@/components/bookshelf";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ARTIFACTS, BOOKS_DATA } from "@/components/bookshelf/types";
-import { useTheme } from "next-themes";
 
 export default function RecsPage() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
   const [showContent, setShowContent] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const assetsLoadedRef = useRef(false);
@@ -163,12 +160,9 @@ export default function RecsPage() {
             </p>
             <div className="mt-8 h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
               <div
-                className="h-full rounded-full transition-[width] duration-200 ease-out"
+                className="h-full rounded-full bg-amber-800/85 transition-[width] duration-200 ease-out dark:bg-amber-700/95"
                 style={{
                   width: `${loadProgress}%`,
-                  backgroundColor: isDark
-                    ? "rgb(180 83 9 / 0.95)"
-                    : "rgb(146 64 14 / 0.85)",
                 }}
               />
             </div>
