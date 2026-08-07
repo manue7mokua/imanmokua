@@ -115,13 +115,15 @@ export default function HomePage() {
           <p>
             currently working on{" "}
             <span className="wearables-reveal">
-              wearable devices
-              <Glasses
-                aria-hidden="true"
-                className="wearables-glasses"
-                size={25}
-                strokeWidth={1.55}
-              />
+              wearable
+              <span aria-hidden="true" className="wearables-icon-anchor">
+                <Glasses
+                  className="wearables-glasses"
+                  size={25}
+                  strokeWidth={1.55}
+                />
+              </span>
+              devices
             </span>{" "}
             at Meta.
           </p>

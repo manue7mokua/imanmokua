@@ -119,9 +119,17 @@ body {
   cursor: default;
 }
 
+.wearables-icon-anchor {
+  position: relative;
+  display: inline-block;
+  width: 0.42em;
+  height: 1em;
+  vertical-align: -0.12em;
+}
+
 .wearables-glasses {
   position: absolute;
-  bottom: calc(100% - 4px);
+  bottom: calc(100% - 2px);
   left: 50%;
   opacity: 0;
   pointer-events: none;
