@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/SectionHeader";
 
 export function ProjectsHeader() {
-  return <SectionHeader section="Projects" />;
+  return <SectionHeader section="projects" />;
 }
