@@ -1,9 +1,13 @@
 .page {
-  --project-bg: #0e0f0d;
-  --project-card: #10110f;
-  --project-border: rgba(238, 238, 232, 0.22);
-  --project-muted: rgba(238, 238, 232, 0.66);
-  --project-text: #eeeeea;
+  --project-bg: var(--background);
+  --project-card: color-mix(
+    in srgb,
+    var(--background) 96%,
+    var(--foreground) 4%
+  );
+  --project-border: color-mix(in srgb, var(--foreground) 22%, transparent);
+  --project-muted: color-mix(in srgb, var(--foreground) 66%, transparent);
+  --project-text: var(--foreground);
   height: 100svh;
   overflow: hidden;
   background: var(--project-bg);
@@ -70,13 +74,14 @@
   background: #ee8a2f;
 }
 
-.title {
-  margin: 32px clamp(18px, 2.2vw, 36px) 46px;
+.intro {
+  margin: 26px clamp(18px, 2.2vw, 36px) 18px;
+  color: var(--project-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
-  font-size: clamp(30px, 2.5vw, 40px);
-  font-weight: 500;
-  line-height: 1;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: 0;
 }
 
@@ -86,7 +91,7 @@
   flex: 1 1 auto;
   min-height: 0;
   margin-inline: auto;
-  padding: 0 0 30px;
+  padding: 8px 0 30px;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
@@ -112,7 +117,7 @@
 }
 
 .card:hover {
-  border-color: rgba(238, 238, 232, 0.36);
+  border-color: color-mix(in srgb, var(--foreground) 36%, transparent);
   transform: translateY(-1px);
 }
 
@@ -175,7 +180,8 @@
   gap: 10px;
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid rgba(238, 238, 232, 0.2);
+  border-top: 1px solid
+    color-mix(in srgb, var(--foreground) 20%, transparent);
 }
 
 .cardLink {
@@ -213,9 +219,9 @@ button.cardLink {
   position: relative;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(238, 238, 232, 0.18);
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
   border-radius: 9px;
-  background: #10110f;
+  background: var(--project-card);
 }
 
 .mediaAsset {
@@ -307,9 +313,13 @@ button.cardLink {
   width: min(86%, 180px);
   padding: 0;
   overflow: hidden;
-  border: 1px solid rgba(238, 238, 232, 0.2);
+  border: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
   border-radius: 17px;
-  background: #181917;
+  background: color-mix(
+    in srgb,
+    var(--background) 90%,
+    var(--foreground) 10%
+  );
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
   aspect-ratio: 4 / 3;
   cursor: pointer;
@@ -323,7 +333,7 @@ button.cardLink {
 }
 
 .photoStackButton:hover {
-  border-color: rgba(238, 238, 232, 0.45);
+  border-color: color-mix(in srgb, var(--foreground) 45%, transparent);
 }
 
 .photoStackButton:focus-visible {
@@ -564,9 +574,8 @@ button.cardLink {
     padding-inline: 14px;
   }
 
-  .title {
-    margin: 28px 16px 36px;
-    font-size: 31px;
+  .intro {
+    margin: 22px 16px 14px;
   }
 
   .grid {

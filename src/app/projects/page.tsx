@@ -7,7 +7,9 @@ export default function ProjectsPage() {
     <main className={styles.page}>
       <div className={styles.shell}>
         <ProjectsHeader />
-        <h1 className={styles.title}>/projects</h1>
+        <p className={styles.intro}>
+          this sprung from some late-night frolicking.
+        </p>
         <ProjectsBento />
       </div>
     </main>
