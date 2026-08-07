@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Bookshelf } from "@/components/bookshelf";
 import { SectionHeader } from "@/components/SectionHeader";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ARTIFACTS, BOOKS_DATA } from "@/components/bookshelf/types";
 
 export default function RecsPage() {
@@ -145,7 +146,7 @@ export default function RecsPage() {
   return (
     <main className="bg-background h-dvh overflow-hidden">
       <div className="fixed inset-x-0 top-0 z-50 bg-background/85 pt-[env(safe-area-inset-top)] backdrop-blur-md">
-        <SectionHeader section="library" />
+        <SectionHeader center={<ThemeToggle />} section="library" />
       </div>
 
       {showContent ? (

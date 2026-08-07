@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function NotFound() {
   const { resolvedTheme } = useTheme();
@@ -18,7 +19,7 @@ export default function NotFound() {
   if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-[500px] h-[400px]" />
+        <div className="aspect-[5/4] w-[calc(100vw-32px)] max-w-[500px]" />
       </div>
     );
   }
@@ -28,8 +29,12 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground">
+      <div className="fixed inset-x-0 top-0 z-20 flex h-[60px] items-center justify-center pt-[env(safe-area-inset-top)]">
+        <ThemeToggle />
+      </div>
+
       {/* 404 Image */}
-      <div className="relative w-[500px] h-[400px] ghost-animation overflow-hidden">
+      <div className="ghost-animation relative aspect-[5/4] w-[calc(100vw-32px)] max-w-[500px] overflow-hidden">
         <Image
           src={imageSrc}
           alt="404 - Page Not Found"

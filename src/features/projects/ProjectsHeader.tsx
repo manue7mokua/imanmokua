@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function ProjectsHeader() {
-  return <SectionHeader section="projects" />;
+  return <SectionHeader center={<ThemeToggle />} section="projects" />;
 }
