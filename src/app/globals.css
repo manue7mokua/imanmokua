@@ -11,6 +11,8 @@
 :root {
   --background: #fcfcfc;
   --foreground: #000000;
+  --font-ui-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 }
 
 /* Dark mode when .dark class is applied */

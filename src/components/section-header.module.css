@@ -7,8 +7,7 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: clamp(18px, 2.2vw, 36px);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    monospace;
+  font-family: var(--font-ui-mono);
   font-size: 13px;
 }
 
