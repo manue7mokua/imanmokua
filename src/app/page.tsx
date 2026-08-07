@@ -127,7 +127,7 @@ export default function HomePage() {
           </p>
 
           <p>
-            i care a lot about design; it&apos;s pretty cool how things are structured.
+            i care a lot about design; it&apos;s pretty cool how things are structured,{" "}
             look and feel can affect how we think. i like football ('Zonal Marking' is a great read).
             i wanna build my own version of TARS someday :)
           </p>
