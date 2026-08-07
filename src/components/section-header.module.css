@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  width: min(100%, 1680px);
+  min-height: 60px;
+  margin-inline: auto;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(18px, 2.2vw, 36px);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  font-size: 13px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 160ms ease;
+}
+
+.backLink:hover {
+  opacity: 0.68;
+}
+
+.backLink:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+.sectionIdentity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ee8a2f;
+}
+
+@media (max-width: 740px) {
+  .header {
+    min-height: 58px;
+    padding-inline: 14px;
+  }
+}

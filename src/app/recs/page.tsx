@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import { Bookshelf } from "@/components/bookshelf";
-import { AppHeader } from "@/components/AppHeader";
+import { SectionHeader } from "@/components/SectionHeader";
 import { ARTIFACTS, BOOKS_DATA } from "@/components/bookshelf/types";
 import { useTheme } from "next-themes";
 
@@ -148,30 +147,12 @@ export default function RecsPage() {
 
   return (
     <main className="bg-background h-dvh overflow-hidden">
-      <AppHeader barClassName="h-14 items-center" showAvatar={false} />
-
-      <div
-        className="fixed left-0 right-0 z-[45] bg-background/65 backdrop-blur-md"
-        style={{ top: "calc(env(safe-area-inset-top) + 3.5rem)" }}
-      >
-        <div className="relative mx-auto flex h-12 w-full max-w-5xl items-center px-6">
-          <Link
-            href="/"
-            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
-          >
-            ← Back to home
-          </Link>
-          <h1
-            className="absolute left-1/2 -translate-x-1/2 font-cinzel text-xs tracking-[0.3em] uppercase"
-            style={{ color: isDark ? "rgb(245 158 11 / 0.8)" : "#000000" }}
-          >
-            LIBRARY
-          </h1>
-        </div>
+      <div className="fixed inset-x-0 top-0 z-50 bg-background/85 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+        <SectionHeader section="library" />
       </div>
 
       {showContent ? (
-        <div className="h-full pt-[calc(env(safe-area-inset-top)+6.5rem)]">
+        <div className="h-full pt-[calc(env(safe-area-inset-top)+3.75rem)]">
           <Bookshelf />
         </div>
       ) : (
