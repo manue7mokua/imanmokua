@@ -48,7 +48,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/writing"
-          className="px-6 py-3 font-mono text-sm no-underline transition-opacity hover:opacity-70 md:text-base"
+          className="px-6 py-3 text-[13px] font-normal no-underline transition-opacity hover:opacity-70 [font-family:var(--font-ui-mono)]"
         >
           ← go back
         </Link>
