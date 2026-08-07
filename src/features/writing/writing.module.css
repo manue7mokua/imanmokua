@@ -1,3 +1,5 @@
 .postList {
   font-family: var(--font-ui-mono);
+  font-size: 12px;
+  line-height: 1.5;
 }
