@@ -1,12 +1,15 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import styles from "./section-header.module.css";
 
 interface SectionHeaderProps {
+  center?: ReactNode;
+  marker?: ReactNode;
   section: string;
 }
 
-export function SectionHeader({ section }: SectionHeaderProps) {
+export function SectionHeader({ center, marker, section }: SectionHeaderProps) {
   return (
     <header className={styles.header}>
       <Link className={styles.backLink} href="/">
@@ -14,9 +17,11 @@ export function SectionHeader({ section }: SectionHeaderProps) {
         <span>back to home</span>
       </Link>
 
+      {center ? <div className={styles.centerSlot}>{center}</div> : null}
+
       <div className={styles.sectionIdentity}>
         <h1 className={styles.sectionTitle}>{section}</h1>
-        <span aria-hidden="true" className={styles.statusDot} />
+        {marker ?? <span aria-hidden="true" className={styles.statusDot} />}
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AppHeader } from "@/components/AppHeader";
+import { WritingHeader } from "@/features/writing/WritingHeader";
 
 interface BlogPost {
   title: string;
@@ -48,19 +48,9 @@ const blogPosts: YearSection[] = [
 export default function WritingPage() {
   return (
     <main className="bg-background min-h-screen">
-      <AppHeader barClassName="h-14 items-end pb-2" />
+      <WritingHeader />
 
-      <div className="pt-14 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
-        {/* Back to home link */}
-        <div className="pt-6 pb-8">
-          <Link
-            href="/"
-            className="font-mono text-sm text-foreground no-underline transition-opacity hover:opacity-70"
-          >
-            ← Back to home
-          </Link>
-        </div>
-
+      <div className="mx-auto max-w-4xl px-6 pt-10 md:px-12 lg:px-24">
         {/* Blog posts by year */}
         <div className="space-y-1">
           {blogPosts.map((yearSection) => (
