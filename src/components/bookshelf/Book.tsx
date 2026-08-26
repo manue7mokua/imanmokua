@@ -52,6 +52,7 @@ export function Book({
           ? `translateX(${horizontalOffset}px) rotate(${data.slant}deg)`
           : undefined,
         transformOrigin: shouldSlant ? "bottom center" : undefined,
+        marginRight: shouldSlant ? `${horizontalOffset}px` : undefined,
       }}
       onClick={(e) => {
         e.stopPropagation();

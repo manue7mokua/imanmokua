@@ -558,7 +558,7 @@ export function generateBooks(): BookData[] {
     // Add random slant only to middle row books, leaning left against other books
     // Only apply to ~35% of middle row books for natural appearance
     let slant: number | undefined = undefined;
-    if (row === 1) {
+    if (row === 1 && bookInfo.category !== "libraryAddition") {
       const slantRand = random();
       if (slantRand < 0.35) {
         // Lean left (negative angle) so books rest against books to their left
