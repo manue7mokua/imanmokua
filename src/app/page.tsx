@@ -97,7 +97,7 @@ export default function HomePage() {
         {/* H1 Header */}
         <div className="flex items-center justify-start gap-3 mb-8 md:mb-10">
           <h1 className="text-2xl md:text-2xl font-bold cursor-default">
-            hey, i'm Iman
+            hey, i&apos;m Iman
           </h1>
           <Image
             src="https://api.dicebear.com/9.x/adventurer/svg?seed=Sara"
@@ -130,7 +130,7 @@ export default function HomePage() {
 
           <p>
             i care a lot about design; it&apos;s pretty cool how things are structured,{" "}
-            look and feel can affect how we think. i like football ('Zonal Marking' is a great read).
+            look and feel can affect how we think. i like football (&apos;Zonal Marking&apos; is a great read).
             i wanna build my own version of TARS someday :)
           </p>
 
