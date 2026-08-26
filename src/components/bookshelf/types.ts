@@ -1,5 +1,9 @@
 export type BookState = "pristine" | "worn" | "aged";
-export type BookCategory = "personalFavorites" | "passionStart" | "general";
+export type BookCategory =
+  | "personalFavorites"
+  | "passionStart"
+  | "general"
+  | "libraryAddition";
 
 export interface BookData {
   id: number;
@@ -375,11 +379,97 @@ const GENERAL: BookInfo[] = [
   },
 ];
 
+const LIBRARY_ADDITIONS: BookInfo[] = [
+  {
+    title: "The Count of Monte Cristo",
+    author: "Alexandre Dumas",
+    description:
+      "A sweeping tale of betrayal, imprisonment, reinvention, and the long cost of revenge.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/the_count_of_monte_cristo.jpg",
+    thickness: 20,
+  },
+  {
+    title: "1984",
+    author: "George Orwell",
+    description:
+      "A stark warning about totalitarian power, mass surveillance, and the manipulation of truth.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/1984.jpg",
+    thickness: 18,
+  },
+  {
+    title: "The Picture of Dorian Gray",
+    author: "Oscar Wilde",
+    description:
+      "A sharp Gothic portrait of beauty, influence, and a life corroded by vanity and secrecy.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/the_picture_of_dorian_gray.jpg",
+    thickness: 18,
+  },
+  {
+    title: "The Grapes of Wrath",
+    author: "John Steinbeck",
+    description:
+      "The Joad family's migration becomes an enduring story of hardship, dignity, and solidarity.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/the_grapes_of_wrath.jpg",
+    thickness: 20,
+  },
+  {
+    title: "Zonal Marking",
+    author: "Michael Cox",
+    description:
+      "A tactical history of modern European soccer and the ideas that reshaped how the game is played.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/zonal_marking.jpg",
+    thickness: 18,
+  },
+  {
+    title: "The Odyssey",
+    author:
+      "Homer, translated by Robert Fagles, with an introduction by Bernard Knox",
+    description:
+      "Robert Fagles brings fresh energy to Odysseus's long journey home, supported by Bernard Knox's illuminating introduction.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/the_odyssey.jpg",
+    thickness: 20,
+  },
+  {
+    title: "Greenlights",
+    author: "Matthew McConaughey",
+    description:
+      "A candid memoir assembled from decades of journals, stories, lessons, and hard-won perspective.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/greenlights.jpg",
+    thickness: 18,
+  },
+  {
+    title: "Dopamine Hole",
+    author: "Josh Czuba",
+    description:
+      "Thirteen darkly comic stories about people coming apart under the pressures of modern life.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/dopamine_hole.jpg",
+    thickness: 18,
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Haruki Murakami",
+    description:
+      "A dreamlike dual narrative of fate, memory, talking cats, and two lives moving toward each other.",
+    category: "libraryAddition",
+    coverImage: "/book_covers/kafka_on_the_shore.jpg",
+    thickness: 20,
+  },
+];
+
 // Combined books data in the order they should appear
 export const BOOKS_DATA: BookInfo[] = [
   ...PERSONAL_FAVORITES,
   ...PASSION_START,
   ...GENERAL,
+  ...LIBRARY_ADDITIONS,
 ];
 
 export const SHELF_CONFIG: ShelfRowConfig[] = [
@@ -503,6 +593,9 @@ export function distributeBooks(books: BookData[]): ShelfSection[][] {
   );
   const passionBooks = books.filter((b) => b.category === "passionStart");
   const generalBooks = books.filter((b) => b.category === "general");
+  const libraryAdditions = books.filter(
+    (b) => b.category === "libraryAddition"
+  );
 
   // Row 0: Personal Favorites in BIG section (3), General in other sections
   const row0Sections: ShelfSection[] = [];
@@ -568,6 +661,25 @@ export function distributeBooks(books: BookData[]): ShelfSection[][] {
     }
   }
   layout.push(row2Sections);
+
+  // Fill open space at the ends of existing compartments so no current books move.
+  const additionPlacements = [
+    { row: 0, section: 0, count: 2 },
+    { row: 0, section: 1, count: 2 },
+    { row: 0, section: 4, count: 2 },
+    { row: 1, section: 0, count: 1 },
+    { row: 1, section: 2, count: 2 },
+  ];
+  let additionIndex = 0;
+
+  additionPlacements.forEach(({ row, section, count }) => {
+    const booksForSection = libraryAdditions.slice(
+      additionIndex,
+      additionIndex + count
+    );
+    layout[row][section].items.push(...booksForSection);
+    additionIndex += count;
+  });
 
   return layout;
 }
