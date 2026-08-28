@@ -16,6 +16,16 @@ import { MobileCoverFeed } from "./MobileCoverFeed";
 
 type AnimationPhase = "idle" | "pulling" | "open" | "closing";
 
+const BOOK_PICKUP_DURATION_MS = 1050;
+const BOOK_RETURN_DURATION_MS = 850;
+const ARTIFACT_TRANSITION_DURATION_MS = 700;
+
+function motionDuration(duration: number) {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? 120
+    : duration;
+}
+
 export function Bookshelf() {
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
@@ -23,6 +33,7 @@ export function Bookshelf() {
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>("idle");
   const [showModal, setShowModal] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pickupSoundRef = useRef<HTMLAudioElement | null>(null);
 
   const books = useMemo(() => generateBooks(), []);
   const shelfLayout = useMemo(() => distributeBooks(books), [books]);
@@ -80,11 +91,33 @@ export function Bookshelf() {
     };
   }, []);
 
+  useEffect(() => {
+    const pickupSound = new Audio("/sounds/book-flip-2.mp3");
+    pickupSound.preload = "auto";
+    pickupSound.volume = 0.24;
+    pickupSound.playbackRate = 0.92;
+    pickupSoundRef.current = pickupSound;
+
+    return () => {
+      pickupSound.pause();
+      pickupSoundRef.current = null;
+    };
+  }, []);
+
   const clearTimeouts = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
+  }, []);
+
+  const playPickupSound = useCallback(() => {
+    const pickupSound = pickupSoundRef.current;
+    if (!pickupSound) return;
+
+    pickupSound.pause();
+    pickupSound.currentTime = 0;
+    void pickupSound.play().catch(() => undefined);
   }, []);
 
   const handleSelectBook = useCallback(
@@ -93,6 +126,7 @@ export function Bookshelf() {
 
       if (isMobileLayout && book) {
         if (showModal) return;
+        playPickupSound();
         setSelectedArtifactId(null);
         setSelectedBookId(book.id);
         setAnimationPhase("open");
@@ -101,6 +135,7 @@ export function Bookshelf() {
       }
 
       if (book && animationPhase === "idle") {
+        playPickupSound();
         setSelectedArtifactId(null);
         setSelectedBookId(book.id);
         setAnimationPhase("pulling");
@@ -108,10 +143,10 @@ export function Bookshelf() {
         timeoutRef.current = setTimeout(() => {
           setAnimationPhase("open");
           setShowModal(true);
-        }, 700);
+        }, motionDuration(BOOK_PICKUP_DURATION_MS));
       }
     },
-    [animationPhase, clearTimeouts, isMobileLayout, showModal]
+    [animationPhase, clearTimeouts, isMobileLayout, playPickupSound, showModal]
   );
 
   const handleSelectArtifact = useCallback(
@@ -126,7 +161,7 @@ export function Bookshelf() {
         timeoutRef.current = setTimeout(() => {
           setAnimationPhase("open");
           setShowModal(true);
-        }, 700);
+        }, ARTIFACT_TRANSITION_DURATION_MS);
       }
     },
     [animationPhase, clearTimeouts]
@@ -148,12 +183,17 @@ export function Bookshelf() {
     setShowModal(false);
     setAnimationPhase("closing");
 
-    timeoutRef.current = setTimeout(() => {
-      setAnimationPhase("idle");
-      setSelectedBookId(null);
-      setSelectedArtifactId(null);
-    }, 700);
-  }, [animationPhase, clearTimeouts, isMobileLayout]);
+    timeoutRef.current = setTimeout(
+      () => {
+        setAnimationPhase("idle");
+        setSelectedBookId(null);
+        setSelectedArtifactId(null);
+      },
+      selectedBookId === null
+        ? ARTIFACT_TRANSITION_DURATION_MS
+        : motionDuration(BOOK_RETURN_DURATION_MS)
+    );
+  }, [animationPhase, clearTimeouts, isMobileLayout, selectedBookId]);
 
   const handleBgClick = () => {
     if (animationPhase === "open") {
@@ -163,8 +203,8 @@ export function Bookshelf() {
 
   const getBookAnimationClass = (bookId: number): string => {
     if (selectedBookId !== bookId) return "";
-    if (animationPhase === "pulling" || animationPhase === "closing")
-      return "pulling";
+    if (animationPhase === "pulling") return "pulling";
+    if (animationPhase === "closing") return "returning";
     if (animationPhase === "open") return "open";
     return "";
   };

@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { BookData } from "./types";
 
 interface BookProps {
@@ -28,32 +29,35 @@ export function Book({
   const spineTitleSize =
     data.thickness < 30 ? "text-[0.5rem]" : "text-[0.55rem]";
 
-  // Only apply slant if book has one and is not the first in section (has a book to lean against)
-  // Also disable slant when animation is active to let CSS animation take over
   const isAnimating = animationClass !== "";
-  const shouldSlant = data.slant && !isFirstInSection && !isAnimating;
+  const hasRestingSlant = Boolean(data.slant && !isFirstInSection);
+  const shouldSlant = hasRestingSlant && !isAnimating;
 
-  // Calculate horizontal offset to prevent slanted books from overlapping into adjacent books
   let horizontalOffset = 0;
-  if (shouldSlant && data.slant) {
+  if (hasRestingSlant && data.slant) {
     const slantRadians = (Math.abs(data.slant) * Math.PI) / 180;
     horizontalOffset = data.height * Math.sin(slantRadians);
   }
 
+  const restingTransform = hasRestingSlant
+    ? `translateX(${horizontalOffset}px) rotate(${data.slant}deg)`
+    : "translate3d(0, 0, 0)";
+
+  const bookStyle: CSSProperties & { "--book-rest-transform": string } = {
+    "--book-rest-transform": restingTransform,
+    height: `${data.height}px`,
+    width: `${data.thickness}px`,
+    zIndex: isSelected ? 50 : 10,
+    marginLeft: data.offsetX ? `${data.offsetX}px` : undefined,
+    transform: shouldSlant ? restingTransform : undefined,
+    transformOrigin: hasRestingSlant ? "bottom center" : undefined,
+    marginRight: hasRestingSlant ? `${horizontalOffset}px` : undefined,
+  };
+
   return (
     <div
       className={`book-container group relative mx-[1px] ${animationClass}`}
-      style={{
-        height: `${data.height}px`,
-        width: `${data.thickness}px`,
-        zIndex: isSelected ? 50 : 10,
-        marginLeft: data.offsetX ? `${data.offsetX}px` : undefined,
-        transform: shouldSlant
-          ? `translateX(${horizontalOffset}px) rotate(${data.slant}deg)`
-          : undefined,
-        transformOrigin: shouldSlant ? "bottom center" : undefined,
-        marginRight: shouldSlant ? `${horizontalOffset}px` : undefined,
-      }}
+      style={bookStyle}
       onClick={(e) => {
         e.stopPropagation();
         if (!isSelected) {
@@ -94,6 +98,18 @@ export function Book({
           draggable={false}
         />
       </div>
+
+      {animationClass ? (
+        <div className="librarian-hand" aria-hidden="true">
+          <div className="librarian-hand__sleeve"></div>
+          <div className="librarian-hand__cuff"></div>
+          <div className="librarian-hand__palm"></div>
+          <div className="librarian-hand__finger librarian-hand__finger--one"></div>
+          <div className="librarian-hand__finger librarian-hand__finger--two"></div>
+          <div className="librarian-hand__finger librarian-hand__finger--three"></div>
+          <div className="librarian-hand__thumb"></div>
+        </div>
+      ) : null}
     </div>
   );
 }
